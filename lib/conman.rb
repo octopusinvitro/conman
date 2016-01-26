@@ -2,8 +2,9 @@ require 'console'
 
 class Conman
 
-  def initialize(console)
-    @console = console
+  def initialize(console, ui)
+    @console      = console
+    @ui           = ui
     @contact_list = []
   end
 
@@ -12,7 +13,7 @@ class Conman
     while answer == "y"
       add_contact
       display(contact_list.last)
-      answer = ask_for_another
+      answer = ui.ask_for_another
     end
     display_all(contact_list)
   end
@@ -62,12 +63,7 @@ class Conman
 
   private
 
-  attr_reader :console, :contact_list
-
-  def ask_for_another
-    console.print("Add another contact? (y/n): ")
-    console.read.chomp
-  end
+  attr_reader :console, :ui, :contact_list
 
   def ask_for_name
     console.print("Contact name: ")

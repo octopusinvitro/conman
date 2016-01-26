@@ -3,8 +3,9 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'console'
+require 'ui'
 require 'conman'
 
 console = Console.new($stdin, $stdout)
-conman  = Conman.new(console)
+conman  = Conman.new(console, UI.new(console))
 conman.run

@@ -5,7 +5,8 @@ describe Conman do
   let (:input)   {StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\n")}
   let (:output)  {StringIO.new}
   let (:console) {Console.new(input, output)}
-  let (:conman)  {Conman.new(console)}
+  let (:ui)      {UI.new(console)}
+  let (:conman)  {Conman.new(console, ui)}
 
   it "saves the name introduced by the user" do
     conman.add_contact
