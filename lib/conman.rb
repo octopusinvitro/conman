@@ -11,6 +11,7 @@ class Conman
   	answer = "y"
   	while answer == "y"
   	  add_contact
+  	  display(contact_list.last)
   	  answer = ask_for_another
     end
   end
