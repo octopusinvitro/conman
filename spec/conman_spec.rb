@@ -59,4 +59,13 @@ describe Conman do
     conman.display_all(contacts)
     expect(output.string.lines.count).to eq(4)
   end
+
+  it "prints all contacts after finished" do
+    input.string << "y\n"
+    input.string << "name\naddress\n123456\nemail@mail.com\nnotes\n"
+    input.string << "n\n"
+    conman.run
+    expect(output.string).to include(conman.header)
+  end
+
 end

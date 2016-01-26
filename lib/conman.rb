@@ -14,6 +14,7 @@ class Conman
       display(contact_list.last)
       answer = ask_for_another
     end
+    display_all(contact_list)
   end
 
   def add_contact
