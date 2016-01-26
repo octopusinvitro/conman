@@ -5,6 +5,7 @@ class UI
   ADD_ANOTHER = "Add another contact? (y/n): "
   NAME        = "Contact name: "
   ADDRESS     = "Contact address: "
+  PHONE       = "Contact phone: "
 
   def initialize(console)
     @console = console
@@ -25,6 +26,10 @@ class UI
     console.read.chomp
   end
 
+  def ask_for_phone
+    console.print(PHONE)
+    console.read.chomp
+  end
   private
 
   attr_reader :console
