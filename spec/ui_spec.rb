@@ -34,5 +34,12 @@ describe UI do
     expect(output.string.chomp).to eq(UI::PHONE)
     expect(phone).to eq("1234")
   end
+
+  it "reads an email" do
+    input.string = "email@mail.com"
+    email        = ui.ask_for_email
+    expect(output.string.chomp).to eq(UI::EMAIL)
+    expect(email).to eq("email@mail.com")
+  end
   end
 end
