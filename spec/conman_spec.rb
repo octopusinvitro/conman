@@ -40,4 +40,9 @@ describe Conman do
     expect(conman.list_size).to eq(2)
   end
 
+  it "prints a contact" do
+ 	  contact = {name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}
+ 	  conman.display(contact)
+ 	  expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\n") 	
+  end
 end

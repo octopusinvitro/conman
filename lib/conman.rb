@@ -38,6 +38,19 @@ class Conman
   def list_size
   	contact_list.size
   end
+
+  def display(contact)
+  	console.print(contact[:name] + "\t" + 
+  		contact[:address] + "\t" +
+  		contact[:phone]   + "\t" +
+  		contact[:email]   + "\t" +
+  		contact[:notes]   + "\n")
+  end
+
+  private
+
+  attr_reader :console, :contact_list
+
   def ask_for_another
   	console.print("Add another contact? (y/n): ")
   	console.read.chomp
