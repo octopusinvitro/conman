@@ -3,6 +3,8 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'console'
+require 'conman'
 
 console = Console.new($stdin, $stdout)
-console.print(console.read())
+conman  = Conman.new(console)
+conman.add_contact
