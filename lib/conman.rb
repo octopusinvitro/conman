@@ -21,9 +21,9 @@ class Conman
   def add_contact
     name    = ui.ask_for_name
     address = ui.ask_for_address
-    notes   = ask_for_notes
     phone   = ui.ask_for_phone
     email   = ui.ask_for_email
+    notes   = ui.ask_for_notes
 
     contact = {}
     contact[:name]    = name
@@ -64,20 +64,5 @@ class Conman
   private
 
   attr_reader :console, :ui, :contact_list
-
-  def ask_for_phone
-    console.print("Contact phone: ")
-    console.read.chomp
-  end
-
-  def ask_for_email
-    console.print("Contact email: ")
-    console.read.chomp
-  end
-
-  def ask_for_notes
-    console.print("Contact notes")
-    console.read.chomp
-  end
 
 end

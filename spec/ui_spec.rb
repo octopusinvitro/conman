@@ -41,5 +41,12 @@ describe UI do
     expect(output.string.chomp).to eq(UI::EMAIL)
     expect(email).to eq("email@mail.com")
   end
+
+  it "reads notes" do
+    input.string = "notes"
+    notes        = ui.ask_for_notes
+    expect(output.string.chomp).to eq(UI::NOTES)
+    expect(notes).to eq("notes")
+  end
   end
 end
