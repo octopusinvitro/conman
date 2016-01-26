@@ -10,7 +10,7 @@ describe UI do
 
     answer  = ui.ask_for_another
 
-    expect(output.string).to eq(UI::ADD_ANOTHER + "\n")
+    expect(output.string.chomp).to eq(UI::ADD_ANOTHER)
     expect(answer).to eq("y")
   end
 
@@ -19,10 +19,21 @@ describe UI do
     output  = StringIO.new
     ui      = UI.new(Console.new(input, output))
 
-    answer  = ui.ask_for_name
+    name  = ui.ask_for_name
 
-    expect(output.string).to eq(UI::NAME + "\n")
-    expect(answer).to eq("name")
+    expect(output.string.chomp).to eq(UI::NAME)
+    expect(name).to eq("name")
+  end
+
+  it "reads an address" do
+    input   = StringIO.new("address")
+    output  = StringIO.new
+    ui      = UI.new(Console.new(input, output))
+
+    address = ui.ask_for_address
+
+    expect(output.string.chomp).to eq(UI::ADDRESS)
+    expect(address).to eq("address")
   end
 
 end
