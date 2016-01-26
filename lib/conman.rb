@@ -36,7 +36,7 @@ class Conman
     contact_list[contact_id]
   end
 
-  def list_size
+  def total_contacts
     contact_list.size
   end
 
