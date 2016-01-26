@@ -48,6 +48,17 @@ class Conman
       contact[:notes]   + "\n")
   end
 
+  def display_all(contacts)
+    console.print(header)
+    contacts.each do |contact|
+      display(contact)
+    end
+  end
+
+  def header
+    "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
+  end
+
   private
 
   attr_reader :console, :contact_list
