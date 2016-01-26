@@ -6,6 +6,7 @@ class UI
   NAME        = "Contact name: "
   ADDRESS     = "Contact address: "
   PHONE       = "Contact phone: "
+  EMAIL       = "Contact email: "
 
   def initialize(console)
     @console = console
@@ -28,6 +29,11 @@ class UI
 
   def ask_for_phone
     console.print(PHONE)
+    console.read.chomp
+  end
+
+  def ask_for_email
+    console.print(EMAIL)
     console.read.chomp
   end
   private
