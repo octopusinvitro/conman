@@ -8,6 +8,7 @@ class UI
   PHONE       = "Contact phone: "
   EMAIL       = "Contact email: "
   NOTES       = "Contact notes: "
+  HEADER      = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
 
   def initialize(console)
     @console = console
@@ -49,6 +50,13 @@ class UI
       values << value + "\t"
     end
     console.print(values)
+  end
+
+  def display_all(contacts)
+    console.print(HEADER)
+    contacts.each do |contact|
+      display(contact)
+    end
   end
 
   private

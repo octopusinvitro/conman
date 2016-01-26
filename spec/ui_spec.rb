@@ -50,8 +50,17 @@ describe UI do
   end
 
   it "prints a contact" do
-     contact = {name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}
+     contact = {name: "name", address: "address"}
      ui.display(contact)
-     expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\t\n")
+     expect(output.string).to eq("name\taddress\t\n")
   end
+
+  it "prints all contacts" do
+    contacts = []
+    contacts << {name: "name1", address: "address1"}
+    contacts << {name: "name2", address: "address2"}
+    ui.display_all(contacts)
+    expect(output.string.lines.count).to eq(4)
+  end
+
 end
