@@ -7,6 +7,13 @@ class Conman
   	@contact_list = []
   end
 
+  def run
+  	answer = "y"
+  	while answer == "y"
+  	  add_contact
+  	  answer = ask_for_another
+    end
+  end
 
   def add_contact
   	name    = ask_for_name
@@ -24,7 +31,19 @@ class Conman
   	contact_list << contact
   end
 
-  def add_name
+  def contact_of_id(contact_id)
+  	contact_list[contact_id]
+  end
+
+  def list_size
+  	contact_list.size
+  end
+  def ask_for_another
+  	console.print("Add another contact? (y/n): ")
+  	console.read.chomp
+  end
+
+  def ask_for_name
   	console.print("Contact name: ")
   	console.read.chomp
   end
@@ -48,13 +67,5 @@ class Conman
   	console.print("Contact notes")
   	console.read.chomp
   end
-
-  def contact_by_id(contact_id)
-  	contact_list[contact_id]
-  end
-
-  private
-
-  attr_reader :console, :contact_list
 
 end

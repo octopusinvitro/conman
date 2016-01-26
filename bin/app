@@ -7,4 +7,4 @@ require 'conman'
 
 console = Console.new($stdin, $stdout)
 conman  = Conman.new(console)
-conman.add_contact
+conman.run
