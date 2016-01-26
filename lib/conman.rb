@@ -15,7 +15,7 @@ class Conman
       ui.display(contact_list.last)
       answer = ui.ask_for_another
     end
-    display_all(contact_list)
+    ui.display_all(contact_list)
   end
 
   def add_contact
@@ -40,17 +40,6 @@ class Conman
 
   def total_contacts
     contact_list.size
-  end
-
-  def display_all(contacts)
-    console.print(header)
-    contacts.each do |contact|
-      ui.display(contact)
-    end
-  end
-
-  def header
-    "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
   end
 
   private
