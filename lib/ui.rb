@@ -42,6 +42,15 @@ class UI
     console.print(NOTES)
     console.read.chomp
   end
+
+  def display(contact)
+    console.print(contact[:name] + "\t" +
+      contact[:address] + "\t" +
+      contact[:phone]   + "\t" +
+      contact[:email]   + "\t" +
+      contact[:notes]   + "\n")
+  end
+
   private
 
   attr_reader :console

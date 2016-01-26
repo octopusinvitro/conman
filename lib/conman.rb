@@ -12,7 +12,7 @@ class Conman
     answer = "y"
     while answer == "y"
       add_contact
-      display(contact_list.last)
+      ui.display(contact_list.last)
       answer = ui.ask_for_another
     end
     display_all(contact_list)
@@ -42,18 +42,10 @@ class Conman
     contact_list.size
   end
 
-  def display(contact)
-    console.print(contact[:name] + "\t" + 
-      contact[:address] + "\t" +
-      contact[:phone]   + "\t" +
-      contact[:email]   + "\t" +
-      contact[:notes]   + "\n")
-  end
-
   def display_all(contacts)
     console.print(header)
     contacts.each do |contact|
-      display(contact)
+      ui.display(contact)
     end
   end
 
