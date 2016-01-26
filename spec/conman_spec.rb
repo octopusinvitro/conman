@@ -52,4 +52,11 @@ describe Conman do
     expect(output.string).to include("name\taddress\t123456\temail@mail.com\tnotes\n")
   end
 
+  it "prints all contacts" do
+    contacts = []
+    contacts << {name: "name1", address: "address1", phone: "123456", email: "email1@mail.com", notes: "notes1"}
+    contacts << {name: "name2", address: "address2", phone: "123456", email: "email2@mail.com", notes: "notes2"}
+    conman.display_all(contacts)
+    expect(output.string.lines.count).to eq(4)
+  end
 end
