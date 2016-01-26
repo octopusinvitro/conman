@@ -21,9 +21,9 @@ class Conman
   def add_contact
     name    = ui.ask_for_name
     address = ui.ask_for_address
-    phone   = ask_for_phone
     email   = ask_for_email
     notes   = ask_for_notes
+    phone   = ui.ask_for_phone
 
     contact = {}
     contact[:name]    = name

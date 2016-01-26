@@ -28,4 +28,11 @@ describe UI do
     expect(address).to eq("address")
   end
 
+  it "reads a phone" do
+    input.string = "1234"
+    phone        = ui.ask_for_phone
+    expect(output.string.chomp).to eq(UI::PHONE)
+    expect(phone).to eq("1234")
+  end
+  end
 end
