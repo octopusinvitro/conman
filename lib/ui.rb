@@ -44,11 +44,11 @@ class UI
   end
 
   def display(contact)
-    console.print(contact[:name] + "\t" +
-      contact[:address] + "\t" +
-      contact[:phone]   + "\t" +
-      contact[:email]   + "\t" +
-      contact[:notes]   + "\n")
+    values = ""
+    contact.each do |key, value|
+      values << value + "\t"
+    end
+    console.print(values)
   end
 
   private

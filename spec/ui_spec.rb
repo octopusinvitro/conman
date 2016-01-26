@@ -52,6 +52,6 @@ describe UI do
   it "prints a contact" do
      contact = {name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}
      ui.display(contact)
-     expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\n")
+     expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\t\n")
   end
 end
