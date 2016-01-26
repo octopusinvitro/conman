@@ -33,17 +33,17 @@ describe Conman do
   end
 
   it "adds a contact through a loop" do
-  	input   = StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\ny\nname\naddress\n123456\nemail@mail.com\nnotes\nn\n")
-  	console = Console.new(input, output)
+    input   = StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\ny\nname\naddress\n123456\nemail@mail.com\nnotes\nn\n")
+    console = Console.new(input, output)
     conman  = Conman.new(console)
     conman.run
     expect(conman.list_size).to eq(2)
   end
 
   it "prints a contact" do
- 	  contact = {name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}
- 	  conman.display(contact)
- 	  expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\n") 	
+     contact = {name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}
+     conman.display(contact)
+     expect(output.string).to eq("name\taddress\t123456\temail@mail.com\tnotes\n")   
   end
 
   it "prints contact after adding it" do
