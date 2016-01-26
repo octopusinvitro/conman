@@ -32,4 +32,12 @@ describe Conman do
     expect(conman.contact_of_id(0)[:notes]).to eq("notes")
   end
 
+  it "adds a contact through a loop" do
+  	input   = StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\ny\nname\naddress\n123456\nemail@mail.com\nnotes\nn\n")
+  	console = Console.new(input, output)
+    conman  = Conman.new(console)
+    conman.run
+    expect(conman.list_size).to eq(2)
+  end
+
 end
