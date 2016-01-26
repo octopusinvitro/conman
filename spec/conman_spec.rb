@@ -44,7 +44,7 @@ describe Conman do
   it "prints contact after adding it" do
     input.string << "n\n"
     conman.run
-    expect(output.string).to include("name\taddress\t123456\temail@mail.com\tnotes\n")
+    expect(output.string).to include("name\taddress\t123456\temail@mail.com\tnotes\t\n")
   end
 
   it "prints all contacts" do
