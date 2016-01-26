@@ -14,4 +14,15 @@ describe UI do
     expect(answer).to eq("y")
   end
 
+  it "reads a name" do
+    input   = StringIO.new("name")
+    output  = StringIO.new
+    ui      = UI.new(Console.new(input, output))
+
+    answer  = ui.ask_for_name
+
+    expect(output.string).to eq(UI::NAME + "\n")
+    expect(answer).to eq("name")
+  end
+
 end

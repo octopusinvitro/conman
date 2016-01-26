@@ -3,6 +3,7 @@ require 'console'
 class UI
 
   ADD_ANOTHER = "Add another contact? (y/n): "
+  NAME        = "Contact name: "
 
   def initialize(console)
     @console = console
@@ -10,6 +11,11 @@ class UI
 
   def ask_for_another
     console.print(ADD_ANOTHER)
+    console.read.chomp
+  end
+
+  def ask_for_name
+    console.print(NAME)
     console.read.chomp
   end
 

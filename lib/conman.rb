@@ -19,7 +19,7 @@ class Conman
   end
 
   def add_contact
-    name    = ask_for_name
+    name    = ui.ask_for_name
     address = ask_for_address
     phone   = ask_for_phone
     email   = ask_for_email
@@ -64,11 +64,6 @@ class Conman
   private
 
   attr_reader :console, :ui, :contact_list
-
-  def ask_for_name
-    console.print("Contact name: ")
-    console.read.chomp
-  end
 
   def ask_for_address
     console.print("Contact address: ")
