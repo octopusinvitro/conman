@@ -11,8 +11,16 @@ class Conman
   	console.print("Contact name: ")
   	name = console.read.chomp
 
+  	console.print("Contact address: ")
+  	address = console.read.chomp
+
+    console.print("Contact phone: ")
+    phone = console.read.chomp
+
   	contact = {}
-  	contact[:name] = name
+  	contact[:name]    = name
+  	contact[:address] = address
+  	contact[:phone]   = phone
   	contact_list << contact
   end
 
