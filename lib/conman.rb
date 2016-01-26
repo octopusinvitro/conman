@@ -7,12 +7,13 @@ class Conman
   	@contact_list = []
   end
 
+
   def add_contact
-  	name    = add_name
-  	address = add_address
-  	phone   = add_phone
-    email   = add_email
-    notes   = add_notes
+  	name    = ask_for_name
+  	address = ask_for_address
+  	phone   = ask_for_phone
+    email   = ask_for_email
+    notes   = ask_for_notes
 
   	contact = {}
   	contact[:name]    = name
@@ -28,22 +29,22 @@ class Conman
   	console.read.chomp
   end
 
-  def add_address
-	console.print("Contact address: ")
+  def ask_for_address
+	  console.print("Contact address: ")
   	console.read.chomp
   end
 
-  def add_phone
+  def ask_for_phone
   	console.print("Contact phone: ")
     console.read.chomp
   end
 
-  def add_email
+  def ask_for_email
   	console.print("Contact email: ")
     console.read.chomp
   end
 
-  def add_notes
+  def ask_for_notes
   	console.print("Contact notes")
   	console.read.chomp
   end
