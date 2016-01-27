@@ -7,46 +7,67 @@ describe UI do
   let(:output) {StringIO.new}
   let(:ui)     {UI.new(Console.new(input, output))}
 
-  it "reads an answer" do
+
+  it "prints the prompt message for adding another contact" do
+    input.string = "\n"
+    ui.ask_for_another
+    expect_msg(UI::ADD_ANOTHER)
+  end
     input.string = "y"
-    answer       = ui.ask_for_another
-    expect(output.string.chomp).to eq(UI::ADD_ANOTHER)
-    expect(answer).to eq("y")
+
+  it "prints the prompt message for a name" do
+    input.string = "\n"
+    ui.ask_for_name
+    expect_msg(UI::NAME)
   end
 
   it "reads a name" do
     input.string = "name"
-    name         = ui.ask_for_name
-    expect(output.string.chomp).to eq(UI::NAME)
-    expect(name).to eq("name")
+    expect(ui.ask_for_name).to eq("name")
+  end
+
+  it "prints the prompt message for an address" do
+    input.string = "\n"
+    ui.ask_for_address
+    expect_msg(UI::ADDRESS)
   end
 
   it "reads an address" do
     input.string = "address"
-    address      = ui.ask_for_address
-    expect(output.string.chomp).to eq(UI::ADDRESS)
-    expect(address).to eq("address")
+    expect(ui.ask_for_address).to eq("address")
+  end
+
+  it "prints the prompt message for a phone" do
+    input.string = "\n"
+    ui.ask_for_phone
+    expect_msg(UI::PHONE)
   end
 
   it "reads a phone" do
     input.string = "1234"
-    phone        = ui.ask_for_phone
-    expect(output.string.chomp).to eq(UI::PHONE)
-    expect(phone).to eq("1234")
+    expect(ui.ask_for_phone).to eq("1234")
+  end
+
+  it "prints the prompt message for an email" do
+    input.string = "\n"
+    ui.ask_for_email
+    expect_msg(UI::EMAIL)
   end
 
   it "reads an email" do
     input.string = "email@mail.com"
-    email        = ui.ask_for_email
-    expect(output.string.chomp).to eq(UI::EMAIL)
-    expect(email).to eq("email@mail.com")
+    expect(ui.ask_for_email).to eq("email@mail.com")
+  end
+
+  it "prints the prompt message for notes" do
+    input.string = "\n"
+    ui.ask_for_notes
+    expect_msg(UI::NOTES)
   end
 
   it "reads notes" do
     input.string = "notes"
-    notes        = ui.ask_for_notes
-    expect(output.string.chomp).to eq(UI::NOTES)
-    expect(notes).to eq("notes")
+    expect(ui.ask_for_notes).to eq("notes")
   end
 
   it "prints a contact" do
@@ -63,4 +84,7 @@ describe UI do
     expect(output.string.lines.count).to eq(4)
   end
 
+  def expect_msg(message)
+    expect(output.string.chomp).to eq(message)
+  end
 end
