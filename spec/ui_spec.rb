@@ -13,7 +13,16 @@ describe UI do
     ui.ask_for_another
     expect_msg(UI::ADD_ANOTHER)
   end
+
+  it "reads a positive answer" do
     input.string = "y"
+    expect(ui.ask_for_another).to eq(true)
+  end
+
+  it "reads a negative answer" do
+    input.string = "n"
+    expect(ui.ask_for_another).to eq(false)
+  end
 
   it "prints the prompt message for a name" do
     input.string = "\n"

@@ -8,12 +8,12 @@ class Conman
   end
 
   def run
-    answer = "y"
+    add_another = true
 
-    while answer == "y"
+    while add_another == true
       add_contact
       ui.display(contact_list.last)
-      answer = ui.ask_for_another
+      add_another = ui.ask_for_another
     end
 
     ui.display_all(contact_list)
