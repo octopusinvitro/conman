@@ -7,5 +7,5 @@ require 'ui'
 require 'conman'
 
 console = Console.new($stdin, $stdout)
-conman  = Conman.new(console, UI.new(console))
+conman  = Conman.new(UI.new(console))
 conman.run

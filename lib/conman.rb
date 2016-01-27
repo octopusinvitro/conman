@@ -2,19 +2,20 @@ require 'console'
 
 class Conman
 
-  def initialize(console, ui)
-    @console      = console
+  def initialize(ui)
     @ui           = ui
     @contact_list = []
   end
 
   def run
     answer = "y"
+
     while answer == "y"
       add_contact
       ui.display(contact_list.last)
       answer = ui.ask_for_another
     end
+
     ui.display_all(contact_list)
   end
 
@@ -44,6 +45,6 @@ class Conman
 
   private
 
-  attr_reader :console, :ui, :contact_list
+  attr_reader :ui, :contact_list
 
 end

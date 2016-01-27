@@ -4,36 +4,34 @@ describe Conman do
 
   let (:input)   {StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\n")}
   let (:output)  {StringIO.new}
-  let (:console) {Console.new(input, output)}
-  let (:ui)      {UI.new(console)}
-  let (:conman)  {Conman.new(console, ui)}
+  let (:conman)  {Conman.new(UI.new(Console.new(input, output)))}
 
   it "saves the name introduced by the user" do
     conman.add_contact
-    expect(conman.contact_of_id(0)[:name]).to eq("name")
+    expect_field(:name, "name")
   end
 
   it "saves the address introduced by the user" do
     conman.add_contact
-    expect(conman.contact_of_id(0)[:address]).to eq("address")
+    expect_field(:address, "address")
   end
 
   it "saves the phone introduced by the user" do
     conman.add_contact
-    expect(conman.contact_of_id(0)[:phone]).to eq("123456")
+    expect_field(:phone, "123456")
   end
 
   it "saves the email introduced by the user" do
     conman.add_contact
-    expect(conman.contact_of_id(0)[:email]).to eq("email@mail.com")
+    expect_field(:email, "email@mail.com")
   end
 
   it "saves the notes introduced by the user" do
     conman.add_contact
-    expect(conman.contact_of_id(0)[:notes]).to eq("notes")
+    expect_field(:notes, "notes")
   end
 
-  it "adds a contact through a loop" do
+  it "adds two contacts through the main loop" do
     input.string << "y\n"
     input.string << "name\naddress\n123456\nemail@mail.com\nnotes\n"
     input.string << "n\n"
@@ -44,7 +42,7 @@ describe Conman do
   it "prints contact after adding it" do
     input.string << "n\n"
     conman.run
-    expect(output.string).to include("name\taddress\t123456\temail@mail.com\tnotes\t\n")
+    expect(output.string).to include("email@mail.com")
   end
 
   it "prints all contacts after finished" do
@@ -53,6 +51,12 @@ describe Conman do
     input.string << "n\n"
     conman.run
     expect(output.string).to include(UI::HEADER)
+  end
+
+  private
+
+  def expect_field(key, value)
+    expect(conman.contact_of_id(0)[key]).to eq(value)
   end
 
 end
