@@ -15,8 +15,7 @@ class UI
   end
 
   def ask_for_another
-    console.print(ADD_ANOTHER)
-    console.read.chomp
+    add_another == "y" ? true : false
   end
 
   def ask_for_name
@@ -62,5 +61,10 @@ class UI
   private
 
   attr_reader :console
+
+  def add_another
+    console.print(ADD_ANOTHER)
+    console.read.chomp
+  end
 
 end
