@@ -53,8 +53,6 @@ describe Conman do
     expect(output.string).to include(UI::HEADER)
   end
 
-  private
-
   def expect_field(key, value)
     expect(conman.contact_of_id(0)[key]).to eq(value)
   end
