@@ -1,56 +1,60 @@
 require 'conman'
+require 'ui'
 
 describe Conman do
 
-  let (:input)   {StringIO.new("name\naddress\n123456\nemail@mail.com\nnotes\n")}
-  let (:output)  {StringIO.new}
-  let (:conman)  {Conman.new(UI.new(Console.new(input, output)))}
+  let (:ui_fake) {instance_double(UI).as_null_object}
+  let (:conman)  {Conman.new(ui_fake)}
 
   it "saves the name introduced by the user" do
+    allow(ui_fake).to receive(:ask_for_name).and_return("name")
     conman.add_contact
     expect_field(:name, "name")
   end
 
   it "saves the address introduced by the user" do
+    allow(ui_fake).to receive(:ask_for_address).and_return("address")
     conman.add_contact
     expect_field(:address, "address")
   end
 
   it "saves the phone introduced by the user" do
+    allow(ui_fake).to receive(:ask_for_phone).and_return("123456")
     conman.add_contact
     expect_field(:phone, "123456")
   end
 
   it "saves the email introduced by the user" do
+    allow(ui_fake).to receive(:ask_for_email).and_return("email@mail.com")
     conman.add_contact
     expect_field(:email, "email@mail.com")
   end
 
   it "saves the notes introduced by the user" do
+    allow(ui_fake).to receive(:ask_for_notes).and_return("notes")
     conman.add_contact
     expect_field(:notes, "notes")
   end
 
   it "adds two contacts through the main loop" do
-    input.string << "y\n"
-    input.string << "name\naddress\n123456\nemail@mail.com\nnotes\n"
-    input.string << "n\n"
+    allow(ui_fake).to receive(:ask_for_another).and_return(true, false)
+    allow(ui_fake).to receive(:display) { "" }
     conman.run
     expect(conman.total_contacts).to eq(2)
   end
 
   it "prints contact after adding it" do
-    input.string << "n\n"
+    allow(ui_fake).to receive(:ask_for_another).and_return(false)
+    allow(ui_fake).to receive(:display) { "" }
     conman.run
-    expect(output.string).to include("email@mail.com")
+    expect(ui_fake).to have_received(:display).once
   end
 
   it "prints all contacts after finished" do
-    input.string << "y\n"
-    input.string << "name\naddress\n123456\nemail@mail.com\nnotes\n"
-    input.string << "n\n"
+    allow(ui_fake).to receive(:ask_for_another).and_return(true, false)
+    allow(ui_fake).to receive(:display) { "" }
     conman.run
-    expect(output.string).to include(UI::HEADER)
+    expect(ui_fake).to have_received(:display_all).once
   end
 
   def expect_field(key, value)
