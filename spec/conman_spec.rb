@@ -38,21 +38,21 @@ describe Conman do
 
   it "adds two contacts through the main loop" do
     allow(ui).to receive(:ask_for_another).and_return(true, false)
-    allow(ui).to receive(:display) { "" }
+    allow(ui).to receive(:display)
     conman.run
     expect(conman.total_contacts).to eq(2)
   end
 
   it "prints contact after adding it" do
     allow(ui).to receive(:ask_for_another).and_return(false)
-    allow(ui).to receive(:display) { "" }
+    allow(ui).to receive(:display)
     conman.run
     expect(ui).to have_received(:display).once
   end
 
   it "prints all contacts after finished" do
     allow(ui).to receive(:ask_for_another).and_return(true, false)
-    allow(ui).to receive(:display) { "" }
+    allow(ui).to receive(:display)
     conman.run
     expect(ui).to have_received(:display_all).once
   end
