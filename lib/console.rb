@@ -5,7 +5,7 @@ class Console
     @output = output
   end
 
-  def print(message)
+  def write(message)
     output.puts(message)
   end
 
