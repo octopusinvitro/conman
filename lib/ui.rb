@@ -8,6 +8,7 @@ class UI
   PHONE       = "Contact phone: "
   EMAIL       = "Contact email: "
   NOTES       = "Contact notes: "
+  SEARCH      = "Type search term: "
   HEADER      = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
 
   def initialize(console)
@@ -40,6 +41,11 @@ class UI
 
   def ask_for_notes
     console.write(NOTES)
+    console.read.chomp
+  end
+
+  def ask_to_search
+    console.write(SEARCH)
     console.read.chomp
   end
 
