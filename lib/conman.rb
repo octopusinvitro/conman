@@ -8,6 +8,10 @@ class Conman
   end
 
   def run
+    add_contacts
+  end
+
+  def add_contacts
     add_another = true
 
     while add_another == true
