@@ -19,27 +19,27 @@ class UI
   end
 
   def ask_for_name
-    console.print(NAME)
+    console.write(NAME)
     console.read.chomp
   end
 
   def ask_for_address
-    console.print(ADDRESS)
+    console.write(ADDRESS)
     console.read.chomp
   end
 
   def ask_for_phone
-    console.print(PHONE)
+    console.write(PHONE)
     console.read.chomp
   end
 
   def ask_for_email
-    console.print(EMAIL)
+    console.write(EMAIL)
     console.read.chomp
   end
 
   def ask_for_notes
-    console.print(NOTES)
+    console.write(NOTES)
     console.read.chomp
   end
 
@@ -48,11 +48,11 @@ class UI
     contact.each do |key, value|
       values << value + "\t"
     end
-    console.print(values)
+    console.write(values)
   end
 
   def display_all(contacts)
-    console.print(HEADER)
+    console.write(HEADER)
     contacts.each do |contact|
       display(contact)
     end
@@ -63,7 +63,7 @@ class UI
   attr_reader :console
 
   def add_another
-    console.print(ADD_ANOTHER)
+    console.write(ADD_ANOTHER)
     console.read.chomp
   end
 

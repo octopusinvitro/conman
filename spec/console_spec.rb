@@ -5,7 +5,7 @@ describe Console  do
   it "prints to the console" do
     output  = StringIO.new
     console = Console.new(nil, output)
-    console.print("boo")
+    console.write("boo")
 		
     expect(output.string).to eq("boo\n")
   end
