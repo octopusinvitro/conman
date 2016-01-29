@@ -2,7 +2,7 @@ require 'console'
 
 class Conman
 
-  def initialize(ui, contact_list)
+  def initialize(ui, contact_list = [])
     @ui           = ui
     @contact_list = contact_list
   end

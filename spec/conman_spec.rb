@@ -4,7 +4,7 @@ require 'ui'
 describe Conman do
 
   let (:ui) {instance_double(UI).as_null_object}
-  let (:conman)  {Conman.new(ui, [])}
+  let (:conman)  {Conman.new(ui)}
 
   it "saves the name introduced by the user" do
     allow(ui).to receive(:ask_for_name).and_return("name")
