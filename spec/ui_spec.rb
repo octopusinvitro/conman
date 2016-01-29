@@ -11,7 +11,7 @@ describe UI do
   it "prints the prompt message for adding another contact" do
     input.string = "\n"
     ui.ask_for_another
-    expect_msg(UI::ADD_ANOTHER)
+    expect_to_print(UI::ADD_ANOTHER)
   end
 
   it "reads a positive answer" do
@@ -27,7 +27,7 @@ describe UI do
   it "prints the prompt message for a name" do
     input.string = "\n"
     ui.ask_for_name
-    expect_msg(UI::NAME)
+    expect_to_print(UI::NAME)
   end
 
   it "reads a name" do
@@ -38,7 +38,7 @@ describe UI do
   it "prints the prompt message for an address" do
     input.string = "\n"
     ui.ask_for_address
-    expect_msg(UI::ADDRESS)
+    expect_to_print(UI::ADDRESS)
   end
 
   it "reads an address" do
@@ -49,7 +49,7 @@ describe UI do
   it "prints the prompt message for a phone" do
     input.string = "\n"
     ui.ask_for_phone
-    expect_msg(UI::PHONE)
+    expect_to_print(UI::PHONE)
   end
 
   it "reads a phone" do
@@ -60,7 +60,7 @@ describe UI do
   it "prints the prompt message for an email" do
     input.string = "\n"
     ui.ask_for_email
-    expect_msg(UI::EMAIL)
+    expect_to_print(UI::EMAIL)
   end
 
   it "reads an email" do
@@ -71,7 +71,7 @@ describe UI do
   it "prints the prompt message for notes" do
     input.string = "\n"
     ui.ask_for_notes
-    expect_msg(UI::NOTES)
+    expect_to_print(UI::NOTES)
   end
 
   it "reads notes" do
@@ -82,7 +82,7 @@ describe UI do
   it "prints the prompt message for repeating search" do
     input.string = "\n"
     ui.ask_search_again
-    expect_msg(UI::SEARCH_AGAIN)
+    expect_to_print(UI::SEARCH_AGAIN)
   end
 
   it "reads a positive answer to search again" do
@@ -98,7 +98,7 @@ describe UI do
   it "prints the prompt message for a search" do
     input.string = "\n"
     ui.ask_for_term
-    expect_msg(UI::SEARCH)
+    expect_to_print(UI::SEARCH)
   end
 
   it "reads search term" do
@@ -132,7 +132,7 @@ describe UI do
     expect(output.string.lines.count).to eq(4)
   end
 
-  def expect_msg(message)
+  def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
 end
