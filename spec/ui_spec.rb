@@ -79,6 +79,22 @@ describe UI do
     expect(ui.ask_for_notes).to eq("notes")
   end
 
+  it "prints the prompt message for repeating search" do
+    input.string = "\n"
+    ui.ask_search_again
+    expect_msg(UI::SEARCH_AGAIN)
+  end
+
+  it "reads a positive answer to search again" do
+    input.string = "y"
+    expect(ui.ask_search_again).to eq(true)
+  end
+
+  it "reads a negative answer to search again" do
+    input.string = "n"
+    expect(ui.ask_search_again).to eq(false)
+  end
+
   it "prints the prompt message for a search" do
     input.string = "\n"
     ui.ask_for_term
