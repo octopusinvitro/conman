@@ -6,9 +6,8 @@ class Menu
     @ui = ui
   end
 
-  def display
-  	menu = [["1", "Add new contact", "2"], ["Search contact"]]
-  	ui.display_menu(menu)
+  def ask_menu_option(menu)
+    ui.ask_menu_option(menu)
   end
 
   private

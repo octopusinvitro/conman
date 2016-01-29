@@ -56,6 +56,11 @@ class UI
     console.read.chomp
   end
 
+  def ask_menu_option(menu)
+    display_menu(menu)
+    console.read.chomp
+  end
+
   def display_menu(menu)
     menu.each do |item|
       console.write(item[0] + ") " + item[1] + "\n")
