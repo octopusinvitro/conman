@@ -2,14 +2,17 @@ require 'console'
 
 class UI
 
-  ADD_ANOTHER = "Add another contact? (y/n): "
-  NAME        = "Contact name: "
-  ADDRESS     = "Contact address: "
-  PHONE       = "Contact phone: "
-  EMAIL       = "Contact email: "
-  NOTES       = "Contact notes: "
-  SEARCH      = "Type search term: "
-  HEADER      = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
+  ADD_ANOTHER  = "Add another contact? (y/n): "
+  NAME         = "Contact name: "
+  ADDRESS      = "Contact address: "
+  PHONE        = "Contact phone: "
+  EMAIL        = "Contact email: "
+  NOTES        = "Contact notes: "
+
+  SEARCH_AGAIN = "Search again? (y/n): "
+  SEARCH       = "Type search term: "
+
+  HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
 
   def initialize(console)
     @console = console
@@ -44,6 +47,10 @@ class UI
     console.read.chomp
   end
 
+  def ask_search_again
+    search_another == "y" ? true : false
+  end
+
   def ask_for_term
     console.write(SEARCH)
     console.read.chomp
@@ -70,6 +77,11 @@ class UI
 
   def add_another
     console.write(ADD_ANOTHER)
+    console.read.chomp
+  end
+
+  def search_another
+    console.write(SEARCH_AGAIN)
     console.read.chomp
   end
 
