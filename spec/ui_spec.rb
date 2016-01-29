@@ -106,6 +106,12 @@ describe UI do
     expect(ui.ask_for_term).to eq("search term")
   end
 
+  it "prints the menu" do
+    menu = [["1", "Option 1"], ["2", "Option 2"]]
+    ui.display_menu(menu)
+    expect(output.string).to eq("1) Option 1\n2) Option 2\n")
+  end
+
   it "prints a contact" do
      contact = {name: "name", address: "address"}
      ui.display(contact)
