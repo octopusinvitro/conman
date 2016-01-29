@@ -36,7 +36,7 @@ describe Conman do
     expect_field(:notes, "notes")
   end
 
-  it "adds two contacts through the main loop" do
+  it "adds two contacts through the add-contacts loop" do
     allow(ui).to receive(:ask_for_another).and_return(true, false)
     allow(ui).to receive(:display)
     conman.add_contacts
@@ -67,6 +67,19 @@ describe Conman do
     conman = Conman.new(ui, dummies)
     allow(ui).to receive(:ask_for_term).and_return("address")
     expect(conman.search_contact).to eq(dummies)
+  end
+
+  it "performs two searches" do
+    allow(ui).to receive(:ask_search_again).and_return(true, false)
+    conman.search_contacts
+    expect(ui).to have_received(:ask_search_again).twice
+  end
+
+  it "prints all found contacts after a search" do
+    conman = Conman.new(ui, dummies)
+    allow(ui).to receive(:ask_for_term).and_return("address")
+    conman.search_contacts
+    expect(ui).to have_received(:display_all).once
   end
 
   def expect_field(key, value)

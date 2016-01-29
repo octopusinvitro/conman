@@ -9,6 +9,7 @@ class Conman
 
   def run
     add_contacts
+    search_contacts
   end
 
   def add_contacts
@@ -47,16 +48,22 @@ class Conman
     contact_list.size
   end
 
+  def search_contacts
+    search_again = true
+
+    while search_again == true
+      ui.display_all(search_contact)
+      search_again = ui.ask_search_again
+    end
+  end
+
   def search_contact
-    search(ui.ask_for_term)
+    term = ui.ask_for_term
+    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
   end
 
   private
 
   attr_reader :ui, :contact_list
-
-  def search(term)
-    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
-  end
 
 end
