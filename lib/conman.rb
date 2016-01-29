@@ -2,9 +2,9 @@ require 'console'
 
 class Conman
 
-  def initialize(ui)
+  def initialize(ui, contact_list)
     @ui           = ui
-    @contact_list = []
+    @contact_list = contact_list
   end
 
   def run
@@ -47,8 +47,16 @@ class Conman
     contact_list.size
   end
 
+  def search_contact
+    search(ui.ask_for_term)
+  end
+
   private
 
   attr_reader :ui, :contact_list
+
+  def search(term)
+    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
+  end
 
 end
