@@ -81,13 +81,13 @@ describe UI do
 
   it "prints the prompt message for a search" do
     input.string = "\n"
-    ui.ask_to_search
+    ui.ask_for_term
     expect_msg(UI::SEARCH)
   end
 
   it "reads search term" do
     input.string = "search term"
-    expect(ui.ask_to_search).to eq("search term")
+    expect(ui.ask_for_term).to eq("search term")
   end
 
   it "prints a contact" do

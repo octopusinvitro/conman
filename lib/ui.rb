@@ -44,7 +44,7 @@ class UI
     console.read.chomp
   end
 
-  def ask_to_search
+  def ask_for_term
     console.write(SEARCH)
     console.read.chomp
   end

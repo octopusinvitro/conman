@@ -4,7 +4,7 @@ require 'ui'
 describe Conman do
 
   let (:ui) {instance_double(UI).as_null_object}
-  let (:conman)  {Conman.new(ui)}
+  let (:conman)  {Conman.new(ui, [])}
 
   it "saves the name introduced by the user" do
     allow(ui).to receive(:ask_for_name).and_return("name")
@@ -57,8 +57,26 @@ describe Conman do
     expect(ui).to have_received(:display_all).once
   end
 
+  it "finds a contact given an exact term" do
+    conman = Conman.new(ui, dummies)
+    allow(ui).to receive(:ask_for_term).and_return("address2")
+    expect(conman.search_contact).to eq([dummies[1]])
+  end
+
+  it "finds several contacts given an inexact term" do
+    conman = Conman.new(ui, dummies)
+    allow(ui).to receive(:ask_for_term).and_return("address")
+    expect(conman.search_contact).to eq(dummies)
+  end
+
   def expect_field(key, value)
     expect(conman.contact_of_id(0)[key]).to eq(value)
   end
 
+  def dummies
+    contact1 = {name: "name1", address: "address1"}
+    contact2 = {name: "name2", address: "address2"}
+    contact3 = {name: "name3", address: "address3"}
+    contacts = [contact1, contact2, contact3]
+  end
 end
