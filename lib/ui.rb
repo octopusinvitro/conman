@@ -23,28 +23,23 @@ class UI
   end
 
   def ask_for_name
-    console.write(NAME)
-    console.read.chomp
+    ask_for_field(NAME)
   end
 
   def ask_for_address
-    console.write(ADDRESS)
-    console.read.chomp
+    ask_for_field(ADDRESS)
   end
 
   def ask_for_phone
-    console.write(PHONE)
-    console.read.chomp
+    ask_for_field(PHONE)
   end
 
   def ask_for_email
-    console.write(EMAIL)
-    console.read.chomp
+    ask_for_field(EMAIL)
   end
 
   def ask_for_notes
-    console.write(NOTES)
-    console.read.chomp
+    ask_for_field(NOTES)
   end
 
   def ask_search_again
@@ -52,8 +47,7 @@ class UI
   end
 
   def ask_for_term
-    console.write(SEARCH)
-    console.read.chomp
+    ask_for_field(SEARCH)
   end
 
   def ask_menu_option(menu)
@@ -87,13 +81,15 @@ class UI
   attr_reader :console
 
   def add_another
-    console.write(ADD_ANOTHER)
-    console.read.chomp
+    ask_for_field(ADD_ANOTHER)
   end
 
   def search_another
-    console.write(SEARCH_AGAIN)
-    console.read.chomp
+    ask_for_field(SEARCH_AGAIN)
   end
 
+  def ask_for_field(question)
+    console.write(question)
+    console.read.chomp
+  end
 end

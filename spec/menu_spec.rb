@@ -7,8 +7,8 @@ describe Menu do
   let(:menu) {Menu.new(ui)}
 
   it "prints the menu" do
-    menuOptions = [["1", "Option 1"], ["2", "Option 2"]]
-    menu.ask_menu_option(menuOptions)
+    menu.ask_menu_option([])
     expect(ui).to have_received(:ask_menu_option).once
   end
+
 end
