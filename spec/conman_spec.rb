@@ -3,8 +3,13 @@ require 'ui'
 
 describe Conman do
 
-  let (:ui) {instance_double(UI).as_null_object}
-  let (:conman)  {Conman.new(ui)}
+  let (:ui)       {instance_double(UI).as_null_object}
+  let (:conman)   {Conman.new(ui)}
+  let (:contacts) {[
+    {name: "name1", address: "address1"},
+    {name: "name2", address: "address2"},
+    {name: "name3", address: "address3"}
+  ]}
 
   it "saves the name introduced by the user" do
     allow(ui).to receive(:ask_for_name).and_return("name")
@@ -36,7 +41,7 @@ describe Conman do
     expect_field(:notes, "notes")
   end
 
-  it "adds two contacts through the add-contacts loop" do
+  it "adds two contacts" do
     allow(ui).to receive(:ask_for_another).and_return(true, false)
     allow(ui).to receive(:display)
     conman.add_contacts
@@ -58,15 +63,15 @@ describe Conman do
   end
 
   it "finds a contact given an exact term" do
-    conman = Conman.new(ui, dummies)
+    conman = Conman.new(ui, contacts)
     allow(ui).to receive(:ask_for_term).and_return("address2")
-    expect(conman.search_contact).to eq([dummies[1]])
+    expect(conman.search_contact).to eq([contacts[1]])
   end
 
   it "finds several contacts given an inexact term" do
-    conman = Conman.new(ui, dummies)
+    conman = Conman.new(ui, contacts)
     allow(ui).to receive(:ask_for_term).and_return("address")
-    expect(conman.search_contact).to eq(dummies)
+    expect(conman.search_contact).to eq(contacts)
   end
 
   it "performs two searches" do
@@ -76,7 +81,7 @@ describe Conman do
   end
 
   it "prints all found contacts after a search" do
-    conman = Conman.new(ui, dummies)
+    conman = Conman.new(ui, contacts)
     allow(ui).to receive(:ask_for_term).and_return("address")
     conman.search_contacts
     expect(ui).to have_received(:display_all).once
@@ -86,10 +91,4 @@ describe Conman do
     expect(conman.contact_of_id(0)[key]).to eq(value)
   end
 
-  def dummies
-    contact1 = {name: "name1", address: "address1"}
-    contact2 = {name: "name2", address: "address2"}
-    contact3 = {name: "name3", address: "address3"}
-    contacts = [contact1, contact2, contact3]
-  end
 end
