@@ -1,26 +1,33 @@
+require 'creator'
+require 'finder'
+
 class Conman
 
-  def initialize(ui, creator, finder)
+  def initialize(ui, db)
     @ui      = ui
-    @creator = creator
-    @finder  = finder
+    @db      = db
+    @creator = Creator.new(ui, db)
+    @finder  = Finder.new(ui, db)
   end
 
   def run
     menu = [
-      [1, "Add contacts"],
-      [2, "Search contacts"],
-      [3, "Quit"]
+      [1, "List contacts"],
+      [2, "Add contacts"],
+      [3, "Search contacts"],
+      [4, "Quit"]
     ]
 
     loop do
       option = ui.ask_menu_option(menu)
 
       if (option == 1)
-        add_contacts
+        list_contacts
       elsif (option == 2)
-        search_contacts
+        add_contacts
       elsif (option == 3)
+        search_contacts
+      elsif (option == 4)
         break
       end
 
@@ -29,7 +36,11 @@ class Conman
 
   private
 
-  attr_reader :ui, :creator, :finder
+  attr_reader :ui, :db, :creator, :finder
+
+  def list_contacts
+    ui.display_all(all)
+  end
 
   def add_contacts
     creator.add_contacts
@@ -37,6 +48,10 @@ class Conman
 
   def search_contacts
     finder.search_contacts
+  end
+
+  def all
+    db.all
   end
 
 end
