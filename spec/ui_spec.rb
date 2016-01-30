@@ -107,15 +107,15 @@ describe UI do
   end
 
   it "prints the menu" do
-    menu = [["1", "Option 1"], ["2", "Option 2"]]
+    menu = [[1, "Option 1"], [2, "Option 2"]]
     ui.display_menu(menu)
     expect(output.string).to eq("1) Option 1\n2) Option 2\n")
   end
 
   it "reads a menu option" do
-    menu = [["1", "Option 1"], ["2", "Option 2"]]
+    menu = [[1, "Option 1"], [2, "Option 2"]]
     input.string = "1"
-    expect(ui.ask_menu_option(menu)).to eq("1")
+    expect(ui.ask_menu_option(menu)).to eq(1)
   end
 
   it "prints a contact" do
