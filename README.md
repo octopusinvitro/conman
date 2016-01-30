@@ -4,7 +4,7 @@ This is a simple console app that keeps a list of contacts. You can:
 
 1. List all contacts
 1. Add contact
-1. Search Contact
+1. Search contact
 1. Edit contact
 1. Exit
 
