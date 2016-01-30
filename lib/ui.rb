@@ -1,14 +1,16 @@
 class UI
 
-  ADD_ANOTHER  = "Add another contact? (y/n): "
-  NAME         = "Contact name: "
+  ADD_ANOTHER  = "\nAdd another contact? (y/n): "
+  NAME         = "\nContact name: "
   ADDRESS      = "Contact address: "
   PHONE        = "Contact phone: "
   EMAIL        = "Contact email: "
   NOTES        = "Contact notes: "
 
-  SEARCH_AGAIN = "Search again? (y/n): "
-  SEARCH       = "Type search term: "
+  SEARCH_AGAIN = "\nSearch again? (y/n): "
+  SEARCH       = "\nType search term: "
+
+  MENU         = "\nChoose a menu option: "
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
 
@@ -50,12 +52,13 @@ class UI
 
   def ask_menu_option(menu)
     display_menu(menu)
-    Integer(console.read.chomp)
+    Integer(ask_for_field(MENU))
   end
 
   def display_menu(menu)
+    console.writeln
     menu.each do |item|
-      console.write(item[0].to_s + ") " + item[1] + "\n")
+      console.writeln(item[0].to_s + ") " + item[1])
     end
   end
 
@@ -64,7 +67,7 @@ class UI
     contact.each do |key, value|
       values << value + "\t"
     end
-    console.write(values)
+    console.writeln(values)
   end
 
   def display_all(contacts)

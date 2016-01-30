@@ -6,6 +6,10 @@ class Console
   end
 
   def write(message)
+    output.print(message)
+  end
+
+  def writeln(message = "")
     output.puts(message)
   end
 

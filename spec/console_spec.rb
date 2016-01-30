@@ -7,6 +7,14 @@ describe Console  do
     console = Console.new(nil, output)
     console.write("boo")
 		
+    expect(output.string).to eq("boo")
+  end
+
+  it "prints a line to the console" do
+    output  = StringIO.new
+    console = Console.new(nil, output)
+    console.writeln("boo")
+
     expect(output.string).to eq("boo\n")
   end
 
