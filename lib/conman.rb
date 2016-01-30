@@ -12,32 +12,16 @@ class Conman
   end
 
   def add_contacts
-    add_another = true
-
-    while add_another == true
-      add_contact
-      ui.display(contact_list.last)
-      add_another = ui.ask_for_another
+    loop do
+      contact = ask_for_fields
+      add_contact(contact)
+      ui.display(contact)
+      break unless ui.ask_for_another
     end
 
     ui.display_all(contact_list)
   end
 
-  def add_contact
-    name    = ui.ask_for_name
-    address = ui.ask_for_address
-    phone   = ui.ask_for_phone
-    email   = ui.ask_for_email
-    notes   = ui.ask_for_notes
-
-    contact = {}
-    contact[:name]    = name
-    contact[:address] = address
-    contact[:phone]   = phone
-    contact[:email]   = email
-    contact[:notes]   = notes
-    contact_list << contact
-  end
 
   def contact_of_id(contact_id)
     contact_list[contact_id]
@@ -48,12 +32,9 @@ class Conman
   end
 
   def search_contacts
-    search_again = true
-
-    while search_again == true
-      contacts_matched = search_contact
-      ui.display_all(contacts_matched)
-      search_again = ui.ask_search_again
+    loop do
+      ui.display_all(search_contact)
+      break unless ui.ask_search_again
     end
   end
 
@@ -64,5 +45,19 @@ class Conman
   private
 
   attr_reader :ui, :contact_list
+
+  def add_contact(contact)
+    contact_list << contact
+  end
+
+  def ask_for_fields
+    contact = {}
+    contact[:name]    = ui.ask_for_name
+    contact[:address] = ui.ask_for_address
+    contact[:phone]   = ui.ask_for_phone
+    contact[:email]   = ui.ask_for_email
+    contact[:notes]   = ui.ask_for_notes
+    contact
+  end
 
 end
