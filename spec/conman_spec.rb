@@ -4,7 +4,8 @@ require 'ui'
 describe Conman do
 
   let (:ui)       {instance_double(UI).as_null_object}
-  let (:conman)   {Conman.new(ui)}
+  let (:db)       {DB.new}
+  let (:conman)   {Conman.new(ui, db)}
   let (:contacts) {[
     {name: "name1", address: "address1"},
     {name: "name2", address: "address2"},
@@ -63,12 +64,14 @@ describe Conman do
   end
 
   it "finds a contact given an exact term" do
-    conman = Conman.new(ui, contacts)
+    db     = DB.new(contacts)
+    conman = Conman.new(ui, db)
     expect(conman.search_contact("address1")).to eq([contacts.first])
   end
 
   it "finds several contacts given an inexact term" do
-    conman = Conman.new(ui, contacts)
+    db     = DB.new(contacts)
+    conman = Conman.new(ui, db)
     expect(conman.search_contact("address")).to eq(contacts)
   end
 

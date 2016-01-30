@@ -1,8 +1,8 @@
 class Conman
 
-  def initialize(ui, contact_list = [])
-    @ui           = ui
-    @contact_list = contact_list
+  def initialize(ui, db)
+    @ui       = ui
+    @contacts = db
   end
 
   def run
@@ -34,16 +34,16 @@ class Conman
       break unless ui.ask_for_another
     end
 
-    ui.display_all(contact_list)
+    ui.display_all(contacts.all)
   end
 
 
   def contact_of_id(contact_id)
-    contact_list[contact_id]
+    contacts.at(contact_id)
   end
 
   def total_contacts
-    contact_list.size
+    contacts.size
   end
 
   def search_contacts
@@ -54,15 +54,15 @@ class Conman
   end
 
   def search_contact(term)
-    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
+    contacts.all.select{ |contact| contact.any? {|key, val| val.include?(term)} }
   end
 
   private
 
-  attr_reader :ui, :contact_list
+  attr_reader :ui, :contacts
 
   def add_contact(contact)
-    contact_list << contact
+    contacts.add(contact)
   end
 
   def ask_for_fields

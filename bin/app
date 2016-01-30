@@ -4,8 +4,9 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'console'
 require 'ui'
+require 'db'
 require 'conman'
 
 console = Console.new($stdin, $stdout)
-conman  = Conman.new(UI.new(console))
+conman  = Conman.new(UI.new(console), DB.new)
 conman.run
