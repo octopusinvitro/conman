@@ -1,4 +1,3 @@
-
 class Conman
 
   def initialize(ui, contact_list = [])

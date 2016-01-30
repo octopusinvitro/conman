@@ -1,5 +1,3 @@
-require 'ui'
-
 class Menu
 
   def initialize(ui)

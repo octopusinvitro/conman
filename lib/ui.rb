@@ -1,5 +1,3 @@
-require 'console'
-
 class UI
 
   ADD_ANOTHER  = "Add another contact? (y/n): "
@@ -52,12 +50,12 @@ class UI
 
   def ask_menu_option(menu)
     display_menu(menu)
-    console.read.chomp
+    Integer(console.read.chomp)
   end
 
   def display_menu(menu)
     menu.each do |item|
-      console.write(item[0] + ") " + item[1] + "\n")
+      console.write(item[0].to_s + ") " + item[1] + "\n")
     end
   end
 
