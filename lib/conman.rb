@@ -1,4 +1,3 @@
-require 'console'
 
 class Conman
 
@@ -52,14 +51,14 @@ class Conman
     search_again = true
 
     while search_again == true
-      ui.display_all(search_contact)
+      contacts_matched = search_contact
+      ui.display_all(contacts_matched)
       search_again = ui.ask_search_again
     end
   end
 
   def search_contact
-    term = ui.ask_for_term
-    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
+    contact_list.select{ |contact| contact.any? {|key, val| val.include?(ui.ask_for_term)} }
   end
 
   private
