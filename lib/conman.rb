@@ -33,13 +33,13 @@ class Conman
 
   def search_contacts
     loop do
-      ui.display_all(search_contact)
+      ui.display_all(search_contact(ui.ask_for_term))
       break unless ui.ask_search_again
     end
   end
 
-  def search_contact
-    contact_list.select{ |contact| contact.any? {|key, val| val.include?(ui.ask_for_term)} }
+  def search_contact(term)
+    contact_list.select{ |contact| contact.any? {|key, val| val.include?(term)} }
   end
 
   private
