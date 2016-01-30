@@ -6,9 +6,10 @@ require 'console'
 require 'ui'
 require 'db'
 require 'creator'
+require 'finder'
 require 'conman'
 
 ui      = UI.new(Console.new($stdin, $stdout))
 db      = DB.new
-conman  = Conman.new(ui, db, Creator.new(ui, db))
+conman  = Conman.new(ui, Creator.new(ui, db), Finder.new(ui, db))
 conman.run
