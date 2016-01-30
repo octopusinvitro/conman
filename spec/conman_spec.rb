@@ -64,14 +64,12 @@ describe Conman do
 
   it "finds a contact given an exact term" do
     conman = Conman.new(ui, contacts)
-    allow(ui).to receive(:ask_for_term).and_return("address1")
-    expect(conman.search_contact).to eq([contacts.first])
+    expect(conman.search_contact("address1")).to eq([contacts.first])
   end
 
   it "finds several contacts given an inexact term" do
     conman = Conman.new(ui, contacts)
-    allow(ui).to receive(:ask_for_term).and_return("address")
-    expect(conman.search_contact).to eq(contacts)
+    expect(conman.search_contact("address")).to eq(contacts)
   end
 
   it "performs two searches" do
