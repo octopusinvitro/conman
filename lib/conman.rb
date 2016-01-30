@@ -6,8 +6,24 @@ class Conman
   end
 
   def run
-    add_contacts
-    search_contacts
+    menu = [
+      [1, "Add contacts"],
+      [2, "Search contacts"],
+      [3, "Quit"]
+    ]
+
+    loop do
+      option = ui.ask_menu_option(menu)
+
+      if (option == 1)
+        add_contacts
+      elsif (option == 2)
+        search_contacts
+      elsif (option == 3)
+        break
+      end
+
+    end
   end
 
   def add_contacts
