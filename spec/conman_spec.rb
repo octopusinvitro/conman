@@ -1,11 +1,13 @@
 require 'conman'
 require 'ui'
+require 'db'
+require 'creator'
 
 describe Conman do
 
   let (:ui)       {instance_double(UI).as_null_object}
   let (:db)       {DB.new}
-  let (:conman)   {Conman.new(ui, db)}
+  let (:conman)   {Conman.new(ui, db, Creator.new(ui, db))}
   let (:contacts) {[
     {name: "name1", address: "address1"},
     {name: "name2", address: "address2"},
@@ -17,61 +19,15 @@ describe Conman do
     allow(ui).to receive(:display)
   end
 
-  it "saves the name introduced by the user" do
-    allow(ui).to receive(:ask_for_name).and_return("name")
-    conman.add_contacts
-    expect_field(:name, "name")
-  end
-
-  it "saves the address introduced by the user" do
-    allow(ui).to receive(:ask_for_address).and_return("address")
-    conman.add_contacts
-    expect_field(:address, "address")
-  end
-
-  it "saves the phone introduced by the user" do
-    allow(ui).to receive(:ask_for_phone).and_return("123456")
-    conman.add_contacts
-    expect_field(:phone, "123456")
-  end
-
-  it "saves the email introduced by the user" do
-    allow(ui).to receive(:ask_for_email).and_return("email@mail.com")
-    conman.add_contacts
-    expect_field(:email, "email@mail.com")
-  end
-
-  it "saves the notes introduced by the user" do
-    allow(ui).to receive(:ask_for_notes).and_return("notes")
-    conman.add_contacts
-    expect_field(:notes, "notes")
-  end
-
-  it "adds two contacts" do
-    allow(ui).to receive(:ask_for_another).and_return(true, false)
-    conman.add_contacts
-    expect(conman.total_contacts).to eq(2)
-  end
-
-  it "prints contact after adding it" do
-    conman.add_contacts
-    expect(ui).to have_received(:display).once
-  end
-
-  it "prints all contacts after finished" do
-    conman.add_contacts
-    expect(ui).to have_received(:display_all).once
-  end
-
   it "finds a contact given an exact term" do
     db     = DB.new(contacts)
-    conman = Conman.new(ui, db)
+    conman = Conman.new(ui, db, Creator.new(ui, db))
     expect(conman.search_contact("address1")).to eq([contacts.first])
   end
 
   it "finds several contacts given an inexact term" do
     db     = DB.new(contacts)
-    conman = Conman.new(ui, db)
+    conman = Conman.new(ui, db, Creator.new(ui, db))
     expect(conman.search_contact("address")).to eq(contacts)
   end
 
@@ -104,10 +60,6 @@ describe Conman do
     allow(ui).to receive(:ask_search_again).and_return(false)
     conman.run
     expect(ui).to have_received(:ask_for_term).once
-  end
-
-  def expect_field(key, value)
-    expect(conman.contact_of_id(0)[key]).to eq(value)
   end
 
 end

@@ -1,8 +1,9 @@
 class Conman
 
-  def initialize(ui, db)
+  def initialize(ui, db, creator)
     @ui       = ui
     @contacts = db
+    @creator  = creator
   end
 
   def run
@@ -26,26 +27,6 @@ class Conman
     end
   end
 
-  def add_contacts
-    loop do
-      contact = ask_for_fields
-      add_contact(contact)
-      ui.display(contact)
-      break unless ui.ask_for_another
-    end
-
-    ui.display_all(contacts.all)
-  end
-
-
-  def contact_of_id(contact_id)
-    contacts.at(contact_id)
-  end
-
-  def total_contacts
-    contacts.size
-  end
-
   def search_contacts
     loop do
       ui.display_all(search_contact(ui.ask_for_term))
@@ -59,20 +40,9 @@ class Conman
 
   private
 
-  attr_reader :ui, :contacts
+  attr_reader :ui, :contacts, :creator
 
-  def add_contact(contact)
-    contacts.add(contact)
+  def add_contacts
+    creator.add_contacts
   end
-
-  def ask_for_fields
-    contact = {}
-    contact[:name]    = ui.ask_for_name
-    contact[:address] = ui.ask_for_address
-    contact[:phone]   = ui.ask_for_phone
-    contact[:email]   = ui.ask_for_email
-    contact[:notes]   = ui.ask_for_notes
-    contact
-  end
-
 end
