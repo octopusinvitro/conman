@@ -19,7 +19,7 @@ class Conman
     ]
 
     loop do
-      option = ui.ask_menu_option(menu)
+      option = ask_menu_option(menu)
 
       if (option == 1)
         list_contacts
@@ -37,6 +37,10 @@ class Conman
   private
 
   attr_reader :ui, :db, :creator, :finder
+
+  def ask_menu_option(menu)
+    ui.ask_menu_option(menu)
+  end
 
   def list_contacts
     ui.display_all(all)

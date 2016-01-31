@@ -9,7 +9,7 @@ class Creator
     loop do
       contact = ask_for_fields
       add_contact(contact)
-      display(contact)
+      display([contact])
       break unless ask_for_another
     end
 
@@ -35,7 +35,7 @@ class Creator
   end
 
   def display(contact)
-    ui.display(contact)
+    ui.display_all(contact)
   end
 
   def ask_for_another
