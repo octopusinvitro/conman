@@ -28,26 +28,26 @@ describe Finder do
 
   it "performs two searches" do
     allow(ui).to receive(:ask_search_again).and_return(true, false)
-    finder.search_contacts
+    finder.act
     expect(ui).to have_received(:ask_search_again).twice
   end
 
   it "prints names of all found contacts after a search" do
-    finder.search_contacts
+    finder.act
     expect(ui).to have_received(:display_names).once
   end
 
   it "asks for more details from a contact in the search results" do
     allow(ui).to receive(:ask_to_expand).and_return(true)
     allow(ui).to receive(:ask_for_contact).and_return(1)
-    finder.search_contacts
+    finder.act
     expect(ui).to have_received(:ask_to_expand).once
   end
 
   it "displays a specific contact if the user chooses one" do
     allow(ui).to receive(:ask_to_expand).and_return(true)
     allow(ui).to receive(:ask_for_contact).and_return(1)
-    finder.search_contacts
+    finder.act
     expect(ui).to have_received(:display_all).once
   end
 

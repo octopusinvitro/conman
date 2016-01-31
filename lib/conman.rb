@@ -1,15 +1,8 @@
-require 'lister'
-require 'creator'
-require 'finder'
-
 class Conman
 
-  def initialize(ui, db)
+  def initialize(ui, actions)
     @ui      = ui
-    @db      = db
-    @lister  = Lister.new(ui, db)
-    @creator = Creator.new(ui, db)
-    @finder  = Finder.new(ui, db)
+    @actions = actions
   end
 
   def run
@@ -22,38 +15,30 @@ class Conman
 
     loop do
       option = ask_menu_option(menu)
-
-      if (option == 1)
-        list_contacts
-      elsif (option == 2)
-        add_contacts
-      elsif (option == 3)
-        search_contacts
-      elsif (option == 4)
-        break
-      end
-
+      break if exit(option)
+      check(option)
     end
+
   end
 
   private
 
-  attr_reader :ui, :db, :lister, :creator, :finder
+  attr_reader :ui, :actions
 
   def ask_menu_option(menu)
     ui.ask_menu_option(menu)
   end
 
-  def list_contacts
-    lister.list_all
+  def exit(option)
+    option == actions.size + 1
   end
 
-  def add_contacts
-    creator.add_contacts
+  def check(option)
+    actions.each { |action| action.act if selected(option, action) }
   end
 
-  def search_contacts
-    finder.search_contacts
+  def selected(option, action)
+    option == actions.index(action) + 1
   end
 
 end

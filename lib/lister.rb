@@ -5,6 +5,10 @@ class Lister
     @contacts = db
   end
 
+  def act
+    list_all
+  end
+
   def list_all
     all.empty? ? print_error_message : display_all
   end

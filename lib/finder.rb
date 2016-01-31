@@ -5,6 +5,10 @@ class Finder
     @contacts = db
   end
 
+  def act
+    search_contacts
+  end
+
   def search_contacts
     loop do
       display_search_results(search_contact(ask_for_term))
