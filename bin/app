@@ -5,19 +5,24 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'console'
 require 'ui'
 require 'db'
+
 require 'lister'
 require 'creator'
 require 'finder'
+
+require 'menu'
 require 'conman'
 
-ui      = UI.new(Console.new($stdin, $stdout))
-db      = DB.new
+ui = UI.new(Console.new($stdin, $stdout))
+db = DB.new
 
 actions = [
-  Lister.new( ui, db),
-  Creator.new(ui, db),
-  Finder.new( ui, db)
+  ["List contacts",   Lister.new( ui, db)],
+  ["Add contacts",    Creator.new(ui, db)],
+  ["Search contacts", Finder.new( ui, db)],
+  ["Exit",            nil]
 ]
 
-conman  = Conman.new(ui, actions)
+menu   = Menu.new(ui, actions)
+conman = Conman.new(menu)
 conman.run
