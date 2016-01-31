@@ -19,6 +19,8 @@ class UI
   EXPAND       = "\nDisplay one of these contacts' details? (y/n): "
   CONTACT      = "\nChoose a contact to expand: "
 
+  ERROR_NO_CONTACTS = "\nNo contacts were found."
+
   def initialize(console)
     @console = console
   end
@@ -109,6 +111,10 @@ class UI
 
   def ask_to_expand
     ask_to(EXPAND)
+  end
+
+  def error_no_contacts
+    console.writeln(ERROR_NO_CONTACTS)
   end
 
   private

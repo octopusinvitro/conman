@@ -30,9 +30,7 @@ class Finder
   end
 
   def choose_contact_to_expand
-    if ask_to_expand
-      expand_contact
-    end
+    expand_contact if ask_to_expand
   end
 
   def ask_to_expand
