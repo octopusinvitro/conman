@@ -13,7 +13,7 @@ class Console
     output.puts(message)
   end
 
-  def read 
+  def read
     input.gets()
   end
 

@@ -8,7 +8,6 @@ describe Creator do
 
   before :each do
     allow(ui).to receive(:ask_for_another).and_return(false)
-    allow(ui).to receive(:display)
   end
 
   it "saves the name introduced by the user" do
@@ -47,14 +46,15 @@ describe Creator do
     expect(db.size).to eq(2)
   end
 
-  it "prints contact after adding it" do
+  it "prints one contact after adding it and all contacts after finished" do
     creator.add_contacts
-    expect(ui).to have_received(:display).once
+    expect(ui).to have_received(:display_all).twice
   end
 
-  it "prints all contacts after finished" do
+  it "prints two contacts after adding them and after finished" do
+    allow(ui).to receive(:ask_for_another).and_return(true, false)
     creator.add_contacts
-    expect(ui).to have_received(:display_all).once
+    expect(ui).to have_received(:display_all).exactly(3).times
   end
 
   def expect_field(key, value)

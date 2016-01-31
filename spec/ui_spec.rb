@@ -106,10 +106,10 @@ describe UI do
     expect(ui.ask_for_term).to eq("search term")
   end
 
-  it "prints the menu" do
+  it "prints the menu with format" do
     menu = [[1, "Option 1"], [2, "Option 2"]]
     ui.display_menu(menu)
-    expect(output.string).to eq("\n1) Option 1\n2) Option 2\n")
+    expect(output.string).to eq("\n--------------------\n 1) Option 1\n 2) Option 2\n--------------------\n")
   end
 
   it "prints the prompt message for choosing a menu option" do
@@ -153,6 +153,33 @@ describe UI do
     ]
     ui.display_names(contacts)
     expect(output.string.lines.count).to eq(4)
+  end
+
+  it "prints the prompt message for asking for a contact" do
+    input.string = "1"
+    ui.ask_for_contact
+    expect_to_print(UI::CONTACT)
+  end
+
+  it "reads a contact's index" do
+    input.string = "1"
+    expect(ui.ask_for_contact).to eq(1)
+  end
+
+  it "prints the prompt message for expanding a contact's details" do
+    input.string = "\n"
+    ui.ask_to_expand
+    expect_to_print(UI::EXPAND)
+  end
+
+  it "reads a positive answer to expand contact details" do
+    input.string = "y"
+    expect(ui.ask_to_expand).to eq(true)
+  end
+
+  it "reads a negative answer to expand contact details" do
+    input.string = "n"
+    expect(ui.ask_to_expand).to eq(false)
   end
 
   def expect_to_print(message)
