@@ -13,6 +13,7 @@ class UI
   MENU         = "\nChoose a menu option: "
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES\n"
+  HEADER_NAMES = "\nINDEX\tNAME\n"
 
   def initialize(console)
     @console = console
@@ -58,16 +59,35 @@ class UI
   def display_menu(menu)
     console.writeln
     menu.each do |item|
-      console.writeln(item[0].to_s + ") " + item[1])
+      display_item(item)
     end
+  end
+
+  def display_item(item)
+    line = "" << item[0].to_s << ") " << item[1]
+    console.writeln(line)
   end
 
   def display(contact)
     values = ""
     contact.each do |key, value|
-      values << value + "\t"
+      values << value << "\t"
     end
     console.writeln(values)
+  end
+
+  def display_names(contacts)
+    console.write(HEADER_NAMES)
+    index = 0
+    contacts.each do |contact|
+      index += 1
+      display_name(index, contact)
+    end
+  end
+
+  def display_name(index, contact)
+    line = "" << index.to_s << "\t" << contact[:name]
+    console.writeln(line)
   end
 
   def display_all(contacts)

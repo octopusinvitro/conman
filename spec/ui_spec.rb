@@ -140,6 +140,21 @@ describe UI do
     expect(output.string.lines.count).to eq(4)
   end
 
+  it "prints a contact but only the name" do
+     contact = {name: "name", address: "address"}
+     ui.display_name(1, contact)
+     expect(output.string).to eq("1\tname\n")
+  end
+
+  it "prints all contacts but only the names" do
+    contacts = [
+      {name: "name1", address: "address1"},
+      {name: "name2", address: "address2"}
+    ]
+    ui.display_names(contacts)
+    expect(output.string.lines.count).to eq(4)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
