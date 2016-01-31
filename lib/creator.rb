@@ -5,6 +5,10 @@ class Creator
     @contacts = db
   end
 
+  def act
+    add_contacts
+  end
+
   def add_contacts
     loop do
       contact = ask_for_fields

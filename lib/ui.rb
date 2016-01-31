@@ -65,9 +65,7 @@ class UI
   def display_menu(menu)
     console.writeln
     console.writeln(SEPARATOR)
-    menu.each do |item|
-      display_item(item)
-    end
+    menu.each { |item| display_item(item) }
     console.writeln(SEPARATOR)
   end
 
@@ -78,16 +76,12 @@ class UI
 
   def display_all(contacts)
     console.writeln(HEADER)
-    contacts.each do |contact|
-      display(contact)
-    end
+    contacts.each { |contact| display(contact) }
   end
 
   def display(contact)
     values = ""
-    contact.each do |key, value|
-      values << value << "\t"
-    end
+    contact.each { |key, value| values << value << "\t" }
     console.writeln(values)
   end
 
