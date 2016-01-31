@@ -108,8 +108,9 @@ describe UI do
 
   it "prints the menu with format" do
     menu = [[1, "Option 1"], [2, "Option 2"]]
-    ui.display_menu(menu)
-    expect(output.string).to eq("\n--------------------\n 1) Option 1\n 2) Option 2\n--------------------\n")
+    input.string = "1"
+    ui.ask_menu_option(menu)
+    expect(output.string).to include("\n--------------------\n 1) Option 1\n 2) Option 2\n--------------------\n")
   end
 
   it "prints the prompt message for choosing a menu option" do

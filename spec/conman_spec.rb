@@ -1,38 +1,31 @@
 require 'conman'
-require 'ui'
-require 'lister'
-require 'creator'
 
 describe Conman do
 
-  let (:ui)      {instance_double(UI).as_null_object}
-  let (:lister)  {instance_double(Lister).as_null_object}
-  let (:creator) {instance_double(Creator).as_null_object}
-  let (:finder)  {instance_double(Finder).as_null_object}
-  let (:conman)  {Conman.new(ui, [lister, creator, finder])}
+  let (:menu)   {instance_double(Menu).as_null_object}
+  let (:conman) {Conman.new(menu)}
 
-  it "displays menu once when program runs" do
-    allow(ui).to receive(:ask_menu_option).and_return(4)
+  it "asks the user for a menu option" do
     conman.run
-    expect(ui).to have_received(:ask_menu_option).once
+    expect(menu).to have_received(:ask_menu_option).once
   end
 
-  it "calls 'list all contacts' if user selects to list all" do
-    allow(ui).to receive(:ask_menu_option).and_return(1, 4)
+  it "exits if the user types the exit option" do
+    allow(menu).to receive(:exit).and_return(true)
     conman.run
-    expect(lister).to have_received(:act).once
+    expect(menu).to have_received(:exit).once
   end
 
-  it "calls 'add contacts' if user selects to add a contact" do
-    allow(ui).to receive(:ask_menu_option).and_return(2, 4)
+  it "checks the user option if it is not an exit option" do
+    allow(menu).to receive(:exit).and_return(false, true)
     conman.run
-    expect(creator).to have_received(:act).once
+    expect(menu).to have_received(:check).once
   end
 
-  it "calls 'search contacts' if user selects to search for a contact" do
-    allow(ui).to receive(:ask_menu_option).and_return(3, 4)
+  it "runs until the user types the exit option" do
+    allow(menu).to receive(:exit).and_return(false, false, false, true)
     conman.run
-    expect(finder).to have_received(:act).once
+    expect(menu).to have_received(:ask_menu_option).exactly(4).times
   end
 
 end
