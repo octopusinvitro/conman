@@ -7,7 +7,7 @@ class Finder
 
   def search_contacts
     loop do
-      display_all(search_contact(ask_for_term))
+      display_names(search_contact(ask_for_term))
       break unless ask_search_again
     end
   end
@@ -24,8 +24,8 @@ class Finder
   	ui.ask_for_term
   end
 
-  def display_all(contact_list)
-  	ui.display_all(contact_list)
+  def display_names(contact_list)
+    ui.display_names(contact_list)
   end
 
   def ask_search_again
