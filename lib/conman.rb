@@ -1,3 +1,4 @@
+require 'lister'
 require 'creator'
 require 'finder'
 
@@ -6,6 +7,7 @@ class Conman
   def initialize(ui, db)
     @ui      = ui
     @db      = db
+    @lister  = Lister.new(ui, db)
     @creator = Creator.new(ui, db)
     @finder  = Finder.new(ui, db)
   end
@@ -36,14 +38,14 @@ class Conman
 
   private
 
-  attr_reader :ui, :db, :creator, :finder
+  attr_reader :ui, :db, :lister, :creator, :finder
 
   def ask_menu_option(menu)
     ui.ask_menu_option(menu)
   end
 
   def list_contacts
-    ui.display_all(all)
+    lister.list_all
   end
 
   def add_contacts
@@ -52,10 +54,6 @@ class Conman
 
   def search_contacts
     finder.search_contacts
-  end
-
-  def all
-    db.all
   end
 
 end

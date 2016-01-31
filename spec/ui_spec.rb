@@ -182,6 +182,11 @@ describe UI do
     expect(ui.ask_to_expand).to eq(false)
   end
 
+  it "prints an error message for no contacts" do
+    ui.error_no_contacts
+    expect_to_print(UI::ERROR_NO_CONTACTS)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
