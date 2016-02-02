@@ -1,0 +1,25 @@
+require 'reader'
+
+describe Reader do
+
+  let (:file)     {instance_double(File).as_null_object}
+  let (:reader)   {described_class.new(file)}
+
+  let(:contents)  {'[
+    {"name":"name1","address":"address1"},
+    {"name":"name2","address":"address2"},
+    {"name":"name3","address":"address3"}
+  ]'}
+
+  let (:contacts) {[
+    {"name"=>"name1", "address"=>"address1"},
+    {"name"=>"name2", "address"=>"address2"},
+    {"name"=>"name3", "address"=>"address3"}
+  ]}
+
+  it "obtains an array of contacts with the right format" do
+    allow(file).to receive(:read).and_return(contents)
+    expect(reader.read_contacts).to eq(contacts)
+  end
+
+end
