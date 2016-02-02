@@ -18,7 +18,7 @@ class Finder
   end
 
   def search_contact(term)
-    all.select{ |contact| contact.any? {|key, val| val.include?(term)} }
+    all_contacts.select{ |contact| contact.any? {|key, val| val.include?(term)} }
   end
 
   private
@@ -58,7 +58,7 @@ class Finder
   	ui.ask_search_again
   end
 
-  def all
+  def all_contacts
   	contacts.all
   end
 
