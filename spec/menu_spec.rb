@@ -17,7 +17,7 @@ describe Menu do
 
   it "creates a menu from a group of menu actions" do
   	expected = [
-      [1, "one"], 
+      [1, "one"],
       [2, "two"]
   	]
   	expect(menu.create_menu).to eq(expected)
