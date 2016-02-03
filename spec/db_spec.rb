@@ -2,7 +2,7 @@ require 'db'
 
 describe DB do
 
-  let(:db) {DB.new()}
+  let(:db) {described_class.new()}
 
   it "has a size of zero at the beginning" do
     expect(db.size).to eq(0)

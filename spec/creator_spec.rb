@@ -4,7 +4,7 @@ describe Creator do
 
   let (:ui)       {instance_double(UI).as_null_object}
   let (:db)       {DB.new}
-  let (:creator)  {Creator.new(ui, db)}
+  let (:creator)  {described_class.new(ui, db)}
 
   before :each do
     allow(ui).to receive(:ask_for_another).and_return(false)
