@@ -4,6 +4,9 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'console'
 require 'ui'
+
+require 'reader'
+require 'writer'
 require 'db'
 
 require 'lister'
@@ -13,8 +16,8 @@ require 'finder'
 require 'menu'
 require 'conman'
 
-ui = UI.new(Console.new($stdin, $stdout))
-db = DB.new
+ui   = UI.new(Console.new($stdin, $stdout))
+db   = DB.new(Reader.new, Writer.new)
 
 actions = [
   ["List contacts",   Lister.new( ui, db)],

@@ -3,11 +3,13 @@ require 'creator'
 describe Creator do
 
   let (:ui)       {instance_double(UI).as_null_object}
-  let (:db)       {DB.new}
+  let (:db)       {instance_double(DB).as_null_object}
   let (:creator)  {described_class.new(ui, db)}
+  let (:contact)  {{name: "name", address: "address", phone: "123456", email: "email@mail.com", notes: "notes"}}
 
   before :each do
     allow(ui).to receive(:ask_for_another).and_return(false)
+    allow(db).to receive(:at).and_return(contact)
   end
 
   it "saves the name introduced by the user" do
@@ -43,7 +45,7 @@ describe Creator do
   it "adds two contacts" do
     allow(ui).to receive(:ask_for_another).and_return(true, false)
     creator.act
-    expect(db.size).to eq(2)
+    expect(db).to have_received(:add).twice
   end
 
   it "prints one contact after adding it and all contacts after finished" do
