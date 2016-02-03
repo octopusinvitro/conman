@@ -7,7 +7,7 @@ class Writer
   end
 
   def write_contacts(contacts)
-  	file.write(parse(contacts))
+    file.write(parse(contacts))
   end
 
   private
