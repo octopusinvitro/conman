@@ -17,7 +17,9 @@ require 'menu'
 require 'conman'
 
 ui   = UI.new(Console.new($stdin, $stdout))
-db   = DB.new(Reader.new, Writer.new)
+
+path = "./contacts"
+db   = DB.new(Reader.new(path), Writer.new(path))
 
 actions = [
   ["List contacts",   Lister.new( ui, db)],

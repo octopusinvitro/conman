@@ -2,20 +2,31 @@ require 'json'
 
 class Writer
 
-  def initialize(file)
+  def initialize(path, file = nil)
+    @path = path
     @file = file
   end
 
   def write_contacts(contacts)
-    file.write(parse(contacts))
+    file.nil? ? write(contacts) : tests_write(contacts)
   end
 
   private
 
-  attr_reader :file
+  attr_reader :path, :file
 
   def parse(contacts)
     contacts.to_json
+  end
+
+  def write(contacts)
+    file = File.open(path, "w+")
+    file.write(parse(contacts))
+    file.close
+  end
+
+  def tests_write(contacts)
+    file.write(parse(contacts))
   end
 
 end

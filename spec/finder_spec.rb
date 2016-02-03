@@ -20,7 +20,7 @@ describe Finder do
     allow(ui).to receive(:ask_search_again).and_return(false)
   end
 
-  it "finds a contact given an exact term" do
+  it "finds one contact given an exact term" do
     expect(finder.search_contact("address1")).to eq([contacts.first])
   end
 

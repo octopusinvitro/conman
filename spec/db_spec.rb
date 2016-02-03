@@ -6,17 +6,23 @@ describe DB do
   let(:writer) {instance_double(Writer).as_null_object}
   let(:db)     {described_class.new(reader, writer)}
 
-  it "has a size of zero at the beginning" do
+  before :each do
     allow(reader).to receive(:read_contacts).and_return([])
-    expect(db.size).to eq(0)
   end
 
   it "adds one contact to the database" do
     contact = {name: "name", address: "address"}
-    allow(reader).to receive(:read_contacts).and_return([contact])
     db.add(contact)
     expect(db.size).to eq(1)
     expect(writer).to have_received(:write_contacts).once
+  end
+
+  it "adds two contacts to the database" do
+    contact = {name: "name", address: "address"}
+    db.add(contact)
+    db.add(contact)
+    expect(db.size).to eq(2)
+    expect(writer).to have_received(:write_contacts).twice
   end
 
   it "returns an empty list of contacts if the reader is null" do
