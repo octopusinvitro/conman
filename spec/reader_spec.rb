@@ -6,9 +6,9 @@ describe Reader do
   let (:reader)   {described_class.new(file)}
 
   let(:contents)  {'[
-    {"name": "name1", "address": "address1"},
-    {"name": "name2", "address": "address2"},
-    {"name": "name3", "address": "address3"}
+    {"name":"name1","address":"address1"},
+    {"name":"name2","address":"address2"},
+    {"name":"name3","address":"address3"}
   ]'}
 
   let (:contacts) {[
