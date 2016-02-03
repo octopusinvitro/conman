@@ -10,7 +10,9 @@ class DB
   end
 
   def add(contact)
-    writer.write_contacts(all) if !writer.nil?
+    contacts = all
+    contacts << contact
+    writer.write_contacts(contacts) if !writer.nil?
   end
 
   def all

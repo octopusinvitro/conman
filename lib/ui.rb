@@ -95,7 +95,7 @@ class UI
   end
 
   def display_name(index, contact)
-    line = "" << index.to_s << "\t" << contact[:name]
+    line = "" << index.to_s << "\t" << contact["name"]
     console.writeln(line)
   end
 
