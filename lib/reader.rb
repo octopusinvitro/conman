@@ -19,7 +19,7 @@ class Reader
   end
 
   def parse(contacts)
-    JSON.parse(contacts)
+    contacts == '' ? [] : JSON.parse(contacts)
   end
 
 end

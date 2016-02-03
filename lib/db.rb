@@ -1,32 +1,28 @@
 class DB
 
-  def initialize(reader = nil, writer = nil, contact_list = [])
+  def initialize(reader = nil, writer = nil)
     @reader = reader
     @writer = writer
-    @contact_list = contact_list
   end
 
   def size
-    contact_list = all
-    contact_list.size
+    all.size
   end
 
   def add(contact)
-    contact_list << contact
-    writer.write_contacts(contact_list) if !writer.nil?
+    writer.write_contacts(all) if !writer.nil?
   end
 
   def all
-    contacts = reader.nil? ? contact_list : reader.read_contacts
+    reader.nil? ? [] : reader.read_contacts
   end
 
   def at(id)
-    contact_list = all
-    contact      = contact_list.empty? ? {} : contact_list[id]
+    all.empty? ? {} : all[id]
   end
 
   private
 
-  attr_reader :reader, :writer, :contact_list
+  attr_reader :reader, :writer
 
 end

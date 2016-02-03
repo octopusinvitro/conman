@@ -17,6 +17,11 @@ describe Reader do
     {"name"=>"name3", "address"=>"address3"}
   ]}
 
+  it "obtains an empty array if file is empty" do
+    allow(file).to receive(:read).and_return('')
+    expect(reader.read_contacts).to eq([])
+  end
+
   it "obtains an array of contacts with the right format" do
     allow(file).to receive(:read).and_return(contents)
     expect(reader.read_contacts).to eq(contacts)
