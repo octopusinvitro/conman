@@ -8,7 +8,7 @@ describe Lister do
 
   it "prints a message if no available contacts" do
     db     = DB.new
-    lister = Lister.new(ui, db)
+    lister = described_class.new(ui, db)
     lister.act
     expect(ui).to have_received(:error_no_contacts).once
   end

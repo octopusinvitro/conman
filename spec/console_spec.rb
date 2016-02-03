@@ -4,7 +4,7 @@ describe Console  do
 
   it "prints to the console" do
     output  = StringIO.new
-    console = Console.new(nil, output)
+    console = described_class.new(nil, output)
     console.write("boo")
 		
     expect(output.string).to eq("boo")

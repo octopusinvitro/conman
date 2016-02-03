@@ -5,7 +5,7 @@ describe UI do
 
   let(:input)  {StringIO.new}
   let(:output) {StringIO.new}
-  let(:ui)     {UI.new(Console.new(input, output))}
+  let(:ui)     {described_class.new(Console.new(input, output))}
 
 
   it "prints the prompt message for adding another contact" do

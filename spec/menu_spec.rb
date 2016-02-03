@@ -8,7 +8,7 @@ describe Menu do
     ["one", lister],
     ["two", nil]
   ]}
-  let (:menu) {Menu.new(ui, actions)}
+  let (:menu) {described_class.new(ui, actions)}
 
   it "asks the user for a menu option" do
     menu.ask_menu_option

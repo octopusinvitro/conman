@@ -3,7 +3,7 @@ require 'conman'
 describe Conman do
 
   let (:menu)   {instance_double(Menu).as_null_object}
-  let (:conman) {Conman.new(menu)}
+  let (:conman) {described_class.new(menu)}
 
   it "asks the user for a menu option" do
     conman.run
