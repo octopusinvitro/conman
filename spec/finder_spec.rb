@@ -10,7 +10,7 @@ describe Finder do
     {name: "name3", address: "address3"}
   ]}
   let (:ui)     {instance_double(UI).as_null_object}
-  let (:finder) {described_class.new(ui, DB.new(contacts))}
+  let (:finder) {described_class.new(ui, DB.new(nil, nil, contacts))}
 
   before :each do
     allow(ui).to receive(:ask_for_term).and_return("")
