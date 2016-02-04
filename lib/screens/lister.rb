@@ -1,8 +1,8 @@
 class ListerScreen
 
   def initialize(ui, db)
-    @ui       = ui
-    @contacts = db
+    @ui = ui
+    @db = db
   end
 
   def run
@@ -15,10 +15,10 @@ class ListerScreen
 
   private
 
-  attr_reader :ui, :contacts
+  attr_reader :ui, :db
 
   def all
-    contacts.all
+    db.all
   end
 
   def print_error_message

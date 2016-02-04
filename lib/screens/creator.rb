@@ -1,8 +1,8 @@
 class CreatorScreen
 
   def initialize(ui, db)
-    @ui       = ui
-    @contacts = db
+    @ui = ui
+    @db = db
   end
 
   def run
@@ -22,7 +22,7 @@ class CreatorScreen
 
   private
 
-  attr_reader :ui, :contacts
+  attr_reader :ui, :db
 
   def ask_for_fields
     contact = {}
@@ -35,7 +35,7 @@ class CreatorScreen
   end
 
   def add_contact(contact)
-    contacts.add(contact)
+    db.add(contact)
   end
 
   def display(contact)
@@ -47,7 +47,7 @@ class CreatorScreen
   end
 
   def all
-    contacts.all
+    db.all
   end
 
   def display_all
