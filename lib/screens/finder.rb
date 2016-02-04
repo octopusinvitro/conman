@@ -23,7 +23,7 @@ class FinderScreen
   attr_reader :ui, :db
 
   def ask_for_term
-  	ui.ask_for_term
+    ui.ask_for_term
   end
 
   def search_contact(term)

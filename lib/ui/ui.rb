@@ -111,6 +111,16 @@ class UI
     console.writeln(ERROR_NO_CONTACTS)
   end
 
+  def ask_for_fields
+    contact            = {}
+    contact["name"]    = ask_for_name
+    contact["address"] = ask_for_address
+    contact["phone"]   = ask_for_phone
+    contact["email"]   = ask_for_email
+    contact["notes"]   = ask_for_notes
+    contact
+  end
+
   private
 
   attr_reader :console
