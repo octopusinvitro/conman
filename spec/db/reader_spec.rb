@@ -1,4 +1,4 @@
-require 'reader'
+require 'db/reader'
 
 describe Reader do
 

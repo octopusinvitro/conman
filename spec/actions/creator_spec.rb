@@ -1,4 +1,4 @@
-require 'creator'
+require 'actions/creator'
 
 describe Creator do
 

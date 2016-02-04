@@ -1,6 +1,4 @@
-require 'finder'
-require 'ui'
-require 'db'
+require 'actions/finder'
 
 describe Finder do
 

@@ -1,4 +1,4 @@
-require 'db'
+require 'db/db'
 
 describe DB do
 
