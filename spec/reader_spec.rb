@@ -19,13 +19,13 @@ describe Reader do
 
   it "obtains an empty array if file is empty" do
     allow(file).to receive(:read).and_return('')
-    expect(reader.read_contacts).to eq([])
+    expect(reader.run).to eq([])
     expect(file).to have_received(:read).once
   end
 
   it "obtains an array of contacts with the right format" do
     allow(file).to receive(:read).and_return(contents)
-    expect(reader.read_contacts).to eq(contacts)
+    expect(reader.run).to eq(contacts)
     expect(file).to have_received(:read).once
   end
 

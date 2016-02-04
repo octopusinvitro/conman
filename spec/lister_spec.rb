@@ -8,13 +8,13 @@ describe Lister do
 
   it "prints an error message if no available contacts" do
     allow(db).to receive(:all).and_return([])
-    lister.act
+    lister.run
     expect(ui).to have_received(:error_no_contacts).once
   end
 
   it "displays a list of contacts if there are any" do
     allow(db).to receive(:all).and_return([{"name" => "name", "address" => "address"}])
-    lister.act
+    lister.run
     expect(ui).to have_received(:display_all).once
   end
 

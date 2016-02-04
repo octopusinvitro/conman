@@ -20,7 +20,7 @@ class Menu
   end
 
   def check(option)
-    actions.each { |action| action.last.act if selected(option, action) }
+    actions.each { |action| action.last.run if selected(option, action) }
   end
 
   private

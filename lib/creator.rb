@@ -5,7 +5,7 @@ class Creator
     @contacts = db
   end
 
-  def act
+  def run
     add_contacts
   end
 

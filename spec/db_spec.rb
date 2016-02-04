@@ -7,14 +7,14 @@ describe DB do
   let(:db)     {described_class.new(reader, writer)}
 
   before :each do
-    allow(reader).to receive(:read_contacts).and_return([])
+    allow(reader).to receive(:run).and_return([])
   end
 
   it "adds one contact to the database" do
     contact = {"name" => "name", "address" => "address"}
     db.add(contact)
     expect(db.size).to eq(1)
-    expect(writer).to have_received(:write_contacts).once
+    expect(writer).to have_received(:run).once
   end
 
   it "adds two contacts to the database" do
@@ -22,7 +22,7 @@ describe DB do
     db.add(contact)
     db.add(contact)
     expect(db.size).to eq(2)
-    expect(writer).to have_received(:write_contacts).twice
+    expect(writer).to have_received(:run).twice
   end
 
   it "returns an empty list of contacts if the reader is null" do
@@ -36,7 +36,7 @@ describe DB do
       {"name" => "name2", "address" => "address2"},
       {"name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:read_contacts).and_return(contacts)
+    allow(reader).to receive(:run).and_return(contacts)
     expect(db.all).to eq(contacts)
   end
 
@@ -50,7 +50,7 @@ describe DB do
     contact = {"name" => "name", "address" => "address"}
     db.add(contact)
 
-    allow(reader).to receive(:read_contacts).and_return([contact])
+    allow(reader).to receive(:run).and_return([contact])
     expect(db.at(0)).to eq(contact)
   end
 

@@ -12,11 +12,11 @@ class DB
   def add(contact)
     contacts = all
     contacts << contact
-    writer.write_contacts(contacts) if !writer.nil?
+    writer.run(contacts) if !writer.nil?
   end
 
   def all
-    reader.nil? ? [] : reader.read_contacts
+    reader.nil? ? [] : reader.run
   end
 
   def at(id)
