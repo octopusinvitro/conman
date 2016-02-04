@@ -5,9 +5,9 @@ require 'db'
 describe Finder do
 
   let (:contacts) {[
-    {name: "name1", address: "address1"},
-    {name: "name2", address: "address2"},
-    {name: "name3", address: "address3"}
+    {"name" => "name1", "address" => "address1"},
+    {"name" => "name2", "address" => "address2"},
+    {"name" => "name3", "address" => "address3"}
   ]}
   let (:ui)     {instance_double(UI).as_null_object}
   let (:db)     {instance_double(DB).as_null_object}
