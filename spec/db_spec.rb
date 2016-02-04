@@ -11,14 +11,14 @@ describe DB do
   end
 
   it "adds one contact to the database" do
-    contact = {name: "name", address: "address"}
+    contact = {"name" => "name", "address" => "address"}
     db.add(contact)
     expect(db.size).to eq(1)
     expect(writer).to have_received(:write_contacts).once
   end
 
   it "adds two contacts to the database" do
-    contact = {name: "name", address: "address"}
+    contact = {"name" => "name", "address" => "address"}
     db.add(contact)
     db.add(contact)
     expect(db.size).to eq(2)
@@ -32,9 +32,9 @@ describe DB do
 
   it "sends the list of all the contacts" do
     contacts = [
-      {name: "name1", address: "address1"},
-      {name: "name2", address: "address2"},
-      {name: "name3", address: "address3"}
+      {"name" => "name1", "address" => "address1"},
+      {"name" => "name2", "address" => "address2"},
+      {"name" => "name3", "address" => "address3"}
     ]
     allow(reader).to receive(:read_contacts).and_return(contacts)
     expect(db.all).to eq(contacts)
@@ -42,12 +42,12 @@ describe DB do
 
   it "gets an empty contact if the reader is null" do
     db = described_class.new(nil, writer)
-    db.add({name: "name", address: "address"})
+    db.add({"name" => "name", "address" => "address"})
     expect(db.at(0)).to eq({})
   end
 
   it "if everything goes well, gets one contact by id" do
-    contact = {name: "name", address: "address"}
+    contact = {"name" => "name", "address" => "address"}
     db.add(contact)
 
     allow(reader).to receive(:read_contacts).and_return([contact])

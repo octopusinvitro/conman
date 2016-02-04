@@ -13,7 +13,7 @@ describe Lister do
   end
 
   it "displays a list of contacts if there are any" do
-    allow(db).to receive(:all).and_return([{name: "name", address: "address"}])
+    allow(db).to receive(:all).and_return([{"name" => "name", "address" => "address"}])
     lister.act
     expect(ui).to have_received(:display_all).once
   end
