@@ -1,4 +1,4 @@
-class Finder
+class FinderScreen
 
   def initialize(ui, db)
     @ui       = ui

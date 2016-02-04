@@ -3,7 +3,7 @@ require 'menu'
 describe Menu do
 
   let (:ui)     {instance_double(UI).as_null_object}
-  let (:lister) {instance_double(Lister).as_null_object}
+  let (:lister) {instance_double(ListerScreen).as_null_object}
   let (:actions) {[
     ["one", lister],
     ["two", nil]

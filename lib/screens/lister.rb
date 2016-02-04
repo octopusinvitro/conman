@@ -1,4 +1,4 @@
-class Lister
+class ListerScreen
 
   def initialize(ui, db)
     @ui       = ui

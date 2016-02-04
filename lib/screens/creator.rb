@@ -1,4 +1,4 @@
-class Creator
+class CreatorScreen
 
   def initialize(ui, db)
     @ui       = ui
@@ -13,7 +13,7 @@ class Creator
     loop do
       contact = ask_for_fields
       add_contact(contact)
-      display([contact])
+      display(contact)
       break unless ask_for_another
     end
 
@@ -39,7 +39,7 @@ class Creator
   end
 
   def display(contact)
-    ui.display_all(contact)
+    ui.display_all([contact])
   end
 
   def ask_for_another
@@ -51,6 +51,6 @@ class Creator
   end
 
   def display_all
-  	ui.display_all(all)
+    ui.display_all(all)
   end
 end

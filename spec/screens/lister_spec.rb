@@ -1,6 +1,6 @@
-require 'actions/lister'
+require 'screens/lister'
 
-describe Lister do
+describe ListerScreen do
 
   let (:ui)     {instance_double(UI).as_null_object}
   let (:db)     {instance_double(DB).as_null_object}

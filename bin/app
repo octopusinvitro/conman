@@ -9,9 +9,9 @@ require 'db/reader'
 require 'db/writer'
 require 'db/db'
 
-require 'actions/lister'
-require 'actions/creator'
-require 'actions/finder'
+require 'screens/lister'
+require 'screens/creator'
+require 'screens/finder'
 
 require 'menu'
 require 'conman'
@@ -22,9 +22,9 @@ path = "./contacts"
 db   = DB.new(Reader.new(path), Writer.new(path))
 
 actions = [
-  ["List contacts",   Lister.new( ui, db)],
-  ["Add contacts",    Creator.new(ui, db)],
-  ["Search contacts", Finder.new( ui, db)],
+  ["List contacts",   ListerScreen.new( ui, db)],
+  ["Add contacts",    CreatorScreen.new(ui, db)],
+  ["Search contacts", FinderScreen.new( ui, db)],
   ["Exit",            nil]
 ]
 
