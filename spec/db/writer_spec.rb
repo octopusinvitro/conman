@@ -1,4 +1,4 @@
-require 'writer'
+require 'db/writer'
 
 describe Writer do
 

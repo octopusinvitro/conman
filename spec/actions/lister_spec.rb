@@ -1,4 +1,4 @@
-require 'lister'
+require 'actions/lister'
 
 describe Lister do
 

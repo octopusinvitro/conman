@@ -1,5 +1,5 @@
-require 'console'
-require 'ui'
+require 'ui/console'
+require 'ui/ui'
 
 describe UI do
 

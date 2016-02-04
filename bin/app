@@ -2,16 +2,16 @@
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
-require 'console'
-require 'ui'
+require 'ui/console'
+require 'ui/ui'
 
-require 'reader'
-require 'writer'
-require 'db'
+require 'db/reader'
+require 'db/writer'
+require 'db/db'
 
-require 'lister'
-require 'creator'
-require 'finder'
+require 'actions/lister'
+require 'actions/creator'
+require 'actions/finder'
 
 require 'menu'
 require 'conman'

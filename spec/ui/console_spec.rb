@@ -1,4 +1,4 @@
-require 'console'
+require 'ui/console'
 
 describe Console  do
 
