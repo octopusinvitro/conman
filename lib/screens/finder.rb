@@ -1,8 +1,8 @@
 class FinderScreen
 
   def initialize(ui, db)
-    @ui       = ui
-    @contacts = db
+    @ui = ui
+    @db = db
   end
 
   def run
@@ -24,7 +24,7 @@ class FinderScreen
 
   private
 
-  attr_reader :ui, :contacts
+  attr_reader :ui, :db
 
   def ask_for_term
   	ui.ask_for_term
@@ -60,7 +60,7 @@ class FinderScreen
   end
 
   def all_contacts
-  	contacts.all
+    db.all
   end
 
 end
