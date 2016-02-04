@@ -11,8 +11,9 @@ class Finder
 
   def search_contacts
     loop do
-      display_search_results(search_contact(ask_for_term))
-      choose_contact_to_expand
+      matched = search_contact(ask_for_term)
+      display_search_results(matched)
+      choose_contact_to_expand(matched)
       break unless ask_search_again
     end
   end
@@ -33,17 +34,17 @@ class Finder
     ui.display_names(contacts)
   end
 
-  def choose_contact_to_expand
-    expand_contact if ask_to_expand
+  def choose_contact_to_expand(matched)
+    expand_contact(matched) if ask_to_expand
   end
 
   def ask_to_expand
     ui.ask_to_expand
   end
 
-  def expand_contact
+  def expand_contact(matched)
     index = ask_for_contact - 1
-    display([contacts.at(index)])
+    display([matched[index]])
   end
 
   def ask_for_contact
