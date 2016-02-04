@@ -49,9 +49,28 @@ describe DB do
   it "if everything goes well, gets one contact by id" do
     contact = {"name" => "name", "address" => "address"}
     db.add(contact)
-
     allow(reader).to receive(:run).and_return([contact])
     expect(db.at(0)).to eq(contact)
+  end
+
+  it "finds one contact given an exact term" do
+    contacts = [
+      {"name" => "name1", "address" => "address1"},
+      {"name" => "name2", "address" => "address2"},
+      {"name" => "name3", "address" => "address3"}
+    ]
+    allow(reader).to receive(:run).and_return(contacts)
+    expect(db.search("address1")).to eq([contacts.first])
+  end
+
+  it "finds several contacts given an inexact term" do
+    contacts = [
+      {"name" => "name1", "address" => "address1"},
+      {"name" => "name2", "address" => "address2"},
+      {"name" => "name3", "address" => "address3"}
+    ]
+    allow(reader).to receive(:run).and_return(contacts)
+    expect(db.search("address")).to eq(contacts)
   end
 
 end
