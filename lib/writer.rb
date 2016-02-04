@@ -7,7 +7,7 @@ class Writer
     @file = file
   end
 
-  def write_contacts(contacts)
+  def run(contacts)
     file.nil? ? write(contacts) : tests_write(contacts)
   end
 

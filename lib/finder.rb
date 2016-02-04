@@ -5,7 +5,7 @@ class Finder
     @contacts = db
   end
 
-  def act
+  def run
     search_contacts
   end
 

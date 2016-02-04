@@ -33,7 +33,7 @@ describe Menu do
 
   it "calls the action corresponding to the user option" do
     menu.check(1)
-    expect(lister).to have_received(:act).once
+    expect(lister).to have_received(:run).once
   end
 
 end

@@ -5,7 +5,7 @@ class Lister
     @contacts = db
   end
 
-  def act
+  def run
     list_all
   end
 

@@ -13,7 +13,7 @@ describe Writer do
   let (:writer)  {described_class.new("", file)}
 
   it "saves contacts to a file" do
-    writer.write_contacts(contacts)
+    writer.run(contacts)
     expect(file).to have_received(:write).with(contents)
   end
 

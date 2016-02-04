@@ -7,7 +7,7 @@ class Reader
     @file = file
   end
 
-  def read_contacts
+  def run
     file.nil? ? parse(read) : parse(tests_read)
   end
 
