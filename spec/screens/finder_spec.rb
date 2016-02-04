@@ -1,6 +1,6 @@
-require 'actions/finder'
+require 'screens/finder'
 
-describe Finder do
+describe FinderScreen do
 
   let (:contacts) {[
     {"name" => "name1", "address" => "address1"},

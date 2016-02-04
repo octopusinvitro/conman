@@ -1,6 +1,6 @@
-require 'actions/creator'
+require 'screens/creator'
 
-describe Creator do
+describe CreatorScreen do
 
   let (:ui)       {instance_double(UI).as_null_object}
   let (:db)       {instance_double(DB).as_null_object}
