@@ -18,16 +18,16 @@ class FinderScreen
     end
   end
 
-  def search_contact(term)
-    all_contacts.select{ |contact| contact.any? {|key, val| val.include?(term)} }
-  end
-
   private
 
   attr_reader :ui, :db
 
   def ask_for_term
   	ui.ask_for_term
+  end
+
+  def search_contact(term)
+    db.search(term)
   end
 
   def display_search_results(contacts)
@@ -57,10 +57,6 @@ class FinderScreen
 
   def ask_search_again
   	ui.ask_search_again
-  end
-
-  def all_contacts
-    db.all
   end
 
 end

@@ -23,6 +23,10 @@ class DB
     all.empty? ? {} : all[id]
   end
 
+  def search(term)
+    all.select{ |contact| contact.any? {|key, val| val.include?(term)} }
+  end
+
   private
 
   attr_reader :reader, :writer

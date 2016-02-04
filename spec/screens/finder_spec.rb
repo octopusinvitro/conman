@@ -12,18 +12,10 @@ describe FinderScreen do
   let (:finder) {described_class.new(ui, db)}
 
   before :each do
-    allow(db).to receive(:all).and_return(contacts)
+    allow(db).to receive(:search).and_return(contacts)
     allow(ui).to receive(:ask_for_term).and_return("")
     allow(ui).to receive(:ask_to_expand).and_return(false)
     allow(ui).to receive(:ask_search_again).and_return(false)
-  end
-
-  it "finds one contact given an exact term" do
-    expect(finder.search_contact("address1")).to eq([contacts.first])
-  end
-
-  it "finds several contacts given an inexact term" do
-    expect(finder.search_contact("address")).to eq(contacts)
   end
 
   it "performs two searches" do
@@ -52,11 +44,11 @@ describe FinderScreen do
   end
 
   it "chooses the correct contact to display from the search results" do
-    allow(ui).to receive(:ask_for_term).and_return("address3")
+    allow(db).to receive(:search).and_return([contacts[2]])
     allow(ui).to receive(:ask_to_expand).and_return(true)
     allow(ui).to receive(:ask_for_contact).and_return(1)
     finder.run
-    expect(ui).to have_received(:display_all).with([contacts.at(2)])
+    expect(ui).to have_received(:display_all).with([contacts[2]])
   end
 
 end
