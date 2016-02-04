@@ -20,8 +20,8 @@ class Writer
   end
 
   def write(contacts)
-    File.open(path, "w+") do |file|
-      file.write(parse(contacts))
+    File.open(path, "w+") do |f|
+      f.write(parse(contacts))
     end
   end
 

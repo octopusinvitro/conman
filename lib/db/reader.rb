@@ -21,8 +21,8 @@ class Reader
 
   def read
     contacts = []
-    File.open(path, "r") do |file|
-      contacts = file.read
+    File.open(path, "r") do |f|
+      contacts = f.read
     end
   end
 

@@ -25,13 +25,7 @@ class CreatorScreen
   attr_reader :ui, :db
 
   def ask_for_fields
-    contact = {}
-    contact[:name]    = ui.ask_for_name
-    contact[:address] = ui.ask_for_address
-    contact[:phone]   = ui.ask_for_phone
-    contact[:email]   = ui.ask_for_email
-    contact[:notes]   = ui.ask_for_notes
-    contact
+    ui.ask_for_fields
   end
 
   def add_contact(contact)

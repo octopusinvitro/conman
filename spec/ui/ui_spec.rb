@@ -188,6 +188,12 @@ describe UI do
     expect_to_print(UI::ERROR_NO_CONTACTS)
   end
 
+  it "asks for all fields" do
+    input.string = "name\naddress\n1234\nemail@mail.com\nnotes"
+    contact      = {"name" => "name", "address" => "address", "phone" => "1234", "email" => "email@mail.com", "notes" => "notes", }
+    expect(ui.ask_for_fields).to eq(contact)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
