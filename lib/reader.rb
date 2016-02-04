@@ -20,10 +20,10 @@ class Reader
   end
 
   def read
-    file = File.open(path, "r")
-    contacts = file.read
-    file.close
-    contacts
+    contacts = []
+    File.open(path, "r") do |file|
+      contacts = file.read
+    end
   end
 
   def tests_read
