@@ -53,4 +53,12 @@ describe Finder do
     expect(ui).to have_received(:display_all).once
   end
 
+  it "chooses the correct contact to display from the search results" do
+    allow(ui).to receive(:ask_for_term).and_return("address3")
+    allow(ui).to receive(:ask_to_expand).and_return(true)
+    allow(ui).to receive(:ask_for_contact).and_return(1)
+    finder.act
+    expect(ui).to have_received(:display_all).with([contacts.at(2)])
+  end
+
 end
