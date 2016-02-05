@@ -24,12 +24,16 @@ class CreatorScreen
 
   attr_reader :ui, :db
 
-  def ask_for_fields
-    ui.ask_for_fields
-  end
-
   def add_contact(contact)
     db.add(contact)
+  end
+
+  def all
+    db.all
+  end
+
+  def ask_for_fields
+    ui.ask_for_fields
   end
 
   def display(contact)
@@ -38,10 +42,6 @@ class CreatorScreen
 
   def ask_for_another
     ui.ask_for_another
-  end
-
-  def all
-    db.all
   end
 
   def display_all
