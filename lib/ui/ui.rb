@@ -121,6 +121,21 @@ class UI
     contact
   end
 
+  def display_all_with_index(contacts)
+    console.writeln(HEADER)
+    index = 0
+    contacts.each do |contact|
+      index += 1
+      display_with_index(index, contact)
+    end
+  end
+
+  def display_with_index(index, contact)
+    values = " " << index.to_s << "\t"
+    contact.each { |key, value| values << value << "\t" }
+    console.writeln(values)
+  end
+
   private
 
   attr_reader :console

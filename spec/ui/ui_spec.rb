@@ -194,6 +194,21 @@ describe UI do
     expect(ui.ask_for_fields).to eq(contact)
   end
 
+  it "prints a full contact with an index" do
+     contact = {"name" => "name", "address" => "address"}
+     ui.display_with_index(1, contact)
+     expect(output.string).to eq(" 1\tname\taddress\t\n")
+  end
+
+  it "displays all contacts with an index" do
+    contacts = [
+      {"name" => "name1", "address" => "address1"},
+      {"name" => "name2", "address" => "address2"}
+    ]
+    ui.display_all_with_index(contacts)
+    expect(output.string.lines.count).to eq(4)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
