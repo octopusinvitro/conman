@@ -156,15 +156,15 @@ describe UI do
     expect(output.string.lines.count).to eq(4)
   end
 
-  it "prints the prompt message for asking for a contact" do
+  it "prints the prompt message for asking for a contact to expand" do
     input.string = "1"
-    ui.ask_for_contact
-    expect_to_print(UI::CONTACT)
+    ui.ask_for_contact_to_expand
+    expect_to_print(UI::EXPAND_CONTACT)
   end
 
-  it "reads a contact's index" do
+  it "reads an contact's index to expand" do
     input.string = "1"
-    expect(ui.ask_for_contact).to eq(1)
+    expect(ui.ask_for_contact_to_expand).to eq(1)
   end
 
   it "prints the prompt message for expanding a contact's details" do
@@ -207,6 +207,17 @@ describe UI do
     ]
     ui.display_all_with_index(contacts)
     expect(output.string.lines.count).to eq(4)
+  end
+
+  it "prints the prompt message for asking for a contact to edit" do
+    input.string = "1"
+    ui.ask_for_contact_to_edit
+    expect_to_print(UI::EDIT_CONTACT)
+  end
+
+  it "reads a contact's index to edit" do
+    input.string = "1"
+    expect(ui.ask_for_contact_to_edit).to eq(1)
   end
 
   def expect_to_print(message)

@@ -37,14 +37,14 @@ describe FinderScreen do
 
   it "asks for more details from a contact in the search results" do
     allow(ui).to receive(:ask_to_expand).and_return(true)
-    allow(ui).to receive(:ask_for_contact).and_return(1)
+    allow(ui).to receive(:ask_for_contact_to_expand).and_return(1)
     finder.run
     expect(ui).to have_received(:ask_to_expand).once
   end
 
   it "displays a specific contact if the user chooses one" do
     allow(ui).to receive(:ask_to_expand).and_return(true)
-    allow(ui).to receive(:ask_for_contact).and_return(1)
+    allow(ui).to receive(:ask_for_contact_to_expand).and_return(1)
     finder.run
     expect(ui).to have_received(:display_all).once
   end
@@ -52,7 +52,7 @@ describe FinderScreen do
   it "chooses the correct contact to display from the search results" do
     allow(db).to receive(:search).and_return([contacts[2]])
     allow(ui).to receive(:ask_to_expand).and_return(true)
-    allow(ui).to receive(:ask_for_contact).and_return(1)
+    allow(ui).to receive(:ask_for_contact_to_expand).and_return(1)
     finder.run
     expect(ui).to have_received(:display_all).with([contacts[2]])
   end
