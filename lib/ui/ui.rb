@@ -25,6 +25,7 @@ class UI
   EXPAND         = "\nDisplay one of these contacts' details? (y/n): "
   EXPAND_CONTACT = "\nChoose a contact to expand: "
   EDIT_CONTACT   = "\nChoose a contact to edit: "
+  EDIT_FIELD     = "\nChoose a field to edit: "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
 
@@ -114,6 +115,10 @@ class UI
     Integer(ask_for_field(EDIT_CONTACT))
   end
 
+  def ask_for_field_to_edit
+    Integer(ask_for_field(EDIT_FIELD))
+  end
+
   def ask_to_expand
     ask_to(EXPAND)
   end
@@ -157,6 +162,19 @@ class UI
 
   def format_field(index, key, value)
     field = "" << index.to_s << "\t" << key << ": " << value
+  end
+
+  def ask_for_value_to_update(field)
+    ask_for_field(fields_to_questions(field))
+  end
+
+  def fields_to_questions(key)
+    { "name"    => ASK_NAME,
+      "address" => ASK_ADDRESS,
+      "phone"   => ASK_PHONE,
+      "email"   => ASK_EMAIL,
+      "notes"   => ASK_NOTES
+    }[key]
   end
 
   private
