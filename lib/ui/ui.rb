@@ -1,11 +1,17 @@
 class UI
 
   ADD_ANOTHER  = "\nAdd another contact? (y/n): "
-  NAME         = "\nContact name: "
-  ADDRESS      = "Contact address: "
-  PHONE        = "Contact phone: "
-  EMAIL        = "Contact email: "
-  NOTES        = "Contact notes: "
+  ASK_NAME     = "\nContact name: "
+  ASK_ADDRESS  = "Contact address: "
+  ASK_PHONE    = "Contact phone: "
+  ASK_EMAIL    = "Contact email: "
+  ASK_NOTES    = "Contact notes: "
+
+  NAME         = "Name:    "
+  ADDRESS      = "Address: "
+  PHONE        = "Phone:   "
+  EMAIL        = "Email:   "
+  NOTES        = "Notes:   "
 
   SEARCH_AGAIN = "\nSearch again? (y/n): "
   SEARCH       = "\nType search term: "
@@ -31,23 +37,23 @@ class UI
   end
 
   def ask_for_name
-    ask_for_field(NAME)
+    ask_for_field(ASK_NAME)
   end
 
   def ask_for_address
-    ask_for_field(ADDRESS)
+    ask_for_field(ASK_ADDRESS)
   end
 
   def ask_for_phone
-    ask_for_field(PHONE)
+    ask_for_field(ASK_PHONE)
   end
 
   def ask_for_email
-    ask_for_field(EMAIL)
+    ask_for_field(ASK_EMAIL)
   end
 
   def ask_for_notes
-    ask_for_field(NOTES)
+    ask_for_field(ASK_NOTES)
   end
 
   def ask_search_again
@@ -139,6 +145,18 @@ class UI
     values = " " << index.to_s << "\t"
     contact.each { |key, value| values << value << "\t" }
     console.writeln(values)
+  end
+
+  def display_fields_with_index(contact)
+    index  = 0
+    contact.each do |key, value|
+      index += 1
+      console.writeln(format_field(index, key, value))
+    end
+  end
+
+  def format_field(index, key, value)
+    field = "" << index.to_s << "\t" << key << ": " << value
   end
 
   private
