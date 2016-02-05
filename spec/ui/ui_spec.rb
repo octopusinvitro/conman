@@ -230,7 +230,34 @@ describe UI do
     expect(output.string.lines.count).to eq(5)
   end
 
+  it "prints the prompt message for asking for a field to edit" do
+    input.string = "1"
+    ui.ask_for_field_to_edit
+    expect_to_print(UI::EDIT_FIELD)
+  end
+
+  it "reads a contact's index to edit" do
+    input.string = "1"
+    expect(ui.ask_for_field_to_edit).to eq(1)
+  end
+
+  it "retrieves the right question for a field" do
+    expect(ui.fields_to_questions("name")).to eq(UI::ASK_NAME)
+  end
+
+  it "prints the prompt message for editing a name field" do
+    input.string = "\n"
+    ui.ask_for_value_to_update("name")
+    expect_to_print(UI::ASK_NAME)
+  end
+
+  it "gets the updated field from the user" do
+    input.string = "a name"
+    expect(ui.ask_for_value_to_update("name")).to eq("a name")
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
+
 end
