@@ -11,6 +11,7 @@ class UpdaterScreen
 
   def update_contacts
     display
+    contact = ask_for_contact
   end
 
   private
@@ -21,8 +22,12 @@ class UpdaterScreen
     db.all
   end
 
-  def display
+  def display_all
     ui.display_all_with_index(all)
+  end
+
+  def ask_for_contact
+    ui.ask_for_contact_to_edit
   end
 
 end

@@ -16,8 +16,9 @@ class UI
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES"
   HEADER_NAMES = "\nINDEX\tNAME"
 
-  EXPAND       = "\nDisplay one of these contacts' details? (y/n): "
-  CONTACT      = "\nChoose a contact to expand: "
+  EXPAND         = "\nDisplay one of these contacts' details? (y/n): "
+  EXPAND_CONTACT = "\nChoose a contact to expand: "
+  EDIT_CONTACT   = "\nChoose a contact to edit: "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
 
@@ -99,8 +100,12 @@ class UI
     console.writeln(line)
   end
 
-  def ask_for_contact
-    Integer(ask_for_field(CONTACT))
+  def ask_for_contact_to_expand
+    Integer(ask_for_field(EXPAND_CONTACT))
+  end
+
+  def ask_for_contact_to_edit
+    Integer(ask_for_field(EDIT_CONTACT))
   end
 
   def ask_to_expand

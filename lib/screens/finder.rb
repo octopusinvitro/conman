@@ -60,7 +60,7 @@ class FinderScreen
   end
 
   def ask_for_contact
-    ui.ask_for_contact
+    ui.ask_for_contact_to_expand
   end
 
   def display(contacts)
