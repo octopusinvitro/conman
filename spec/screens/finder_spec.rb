@@ -24,6 +24,12 @@ describe FinderScreen do
     expect(ui).to have_received(:ask_search_again).twice
   end
 
+  it "prints an error message if there are no contacts matching search" do
+    allow(db).to receive(:search).and_return([])
+    finder.run
+    expect(ui).to have_received(:error_no_contacts).once
+  end
+
   it "prints names of all found contacts after a search" do
     finder.run
     expect(ui).to have_received(:display_names).once
