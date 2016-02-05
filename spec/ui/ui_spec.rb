@@ -27,7 +27,7 @@ describe UI do
   it "prints the prompt message for a name" do
     input.string = "\n"
     ui.ask_for_name
-    expect_to_print(UI::NAME)
+    expect_to_print(UI::ASK_NAME)
   end
 
   it "reads a name" do
@@ -38,7 +38,7 @@ describe UI do
   it "prints the prompt message for an address" do
     input.string = "\n"
     ui.ask_for_address
-    expect_to_print(UI::ADDRESS)
+    expect_to_print(UI::ASK_ADDRESS)
   end
 
   it "reads an address" do
@@ -49,7 +49,7 @@ describe UI do
   it "prints the prompt message for a phone" do
     input.string = "\n"
     ui.ask_for_phone
-    expect_to_print(UI::PHONE)
+    expect_to_print(UI::ASK_PHONE)
   end
 
   it "reads a phone" do
@@ -60,7 +60,7 @@ describe UI do
   it "prints the prompt message for an email" do
     input.string = "\n"
     ui.ask_for_email
-    expect_to_print(UI::EMAIL)
+    expect_to_print(UI::ASK_EMAIL)
   end
 
   it "reads an email" do
@@ -71,7 +71,7 @@ describe UI do
   it "prints the prompt message for notes" do
     input.string = "\n"
     ui.ask_for_notes
-    expect_to_print(UI::NOTES)
+    expect_to_print(UI::ASK_NOTES)
   end
 
   it "reads notes" do
@@ -218,6 +218,16 @@ describe UI do
   it "reads a contact's index to edit" do
     input.string = "1"
     expect(ui.ask_for_contact_to_edit).to eq(1)
+  end
+
+  it "prints a field with index" do
+    expect(ui.format_field(1, "name", "somename")).to eq("1\t" << "name: "<< "somename")
+  end
+
+  it "prints a field with index" do
+    contact = {"name" => "name", "address" => "address", "phone" => "1234", "email" => "email@mail.com", "notes" => "notes", }
+    ui.display_fields_with_index(contact)
+    expect(output.string.lines.count).to eq(5)
   end
 
   def expect_to_print(message)
