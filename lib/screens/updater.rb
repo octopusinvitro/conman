@@ -10,15 +10,13 @@ class UpdaterScreen
   end
 
   def update_contacts
-    display_all
-
-    index   = ask_for_contact_index - 1
-    contact = contact_at(index)
-    display_fields(contact)
-
-    index          = ask_for_field_index
-    field          = contact.keys[index]
-    contact[field] = ask_for_value_to_edit(field)
+    contact = choose_contact
+    loop do
+      field = choose_field(contact)
+      update_field(contact, field)
+      display(contact)
+      break unless ask_another_field
+    end
   end
 
   private
@@ -31,6 +29,10 @@ class UpdaterScreen
 
   def contact_at(index)
     db.at(index)
+  end
+
+  def update(contact)
+    db.update(contact)
   end
 
   def ask_for_contact_index
@@ -52,4 +54,28 @@ class UpdaterScreen
   def ask_for_value_to_edit(field)
     ui.ask_for_value_to_edit(field)
   end
+
+  def display(contact)
+    ui.display_all([contact])
+  end
+
+  def ask_another_field
+    ui.ask_another_field
+  end
+
+  def choose_contact
+    display_all
+    contact_at(ask_for_contact_index - 1)
+  end
+
+  def choose_field(contact)
+    display_fields(contact)
+    contact.keys[ask_for_field_index]
+  end
+
+  def update_field(contact, field)
+    contact[field] = ask_for_value_to_edit(field)
+    update(contact)
+  end
+
 end
