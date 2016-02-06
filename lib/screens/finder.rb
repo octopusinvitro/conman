@@ -55,11 +55,11 @@ class FinderScreen
   end
 
   def expand_contact(matched)
-    index = ask_for_contact - 1
+    index = ask_for_contact_index - 1
     display([matched[index]])
   end
 
-  def ask_for_contact
+  def ask_for_contact_index
     ui.ask_for_contact_to_expand
   end
 
