@@ -5,7 +5,7 @@ describe CreatorScreen do
   let (:ui)       {instance_double(UI).as_null_object}
   let (:db)       {instance_double(DB).as_null_object}
   let (:creator)  {described_class.new(ui, db)}
-  let (:contact)  {{"name" => "name", "address" => "address", "phone" => "123456", "email" => "email@mail.com", "notes" => "notes"}}
+  let (:contact)  {{"id" => 1, "name" => "name", "address" => "address", "phone" => "123456", "email" => "email@mail.com", "notes" => "notes"}}
 
   before :each do
     allow(ui).to receive(:ask_for_another).and_return(false)
@@ -13,31 +13,31 @@ describe CreatorScreen do
   end
 
   it "saves the name introduced by the user" do
-    allow(ui).to receive(:ask_for_name).and_return("name")
+    allow(ui).to receive(:ask_for_value_to_edit).with("name").and_return("name")
     creator.run
     expect_field("name", "name")
   end
 
   it "saves the address introduced by the user" do
-    allow(ui).to receive(:ask_for_address).and_return("address")
+    allow(ui).to receive(:ask_for_value_to_edit).with("address").and_return("address")
     creator.run
     expect_field("address", "address")
   end
 
   it "saves the phone introduced by the user" do
-    allow(ui).to receive(:ask_for_phone).and_return("123456")
+    allow(ui).to receive(:ask_for_value_to_edit).with("phone").and_return("123456")
     creator.run
     expect_field("phone", "123456")
   end
 
   it "saves the email introduced by the user" do
-    allow(ui).to receive(:ask_for_email).and_return("email@mail.com")
+    allow(ui).to receive(:ask_for_value_to_edit).with("email").and_return("email@mail.com")
     creator.run
     expect_field("email", "email@mail.com")
   end
 
   it "saves the notes introduced by the user" do
-    allow(ui).to receive(:ask_for_notes).and_return("notes")
+    allow(ui).to receive(:ask_for_value_to_edit).with("notes").and_return("notes")
     creator.run
     expect_field("notes", "notes")
   end
