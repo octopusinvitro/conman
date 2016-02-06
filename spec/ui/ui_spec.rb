@@ -127,15 +127,15 @@ describe UI do
   end
 
   it "prints a contact" do
-     contact = {"name" => "name", "address" => "address"}
+     contact = {"id" => 1, "name" => "name", "address" => "address"}
      ui.display(contact)
      expect(output.string).to eq("name\taddress\t\n")
   end
 
   it "prints all contacts" do
     contacts = [
-      {"name" => "name1", "address" => "address1"},
-      {"name" => "name2", "address" => "address2"}
+      {"id" => 1, "name" => "name1", "address" => "address1"},
+      {"id" => 2, "name" => "name2", "address" => "address2"}
     ]
     ui.display_all(contacts)
     expect(output.string.lines.count).to eq(4)

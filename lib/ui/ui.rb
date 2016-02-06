@@ -89,7 +89,7 @@ class UI
 
   def display(contact)
     values = ""
-    contact.each { |key, value| values << value << "\t" }
+    contact.each { |key, value| values << value << "\t" if key != "id" }
     console.writeln(values)
   end
 
@@ -148,15 +148,17 @@ class UI
 
   def display_with_index(index, contact)
     values = " " << index.to_s << "\t"
-    contact.each { |key, value| values << value << "\t" }
+    contact.each { |key, value| values << value << "\t" if key != "id" }
     console.writeln(values)
   end
 
   def display_fields_with_index(contact)
     index  = 0
     contact.each do |key, value|
-      index += 1
-      console.writeln(format_field(index, key, value))
+      if key != "id"
+        index += 1
+        console.writeln(format_field(index, key, value))
+      end
     end
   end
 
