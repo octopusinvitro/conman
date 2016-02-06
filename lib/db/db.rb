@@ -62,9 +62,10 @@ class DB
   end
 
   def updated_with(contact)
-    contacts = all
     index    = index_of_id(contact["id"])
+    contacts = all
     invalid(index) ? contacts << contact : contacts[index] = contact
+    contacts
   end
 
 end

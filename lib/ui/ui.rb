@@ -152,7 +152,7 @@ class UI
   end
 
   def display_fields_with_index(contact)
-    index  = 0
+    index = 0
     contact.each do |key, value|
       if key != "id"
         index += 1
