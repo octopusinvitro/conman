@@ -16,7 +16,7 @@ class UpdaterScreen
     contact = contact_at(index)
     display_fields(contact)
 
-    index          = ask_for_field_index - 1
+    index          = ask_for_field_index
     field          = contact.keys[index]
     contact[field] = ask_for_value_to_edit(field)
   end
