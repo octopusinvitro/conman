@@ -3,9 +3,9 @@ require 'screens/finder'
 describe FinderScreen do
 
   let (:contacts) {[
-    {"name" => "name1", "address" => "address1"},
-    {"name" => "name2", "address" => "address2"},
-    {"name" => "name3", "address" => "address3"}
+    {"id" => 1, "name" => "name1", "address" => "address1"},
+    {"id" => 2, "name" => "name2", "address" => "address2"},
+    {"id" => 3, "name" => "name3", "address" => "address3"}
   ]}
   let (:ui)     {instance_double(UI).as_null_object}
   let (:db)     {instance_double(DB).as_null_object}

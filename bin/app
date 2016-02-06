@@ -23,11 +23,11 @@ path = "./contacts"
 db   = DB.new(Reader.new(path), Writer.new(path))
 
 actions = [
-  ["List contacts",   ListerScreen.new( ui, db)],
-  ["Add contacts",    CreatorScreen.new(ui, db)],
-  ["Search contacts", FinderScreen.new( ui, db)],
-  ["Update contacts", UpdaterScreen.new( ui, db)],
-  ["Exit",            nil]
+  [UI::LIST,   ListerScreen.new( ui, db)],
+  [UI::ADD,    CreatorScreen.new(ui, db)],
+  [UI::SEARCH, FinderScreen.new( ui, db)],
+  [UI::UPDATE, UpdaterScreen.new(ui, db)],
+  [UI::EXIT,   nil]
 ]
 
 menu   = Menu.new(ui, actions)
