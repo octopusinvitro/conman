@@ -11,6 +11,12 @@ describe UpdaterScreen do
     {"name" => "name3", "address" => "address3"}
   ]}
 
+  before :each do
+    allow(ui).to receive(:ask_for_contact_to_edit).and_return(1)
+    allow(ui).to receive(:ask_for_field_to_edit).and_return(1)
+    allow(db).to receive(:at).and_return(contacts.first)
+  end
+
   it "displays all the contacts with an index" do
     allow(db).to receive(:all).and_return(contacts)
     updater.run
@@ -19,8 +25,24 @@ describe UpdaterScreen do
 
   it "asks the user for a contact to edit" do
     updater.run
-    expect(ui).to have_received(:ask_for_contact_to_edit)
+    expect(ui).to have_received(:ask_for_contact_to_edit).once
   end
 
+  it "prints the contact's fields with numbers" do
+    allow(db).to receive(:at).and_return(contacts.first)
+    updater.run
+    expect(ui).to have_received(:display_fields_with_index).once
+  end
+
+  it "chooses a field to edit" do
+    updater.run
+    expect(ui).to have_received(:ask_for_field_to_edit).once
+  end
+
+  it "asks for the value of the field to edit" do
+    allow(ui).to receive(:ask_for_value_to_edit).and_return("name")
+    updater.run
+    expect(ui).to have_received(:ask_for_value_to_edit).with("name")
+  end
 
 end

@@ -247,13 +247,13 @@ describe UI do
 
   it "prints the prompt message for editing a name field" do
     input.string = "\n"
-    ui.ask_for_value_to_update("name")
+    ui.ask_for_value_to_edit("name")
     expect_to_print(UI::ASK_NAME)
   end
 
   it "gets the updated field from the user" do
     input.string = "a name"
-    expect(ui.ask_for_value_to_update("name")).to eq("a name")
+    expect(ui.ask_for_value_to_edit("name")).to eq("a name")
   end
 
   def expect_to_print(message)

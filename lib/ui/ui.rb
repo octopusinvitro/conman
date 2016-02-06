@@ -164,7 +164,7 @@ class UI
     field = "" << index.to_s << "\t" << key << ": " << value
   end
 
-  def ask_for_value_to_update(field)
+  def ask_for_value_to_edit(field)
     ask_for_field(fields_to_questions(field))
   end
 
