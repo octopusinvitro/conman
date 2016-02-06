@@ -24,8 +24,10 @@ class UI
 
   EXPAND         = "\nDisplay one of these contacts' details? (y/n): "
   EXPAND_CONTACT = "\nChoose a contact to expand: "
+
   EDIT_CONTACT   = "\nChoose a contact to edit: "
   EDIT_FIELD     = "\nChoose a field to edit: "
+  ANOTHER_FIELD  = "\nEdit another field? (y/n): "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
 
@@ -140,10 +142,7 @@ class UI
   def display_all_with_index(contacts)
     console.writeln(HEADER)
     index = 0
-    contacts.each do |contact|
-      index += 1
-      display_with_index(index, contact)
-    end
+    contacts.each { |contact| index += 1; display_with_index(index, contact) }
   end
 
   def display_with_index(index, contact)
@@ -177,6 +176,10 @@ class UI
       "email"   => ASK_EMAIL,
       "notes"   => ASK_NOTES
     }[key]
+  end
+
+  def ask_another_field
+    ask_to(ANOTHER_FIELD)
   end
 
   private

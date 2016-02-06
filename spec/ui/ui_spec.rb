@@ -256,6 +256,16 @@ describe UI do
     expect(ui.ask_for_value_to_edit("name")).to eq("a name")
   end
 
+  it "reads a positive answer to ask another field" do
+    input.string = "y"
+    expect(ui.ask_another_field).to eq(true)
+  end
+
+  it "reads a negative answer to ask another field" do
+    input.string = "n"
+    expect(ui.ask_another_field).to eq(false)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
