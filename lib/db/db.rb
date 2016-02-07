@@ -14,17 +14,15 @@ class DB
   end
 
   def at(index)
-    empty || invalid(index) ? {} : all[index]
+    all.fetch(index, {})
   end
 
   def add(contact)
-    contacts = all << format(contact)
-    writer.run(contacts) if !writer.nil?
+    writer.run(added_a(contact)) if !writer.nil?
   end
 
   def update(contact)
-    contacts = updated_with(format(contact))
-    writer.run(contacts) if !writer.nil?
+    writer.run(updated_with(add_id_to(contact))) if !writer.nil?
   end
 
   def search(term)
@@ -39,15 +37,11 @@ class DB
 
   attr_reader :reader, :writer
 
-  def empty
-    all.empty?
-  end
-
-  def invalid(index)
+  def invalid?(index)
     index.nil? ? true : all[index].nil?
   end
 
-  def format(contact)
+  def add_id_to(contact)
     contact.has_key?("id") ? contact : append_id(contact, id_of_new)
   end
 
@@ -61,10 +55,14 @@ class DB
     size == 0 ? 1 : at(size - 1)["id"] + 1
   end
 
+  def added_a(contact)
+    all << add_id_to(contact)
+  end
+
   def updated_with(contact)
     index    = index_of_id(contact["id"])
     contacts = all
-    invalid(index) ? contacts << contact : contacts[index] = contact
+    invalid?(index) ? contacts << contact : contacts[index] = contact
     contacts
   end
 

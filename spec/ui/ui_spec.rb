@@ -19,12 +19,12 @@ describe UI do
   end
 
   it "reads a positive answer" do
-    input.string = "y"
+    input.string = UI::YES
     expect(ui.ask_for_another).to eq(true)
   end
 
   it "reads a negative answer" do
-    input.string = "n"
+    input.string = "\n"
     expect(ui.ask_for_another).to eq(false)
   end
 
@@ -35,12 +35,12 @@ describe UI do
   end
 
   it "reads a positive answer to search again" do
-    input.string = "y"
+    input.string = UI::YES
     expect(ui.ask_search_again).to eq(true)
   end
 
   it "reads a negative answer to search again" do
-    input.string = "n"
+    input.string = "\n"
     expect(ui.ask_search_again).to eq(false)
   end
 
@@ -51,12 +51,12 @@ describe UI do
   end
 
   it "reads a positive answer to expand contact details" do
-    input.string = "y"
+    input.string = UI::YES
     expect(ui.ask_to_expand).to eq(true)
   end
 
   it "reads a negative answer to expand contact details" do
-    input.string = "n"
+    input.string = "\n"
     expect(ui.ask_to_expand).to eq(false)
   end
 
@@ -67,12 +67,12 @@ describe UI do
   end
 
   it "reads a positive answer to ask another field" do
-    input.string = "y"
+    input.string = UI::YES
     expect(ui.ask_another_field).to eq(true)
   end
 
   it "reads a negative answer to ask another field" do
-    input.string = "n"
+    input.string = "\n"
     expect(ui.ask_another_field).to eq(false)
   end
 

@@ -11,19 +11,19 @@ describe Conman do
   end
 
   it "exits if the user types the exit option" do
-    allow(menu).to receive(:exit).and_return(true)
+    allow(menu).to receive(:exit?).and_return(true)
     conman.run
-    expect(menu).to have_received(:exit).once
+    expect(menu).to have_received(:exit?).once
   end
 
   it "checks the user option if it is not an exit option" do
-    allow(menu).to receive(:exit).and_return(false, true)
+    allow(menu).to receive(:exit?).and_return(false, true)
     conman.run
     expect(menu).to have_received(:check).once
   end
 
   it "runs until the user types the exit option" do
-    allow(menu).to receive(:exit).and_return(false, false, false, true)
+    allow(menu).to receive(:exit?).and_return(false, false, false, true)
     conman.run
     expect(menu).to have_received(:ask_menu_option).exactly(4).times
   end

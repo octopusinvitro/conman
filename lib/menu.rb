@@ -15,12 +15,12 @@ class Menu
   	menu
   end
 
-  def exit(option)
+  def exit?(option)
     option == size
   end
 
   def check(option)
-    actions.each { |action| action.last.run if selected(option, action) }
+    actions.each { |action| action.last.run if selected?(option, action) }
   end
 
   private
@@ -35,7 +35,7 @@ class Menu
     [i + 1, actions[i].first]
   end
 
-  def selected(option, action)
+  def selected?(option, action)
     option == actions.index(action) + 1
   end
 

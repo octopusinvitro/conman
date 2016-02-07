@@ -7,7 +7,7 @@ class Conman
   def run
     loop do
       option = ask_menu_option
-      break if exit(option)
+      break if exit?(option)
       check(option)
     end
   end
@@ -20,8 +20,8 @@ class Conman
     menu.ask_menu_option
   end
 
-  def exit(option)
-    menu.exit(option)
+  def exit?(option)
+    menu.exit?(option)
   end
 
   def check(option)
