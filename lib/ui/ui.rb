@@ -19,6 +19,7 @@ class UI
       "notes"   => NOTES
     }
 
+  YES          = "y"
   ADD_ANOTHER  = "\nAdd another contact? (y/n): "
   SEARCH_AGAIN = "\nSearch again? (y/n): "
   SEARCH_TERM  = "\nType search term: "
@@ -150,7 +151,7 @@ class UI
   attr_reader :console
 
   def ask_to(question)
-    ask_for(question) == "y" ? true : false
+    ask_for(question) == YES ? true : false
   end
 
   def ask_for(question)

@@ -1,6 +1,6 @@
 require 'screens/creator'
 
-describe CreatorScreen do
+describe Creator do
 
   let (:ui)       {instance_double(UI).as_null_object}
   let (:db)       {instance_double(DB).as_null_object}

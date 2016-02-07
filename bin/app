@@ -23,10 +23,10 @@ path = "./contacts"
 db   = DB.new(Reader.new(path), Writer.new(path))
 
 actions = [
-  [UI::LIST,   ListerScreen.new( ui, db)],
-  [UI::ADD,    CreatorScreen.new(ui, db)],
-  [UI::SEARCH, FinderScreen.new( ui, db)],
-  [UI::UPDATE, UpdaterScreen.new(ui, db)],
+  [UI::LIST,   Lister.new(ui, db)],
+  [UI::ADD,    Creator.new(ui, db)],
+  [UI::SEARCH, Finder.new(ui, db)],
+  [UI::UPDATE, Updater.new(ui, db)],
   [UI::EXIT,   nil]
 ]
 

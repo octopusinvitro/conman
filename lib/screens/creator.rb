@@ -1,4 +1,4 @@
-class CreatorScreen
+class Creator
 
   def initialize(ui, db)
     @ui = ui

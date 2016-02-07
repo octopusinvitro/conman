@@ -3,7 +3,7 @@ require 'menu'
 describe Menu do
 
   let (:ui)     {instance_double(UI).as_null_object}
-  let (:lister) {instance_double(ListerScreen).as_null_object}
+  let (:lister) {instance_double(Lister).as_null_object}
   let (:actions) {[
     ["one", lister],
     ["two", nil]
@@ -24,11 +24,11 @@ describe Menu do
   end
 
   it "exits when the user chooses the last menu option" do
-    expect(menu.exit(actions.size)).to eq(true)
+    expect(menu.exit?(actions.size)).to eq(true)
   end
 
   it "does not exit when user doesn't choose the last menu option" do
-    expect(menu.exit(1)).to eq(false)
+    expect(menu.exit?(1)).to eq(false)
   end
 
   it "calls the action corresponding to the user option" do

@@ -1,4 +1,4 @@
-class UpdaterScreen
+class Updater
 
   def initialize(ui, db)
     @ui = ui
