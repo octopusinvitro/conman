@@ -20,7 +20,8 @@ require 'conman'
 ui   = UI.new(Console.new($stdin, $stdout))
 
 path = "./contacts"
-db   = DB.new(Reader.new(path), Writer.new(path))
+file = File.new(path, "a+")
+db   = DB.new(Reader.new(file), Writer.new(file))
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],
