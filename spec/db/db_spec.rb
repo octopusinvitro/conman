@@ -51,7 +51,7 @@ describe DB do
   it "adds one contact to the database" do
     db.add(contact)
     expect(db.size).to eq(1)
-    expect(writer).to have_received(:run).once
+    expect(writer).to have_received(:write).once
   end
 
   it "first contact has an id of 1" do

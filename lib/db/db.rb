@@ -18,11 +18,11 @@ class DB
   end
 
   def add(contact)
-    writer.run(added_a(contact)) if !writer.nil?
+    writer.write(added_a(contact)) if !writer.nil?
   end
 
   def update(contact)
-    writer.run(updated_with(add_id_to(contact))) if !writer.nil?
+    writer.write(updated_with(add_id_to(contact))) if !writer.nil?
   end
 
   def search(term)
