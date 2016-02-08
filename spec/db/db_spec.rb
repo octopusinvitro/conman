@@ -8,7 +8,7 @@ describe DB do
   let(:contact) {{"name" => "name", "address" => "address"}}
 
   before :each do
-    allow(reader).to receive(:run).and_return([])
+    allow(reader).to receive(:read).and_return([])
   end
 
   it "returns an empty list of contacts if the reader is null" do
@@ -22,7 +22,7 @@ describe DB do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:run).and_return(contacts)
+    allow(reader).to receive(:read).and_return(contacts)
     expect(db.all).to eq(contacts)
   end
 
@@ -98,7 +98,7 @@ describe DB do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:run).and_return(contacts)
+    allow(reader).to receive(:read).and_return(contacts)
     expect(db.search("address1")).to eq([contacts.first])
   end
 
@@ -108,7 +108,7 @@ describe DB do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:run).and_return(contacts)
+    allow(reader).to receive(:read).and_return(contacts)
     expect(db.search("address")).to eq(contacts)
   end
 

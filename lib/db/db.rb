@@ -10,7 +10,7 @@ class DB
   end
 
   def all
-    reader.nil? ? [] : reader.run
+    reader.nil? ? [] : reader.read
   end
 
   def at(index)

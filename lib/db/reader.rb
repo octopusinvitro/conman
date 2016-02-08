@@ -6,7 +6,7 @@ class Reader
     @file = file
   end
 
-  def run
+  def read
     file.rewind
     parse(file.read)
   end
