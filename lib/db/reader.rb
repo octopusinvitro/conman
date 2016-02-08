@@ -2,32 +2,21 @@ require 'json'
 
 class Reader
 
-  def initialize(path, file = nil)
-    @path = path
+  def initialize(file)
     @file = file
   end
 
   def run
-    file.nil? ? parse(read) : parse(tests_read)
+    file.rewind
+    parse(file.read)
   end
 
   private
 
-  attr_reader :path, :file
+  attr_reader :file
 
   def parse(contacts)
     contacts == '' ? [] : JSON.parse(contacts)
-  end
-
-  def read
-    contacts = []
-    File.open(path, "r") do |f|
-      contacts = f.read
-    end
-  end
-
-  def tests_read
-    file.read
   end
 
 end
