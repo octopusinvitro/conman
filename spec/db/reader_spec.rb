@@ -17,20 +17,20 @@ describe Reader do
   it "obtains an empty array if file is empty" do
     file   = StringIO.new("")
     reader = described_class.new(file)
-    expect(reader.run).to eq([])
+    expect(reader.read).to eq([])
   end
 
   it "obtains an array of contacts with the right format" do
     file   = StringIO.new(contents)
     reader = described_class.new(file)
-    expect(reader.run).to eq(contacts)
+    expect(reader.read).to eq(contacts)
   end
 
   it "reads from the beginning of the file" do
     file   = StringIO.new(contents)
     reader = described_class.new(file)
     file.seek(1)
-    expect(reader.run).to eq(contacts)
+    expect(reader.read).to eq(contacts)
   end
 
 end
