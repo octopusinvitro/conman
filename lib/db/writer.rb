@@ -6,7 +6,7 @@ class Writer
     @file = file
   end
 
-  def run(contacts)
+  def write(contacts)
     file.truncate(0)
     file.write(contacts.to_json)
     file.flush
