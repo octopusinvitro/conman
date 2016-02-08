@@ -2,9 +2,6 @@ require 'db/reader'
 
 describe Reader do
 
-  let (:file)     {instance_double(File).as_null_object}
-  let (:reader)   {described_class.new("", file)}
-
   let(:contents)  {'[
     {"name":"name1","address":"address1"},
     {"name":"name2","address":"address2"},
@@ -18,15 +15,22 @@ describe Reader do
   ]}
 
   it "obtains an empty array if file is empty" do
-    allow(file).to receive(:read).and_return('')
+    file   = StringIO.new("")
+    reader = described_class.new(file)
     expect(reader.run).to eq([])
-    expect(file).to have_received(:read).once
   end
 
   it "obtains an array of contacts with the right format" do
-    allow(file).to receive(:read).and_return(contents)
+    file   = StringIO.new(contents)
+    reader = described_class.new(file)
     expect(reader.run).to eq(contacts)
-    expect(file).to have_received(:read).once
+  end
+
+  it "reads from the beginning of the file" do
+    file   = StringIO.new(contents)
+    reader = described_class.new(file)
+    file.seek(1)
+    expect(reader.run).to eq(contacts)
   end
 
 end
