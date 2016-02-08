@@ -213,6 +213,7 @@ describe UI do
     ]
     ui.display_all(contacts)
     expect(output.string.lines.count).to eq(4)
+    expect(output.string).to include(UI::HEADER)
   end
 
   it "prints a contact but only the name" do
@@ -228,6 +229,7 @@ describe UI do
     ]
     ui.display_names(contacts)
     expect(output.string.lines.count).to eq(4)
+    expect(output.string).to include(UI::HEADER_NAMES)
   end
 
   it "prints a full contact with an index" do
@@ -243,13 +245,14 @@ describe UI do
     ]
     ui.display_all_with_index(contacts)
     expect(output.string.lines.count).to eq(4)
+    expect(output.string).to include(UI::HEADER_WITH_INDEX)
   end
 
   it "formats a field with index" do
     expect(ui.format_field(1, "name", "a name")).to eq("1\t" << "name: "<< "a name")
   end
 
-  it "prints a field with index" do
+  it "prints all fields with index" do
     contact = {"id" => 1, "name" => "name", "address" => "address", "phone" => "1234", "email" => "email@mail.com", "notes" => "notes", }
     ui.display_fields_with_index(contact)
     expect(output.string.lines.count).to eq(5)
