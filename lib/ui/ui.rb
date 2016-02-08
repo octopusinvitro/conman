@@ -29,6 +29,7 @@ class UI
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES"
   HEADER_NAMES = "\nINDEX\tNAME"
+  HEADER_WITH_INDEX = "\nINDEX\t" << HEADER[1..-1]
 
   EXPAND         = "\nDisplay one of these contacts' details? (y/n): "
   EXPAND_CONTACT = "\nChoose a contact to expand: "
@@ -128,7 +129,7 @@ class UI
   end
 
   def display_all_with_index(contacts)
-    console.writeln(HEADER)
+    console.writeln(HEADER_WITH_INDEX)
     contacts.each_with_index { |contact, index| display_with_index(index + 1, contact) }
   end
 
