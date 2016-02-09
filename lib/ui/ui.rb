@@ -39,13 +39,19 @@ class UI
   ANOTHER_FIELD  = "\nEdit another field? (y/n): "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
+  ERROR_WRONG_INPUT = "ERROR: Wrong input. Please try again: "
 
-  def initialize(console)
-    @console = console
+  def initialize(console, validator)
+    @console   = console
+    @validator = validator
   end
 
   def error_no_contacts
     console.writeln(ERROR_NO_CONTACTS)
+  end
+
+  def error_wrong_input
+    console.write(ERROR_WRONG_INPUT)
   end
 
   def ask_for_another
@@ -91,8 +97,22 @@ class UI
   end
 
   def ask_menu_option(menu)
+    valid_menu_option(menu)
+  end
+
+  def valid_menu_option(menu)
     display_menu(menu)
-    Integer(ask_for(MENU))
+    option = ask_for(MENU)
+    valid?(menu, option) ? Integer(option) : ask_again(menu)
+  end
+
+  def valid?(menu, option)
+    validator.valid_option?(menu, option)
+  end
+
+  def ask_again(menu)
+    error_wrong_input
+    ask_menu_option(menu)
   end
 
   def display_menu(menu)
@@ -149,7 +169,7 @@ class UI
 
   private
 
-  attr_reader :console
+  attr_reader :console, :validator
 
   def ask_to(question)
     ask_for(question) == YES ? true : false

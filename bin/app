@@ -4,6 +4,7 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'ui/console'
 require 'ui/ui'
+require 'ui/validator'
 
 require 'db/reader'
 require 'db/writer'
@@ -17,7 +18,8 @@ require 'screens/updater'
 require 'menu'
 require 'conman'
 
-ui   = UI.new(Console.new($stdin, $stdout))
+
+ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 path = "./contacts"
 file = File.new(path, "a+")

@@ -3,9 +3,10 @@ require 'ui/ui'
 
 describe UI do
 
-  let(:input)  {StringIO.new}
-  let(:output) {StringIO.new}
-  let(:ui)     {described_class.new(Console.new(input, output))}
+  let(:input)     {StringIO.new}
+  let(:output)    {StringIO.new}
+  let(:validator) {Validator.new}
+  let(:ui)        {described_class.new(Console.new(input, output), validator)}
 
   it "prints an error message for no contacts" do
     ui.error_no_contacts
@@ -192,6 +193,20 @@ describe UI do
     menu = [[1, "Option 1"], [2, "Option 2"]]
     input.string = "1"
     expect(ui.ask_menu_option(menu)).to eq(1)
+  end
+
+  it "prints an error message if wrong input" do
+    menu = [[1, "Option 1"], [2, "Option 2"]]
+    input.string = "asdf\n1"
+    ui.ask_menu_option(menu)
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until right menu option" do
+    menu = [[1, "Option 1"], [2, "Option 2"]]
+    input.string = "asdf\n-1\n0\n1"
+    expect(ui.ask_menu_option(menu)).to eq(1)
+    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(3)
   end
 
   it "prints the menu with format" do
