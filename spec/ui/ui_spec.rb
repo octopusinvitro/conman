@@ -5,8 +5,7 @@ describe UI do
 
   let(:input)     {StringIO.new}
   let(:output)    {StringIO.new}
-  let(:validator) {Validator.new}
-  let(:ui)        {described_class.new(Console.new(input, output), validator)}
+  let(:ui)        {described_class.new(Console.new(input, output), Validator.new)}
 
   it "prints the prompt message for adding another contact" do
     input.string = "\n"
@@ -14,12 +13,12 @@ describe UI do
     expect_to_print(UI::ADD_ANOTHER)
   end
 
-  it "reads a positive answer" do
+  it "reads a positive answer to adding another contact" do
     input.string = UI::YES
     expect(ui.ask_for_another).to eq(true)
   end
 
-  it "reads a negative answer" do
+  it "reads a negative answer to adding another contact" do
     input.string = "\n"
     expect(ui.ask_for_another).to eq(false)
   end
@@ -146,13 +145,25 @@ describe UI do
 
   it "prints the prompt message for asking for a contact to expand" do
     input.string = "1"
-    ui.ask_for_contact_to_expand
+    ui.ask_for_contact_to_expand(1)
     expect_to_print(UI::EXPAND_CONTACT)
   end
 
   it "reads an contact's index to expand" do
     input.string = "1"
-    expect(ui.ask_for_contact_to_expand).to eq(1)
+    expect(ui.ask_for_contact_to_expand(1)).to eq(0)
+  end
+
+  it "prints an error message if wrong contact index to expand" do
+    input.string = "asdf\n1"
+    ui.ask_for_contact_to_expand(1)
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until valid contact index to expand" do
+    input.string = "asdf\n-1\n0\n1"
+    expect(ui.ask_for_contact_to_expand(1)).to eq(0)
+    expect_error_message_count_to_be(3)
   end
 
   it "prints the prompt message for asking for a contact to edit" do
@@ -163,7 +174,19 @@ describe UI do
 
   it "reads a contact's index to edit" do
     input.string = "1"
-    expect(ui.ask_for_contact_to_edit(1)).to eq(1)
+    expect(ui.ask_for_contact_to_edit(1)).to eq(0)
+  end
+
+  it "prints an error message if wrong contact index" do
+    input.string = "asdf\n1"
+    ui.ask_for_contact_to_edit(1)
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until valid contact index" do
+    input.string = "asdf\n-1\n0\n1"
+    expect(ui.ask_for_contact_to_edit(1)).to eq(0)
+    expect_error_message_count_to_be(3)
   end
 
   it "prints the prompt message for asking for a field to edit" do
@@ -177,7 +200,7 @@ describe UI do
     expect(ui.ask_for_field_to_edit).to eq(1)
   end
 
-  it "prints an error message if wrong index" do
+  it "prints an error message if wrong field index" do
     input.string = "asdf\n1"
     ui.ask_for_field_to_edit
     expect(output.string).to include(UI::ERROR_WRONG_INPUT)
@@ -186,7 +209,7 @@ describe UI do
   it "keeps asking until valid field index" do
     input.string = "asdf\n-1\n0\n1"
     expect(ui.ask_for_field_to_edit).to eq(1)
-    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(3)
+    expect_error_message_count_to_be(3)
   end
 
   it "prints the prompt message for choosing a menu option" do
@@ -213,7 +236,7 @@ describe UI do
     menu = [[1, "Option 1"], [2, "Option 2"]]
     input.string = "asdf\n-1\n0\n1"
     expect(ui.ask_menu_option(menu)).to eq(1)
-    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(3)
+    expect_error_message_count_to_be(3)
   end
 
   it "prints the menu with format" do
@@ -292,6 +315,10 @@ describe UI do
 
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
+  end
+
+  def expect_error_message_count_to_be(count)
+    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(count)
   end
 
 end

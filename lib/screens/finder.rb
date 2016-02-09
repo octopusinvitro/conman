@@ -25,16 +25,36 @@ class Finder
     db.search(term)
   end
 
+  def ask_search_again
+    ui.ask_search_again
+  end
+
+  def ask_to_expand
+    ui.ask_to_expand
+  end
+
+  def ask_for_contact_index(size)
+    ui.ask_for_contact_to_expand(size)
+  end
+
   def ask_for_term
     ui.ask_for_term
   end
 
-  def expand_or_not(matched)
-    matched.empty? ? error_no_contacts : expand_routine(matched)
+  def display_search_results(contacts)
+    ui.display_names(contacts)
+  end
+
+  def display(contacts)
+    ui.display_all(contacts)
   end
 
   def error_no_contacts
     ui.error_no_contacts
+  end
+
+  def expand_or_not(matched)
+    matched.empty? ? error_no_contacts : expand_routine(matched)
   end
 
   def expand_routine(matched)
@@ -42,33 +62,13 @@ class Finder
     choose_contact_to_expand(matched)
   end
 
-  def display_search_results(contacts)
-    ui.display_names(contacts)
-  end
-
   def choose_contact_to_expand(matched)
     expand_contact(matched) if ask_to_expand
   end
 
-  def ask_to_expand
-    ui.ask_to_expand
-  end
-
   def expand_contact(matched)
-    index = ask_for_contact_index - 1
+    index = ask_for_contact_index(matched.size)
     display([matched[index]])
-  end
-
-  def ask_for_contact_index
-    ui.ask_for_contact_to_expand
-  end
-
-  def display(contacts)
-    ui.display_all(contacts)
-  end
-
-  def ask_search_again
-  	ui.ask_search_again
   end
 
 end

@@ -18,7 +18,6 @@ require 'screens/updater'
 require 'menu'
 require 'conman'
 
-
 ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 path = "./contacts"

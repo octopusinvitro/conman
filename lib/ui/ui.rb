@@ -24,7 +24,7 @@ class UI
   SEARCH_AGAIN = "\nSearch again? (y/n): "
   SEARCH_TERM  = "\nType search term: "
 
-  MENU_OPTION  = "Choose a menu option: "
+  MENU_OPTION  = "\nChoose a menu option: "
   SEPARATOR    = "--------------------"
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES"
@@ -76,12 +76,12 @@ class UI
     ask_for(SEARCH_TERM)
   end
 
-  def ask_for_contact_to_expand
-    Integer(ask_for(EXPAND_CONTACT))
+  def ask_for_contact_to_expand(size)
+    valid_index(EXPAND_CONTACT, size) - 1
   end
 
   def ask_for_contact_to_edit(size)
-    valid_index(EDIT_CONTACT, size)
+    valid_index(EDIT_CONTACT, size) - 1
   end
 
   def ask_for_field_to_edit
@@ -89,18 +89,8 @@ class UI
   end
 
   def ask_menu_option(menu)
-    valid_menu_option(menu)
-  end
-
-  def valid_menu_option(menu)
     display_menu(menu)
-    option = ask_for(MENU_OPTION)
-    valid?(menu.size, option) ? Integer(option) : ask_option_again(menu)
-  end
-
-  def ask_option_again(menu)
-    error_wrong_input
-    ask_menu_option(menu)
+    valid_index(MENU_OPTION, menu.size)
   end
 
   def display_menu(menu)
@@ -168,7 +158,7 @@ class UI
   attr_reader :console, :validator
 
   def ask_to(question)
-    ask_for(question) == YES ? true : false
+    ask_for(question) == YES
   end
 
   def ask_for(question)
@@ -177,17 +167,17 @@ class UI
   end
 
   def valid_index(question, size)
-    input = ask_for(question)
-    valid?(size, input) ? Integer(input) : ask_again(question, size)
+    input = ""
+    loop do
+      input = ask_for(question)
+      break if valid?(size, input)
+      error_wrong_input
+    end
+    Integer(input)
   end
 
   def valid?(size, input)
     validator.valid_index?(size, input)
-  end
-
-  def ask_again(question, size)
-    error_wrong_input
-    valid_index(question, size)
   end
 
 end
