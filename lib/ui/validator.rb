@@ -1,13 +1,15 @@
 class Validator
 
-  def valid_option?(menu, option)
-    valid_options(menu).include? option
+  def valid_index?(size, input)
+    valid_indexes(size).include? input
   end
 
-  def valid_options(menu)
-    options = []
-    (1..menu.size).each { |i| options << i.to_s }
-    options
+  private
+
+  def valid_indexes(size)
+    inputs = []
+    (1..size).each { |i| inputs << i.to_s }
+    inputs
   end
 
 end

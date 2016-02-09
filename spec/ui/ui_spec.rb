@@ -8,11 +8,6 @@ describe UI do
   let(:validator) {Validator.new}
   let(:ui)        {described_class.new(Console.new(input, output), validator)}
 
-  it "prints an error message for no contacts" do
-    ui.error_no_contacts
-    expect_to_print(UI::ERROR_NO_CONTACTS)
-  end
-
   it "prints the prompt message for adding another contact" do
     input.string = "\n"
     ui.ask_for_another
@@ -162,13 +157,13 @@ describe UI do
 
   it "prints the prompt message for asking for a contact to edit" do
     input.string = "1"
-    ui.ask_for_contact_to_edit
+    ui.ask_for_contact_to_edit(1)
     expect_to_print(UI::EDIT_CONTACT)
   end
 
   it "reads a contact's index to edit" do
     input.string = "1"
-    expect(ui.ask_for_contact_to_edit).to eq(1)
+    expect(ui.ask_for_contact_to_edit(1)).to eq(1)
   end
 
   it "prints the prompt message for asking for a field to edit" do
@@ -182,11 +177,23 @@ describe UI do
     expect(ui.ask_for_field_to_edit).to eq(1)
   end
 
+  it "prints an error message if wrong index" do
+    input.string = "asdf\n1"
+    ui.ask_for_field_to_edit
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until valid field index" do
+    input.string = "asdf\n-1\n0\n1"
+    expect(ui.ask_for_field_to_edit).to eq(1)
+    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(3)
+  end
+
   it "prints the prompt message for choosing a menu option" do
     menu = [[1, "Option 1"], [2, "Option 2"]]
     input.string = "1"
     ui.ask_menu_option(menu)
-    expect(output.string).to include(UI::MENU)
+    expect(output.string).to include(UI::MENU_OPTION)
   end
 
   it "reads a menu option" do
@@ -271,6 +278,16 @@ describe UI do
     contact = {"id" => 1, "name" => "name", "address" => "address", "phone" => "1234", "email" => "email@mail.com", "notes" => "notes", }
     ui.display_fields_with_index(contact)
     expect(output.string.lines.count).to eq(5)
+  end
+
+  it "prints an error message for no contacts" do
+    ui.error_no_contacts
+    expect_to_print(UI::ERROR_NO_CONTACTS)
+  end
+
+  it "prints an error message for wrong input" do
+    ui.error_wrong_input
+    expect_to_print(UI::ERROR_WRONG_INPUT)
   end
 
   def expect_to_print(message)
