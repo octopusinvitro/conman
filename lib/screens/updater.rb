@@ -69,7 +69,7 @@ class Updater
 
   def choose_contact
     display_all
-    contact_at(ask_for_contact_index - 1)
+    contact_at(ask_for_contact_index)
   end
 
   def choose_field(contact)

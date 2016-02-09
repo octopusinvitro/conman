@@ -12,7 +12,7 @@ describe Updater do
   ]}
 
   before :each do
-    allow(ui).to receive(:ask_for_contact_to_edit).and_return(1)
+    allow(ui).to receive(:ask_for_contact_to_edit).and_return(0)
     allow(ui).to receive(:ask_for_field_to_edit).and_return(1)
     allow(ui).to receive(:ask_another_field).and_return(false)
     allow(db).to receive(:at).and_return(contacts.first)
