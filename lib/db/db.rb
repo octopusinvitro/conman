@@ -1,6 +1,6 @@
 class DB
 
-  def initialize(reader = nil, writer = nil)
+  def initialize(reader, writer)
     @reader = reader
     @writer = writer
   end
@@ -10,7 +10,7 @@ class DB
   end
 
   def all
-    reader.nil? ? [] : reader.read
+    reader.read
   end
 
   def at(index)
@@ -18,11 +18,11 @@ class DB
   end
 
   def add(contact)
-    writer.write(added_a(contact)) if !writer.nil?
+    writer.write(added_a(contact))
   end
 
   def update(contact)
-    writer.write(updated_with(add_id_to(contact))) if !writer.nil?
+    writer.write(updated_with(add_id_to(contact)))
   end
 
   def search(term)

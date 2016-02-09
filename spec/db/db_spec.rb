@@ -11,8 +11,7 @@ describe DB do
     allow(reader).to receive(:read).and_return([])
   end
 
-  it "returns an empty list of contacts if the reader is null" do
-    db = described_class.new(nil, writer)
+  it "returns an empty list of contacts if there are no contents in the file" do
     expect(db.all).to eq([])
   end
 
@@ -26,9 +25,7 @@ describe DB do
     expect(db.all).to eq(contacts)
   end
 
-  it "gets an empty contact if the reader is null" do
-    db = described_class.new(nil, writer)
-    db.add(contact)
+  it "gets an empty contact if there are not contacts in the file" do
     expect(db.at(0)).to eq({})
   end
 
@@ -49,9 +46,11 @@ describe DB do
   end
 
   it "adds one contact to the database" do
+    contact_with_id = {"id" => 1, "name" => "name", "address" => "address"}
     db.add(contact)
     expect(db.size).to eq(1)
-    expect(writer).to have_received(:write).once
+    expect(db.at(0)).to eq(contact_with_id)
+    expect(writer).to have_received(:write).once.with([contact_with_id])
   end
 
   it "first contact has an id of 1" do
