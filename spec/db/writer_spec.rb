@@ -1,4 +1,5 @@
 require 'db/writer'
+require 'json'
 
 describe Writer do
 
@@ -18,18 +19,25 @@ describe Writer do
     expect(file.string).to eq('[{"name":"name1","address":"address1"}]')
   end
 
-  it "saves the contents of the file in JSON format" do
+  it "saves the contents of the file" do
     file   = StringIO.new("")
     writer = described_class.new(file)
     writer.write(contacts)
     expect(file.string).to eq(contents)
   end
 
+  it "saves the contents of the file in JSON format" do
+    file   = StringIO.new("")
+    writer = described_class.new(file)
+    writer.write(contacts)
+    expect(file.string).to eq(contacts.to_json)
+  end
+
   it "flushes the contents to the file" do
     file   = instance_double(File).as_null_object
     writer = described_class.new(file)
     writer.write(contacts)
-    expect(file).to have_received(:flush).once
+    expect(file).to have_received(:flush)
   end
 
 end
