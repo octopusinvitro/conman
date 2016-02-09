@@ -24,7 +24,7 @@ class UI
   SEARCH_AGAIN = "\nSearch again? (y/n): "
   SEARCH_TERM  = "\nType search term: "
 
-  MENU         = "Choose a menu option: "
+  MENU_OPTION  = "Choose a menu option: "
   SEPARATOR    = "--------------------"
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES"
@@ -44,14 +44,6 @@ class UI
   def initialize(console, validator)
     @console   = console
     @validator = validator
-  end
-
-  def error_no_contacts
-    console.writeln(ERROR_NO_CONTACTS)
-  end
-
-  def error_wrong_input
-    console.write(ERROR_WRONG_INPUT)
   end
 
   def ask_for_another
@@ -88,12 +80,12 @@ class UI
     Integer(ask_for(EXPAND_CONTACT))
   end
 
-  def ask_for_contact_to_edit
-    Integer(ask_for(EDIT_CONTACT))
+  def ask_for_contact_to_edit(size)
+    valid_index(EDIT_CONTACT, size)
   end
 
   def ask_for_field_to_edit
-    Integer(ask_for(EDIT_FIELD))
+    valid_index(EDIT_FIELD, FIELDS_TO_QUESTIONS.size)
   end
 
   def ask_menu_option(menu)
@@ -102,15 +94,11 @@ class UI
 
   def valid_menu_option(menu)
     display_menu(menu)
-    option = ask_for(MENU)
-    valid?(menu, option) ? Integer(option) : ask_again(menu)
+    option = ask_for(MENU_OPTION)
+    valid?(menu.size, option) ? Integer(option) : ask_option_again(menu)
   end
 
-  def valid?(menu, option)
-    validator.valid_option?(menu, option)
-  end
-
-  def ask_again(menu)
+  def ask_option_again(menu)
     error_wrong_input
     ask_menu_option(menu)
   end
@@ -167,6 +155,14 @@ class UI
     field = "" << index.to_s << "\t" << key << ": " << value
   end
 
+  def error_no_contacts
+    console.writeln(ERROR_NO_CONTACTS)
+  end
+
+  def error_wrong_input
+    console.write(ERROR_WRONG_INPUT)
+  end
+
   private
 
   attr_reader :console, :validator
@@ -178,6 +174,20 @@ class UI
   def ask_for(question)
     console.write(question)
     console.read.chomp
+  end
+
+  def valid_index(question, size)
+    input = ask_for(question)
+    valid?(size, input) ? Integer(input) : ask_again(question, size)
+  end
+
+  def valid?(size, input)
+    validator.valid_index?(size, input)
+  end
+
+  def ask_again(question, size)
+    error_wrong_input
+    valid_index(question, size)
   end
 
 end

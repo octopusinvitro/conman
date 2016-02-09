@@ -27,6 +27,10 @@ class Updater
     db.all
   end
 
+  def size
+    db.size
+  end
+
   def contact_at(index)
     db.at(index)
   end
@@ -35,16 +39,12 @@ class Updater
     db.update(contact)
   end
 
+  def ask_another_field
+    ui.ask_another_field
+  end
+
   def ask_for_contact_index
-    ui.ask_for_contact_to_edit
-  end
-
-  def display_all
-    ui.display_all_with_index(all)
-  end
-
-  def display_fields(contact)
-    ui.display_fields_with_index(contact)
+    ui.ask_for_contact_to_edit(size)
   end
 
   def ask_for_field_index
@@ -55,12 +55,16 @@ class Updater
     ui.ask_for_value_to_edit(field)
   end
 
-  def display(contact)
-    ui.display_all([contact])
+  def display_all
+    ui.display_all_with_index(all)
   end
 
-  def ask_another_field
-    ui.ask_another_field
+  def display_fields(contact)
+    ui.display_fields_with_index(contact)
+  end
+
+  def display(contact)
+    ui.display_all([contact])
   end
 
   def choose_contact
