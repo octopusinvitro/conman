@@ -12,12 +12,12 @@ class UI
   EMAIL   = "Contact email: "
   NOTES   = "Contact notes: "
   FIELDS_TO_QUESTIONS = {
-      "name"    => NAME,
-      "address" => ADDRESS,
-      "phone"   => PHONE,
-      "email"   => EMAIL,
-      "notes"   => NOTES
-    }
+    "name"    => NAME,
+    "address" => ADDRESS,
+    "phone"   => PHONE,
+    "email"   => EMAIL,
+    "notes"   => NOTES
+  }
 
   YES          = "y"
   ADD_ANOTHER  = "\nAdd another contact? (y/n): "
@@ -63,12 +63,12 @@ class UI
   end
 
   def ask_for_value_to_edit(field)
-    ask_for(FIELDS_TO_QUESTIONS[field])
+    valid_field(FIELDS_TO_QUESTIONS[field], field)
   end
 
   def ask_for_fields
     contact = {}
-    FIELDS_TO_QUESTIONS.each { |field, question| contact[field] = ask_for(question) }
+    FIELDS_TO_QUESTIONS.each { |field, question| contact[field] = valid_field(question, field) }
     contact
   end
 
@@ -176,8 +176,22 @@ class UI
     Integer(input)
   end
 
+  def valid_field(question, field)
+    input = ""
+    loop do
+      input = ask_for(question)
+      break if valid_field?(field, input)
+      error_wrong_input
+    end
+    input
+  end
+
   def valid?(size, input)
     validator.valid_index?(size, input)
+  end
+
+  def valid_field?(field, input)
+    validator.valid_field?(field, input)
   end
 
 end
