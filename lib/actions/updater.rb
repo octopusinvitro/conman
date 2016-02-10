@@ -6,6 +6,7 @@ class Updater
   end
 
   def run
+    clear
     update_contacts
   end
 
@@ -37,6 +38,10 @@ class Updater
 
   def update(contact)
     db.update(contact)
+  end
+
+  def clear
+    ui.clear
   end
 
   def ask_another_field

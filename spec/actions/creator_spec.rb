@@ -12,6 +12,11 @@ describe Creator do
     allow(db).to receive(:at).and_return(contact)
   end
 
+  it "clears the screen as the first thing" do
+    creator.run
+    expect(ui).to have_received(:clear).once
+  end
+
   it "saves the name introduced by the user" do
     creator.run
     expect_field("name", "a name")

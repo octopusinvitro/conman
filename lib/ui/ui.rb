@@ -19,7 +19,9 @@ class UI
     "notes"   => NOTES
   }
 
-  YES          = "y"
+  YES   = "y"
+  CLEAR = "\033[H\033[2J"
+
   ADD_ANOTHER  = "\nAdd another contact? (y/n): "
   SEARCH_AGAIN = "\nSearch again? (y/n): "
   SEARCH_TERM  = "\nType search term: "
@@ -151,6 +153,10 @@ class UI
 
   def error_wrong_input
     console.write(ERROR_WRONG_INPUT)
+  end
+
+  def clear
+    console.writeln(CLEAR)
   end
 
   private
