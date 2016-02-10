@@ -47,4 +47,5 @@ class Creator
   def display_all
     ui.display_all(all)
   end
+
 end

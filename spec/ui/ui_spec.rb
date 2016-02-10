@@ -94,18 +94,30 @@ describe UI do
   end
 
   it "prints the prompt message for a phone" do
-    input.string = "\n"
+    input.string = "01234567890"
     ui.ask_for_value_to_edit("phone")
     expect_to_print(UI::PHONE)
   end
 
   it "reads a phone" do
-    input.string = "1234"
-    expect(ui.ask_for_value_to_edit("phone")).to eq("1234")
+    input.string = "01234567890"
+    expect(ui.ask_for_value_to_edit("phone")).to eq("01234567890")
+  end
+
+  it "prints an error message if the phone is not valid" do
+    input.string = "asdf\n01234567890"
+    ui.ask_for_value_to_edit("phone")
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until valid phone number" do
+    input.string = "asdf\n1234\n01234567890"
+    expect(ui.ask_for_value_to_edit("phone")).to eq("01234567890")
+    expect_error_message_count_to_be(2)
   end
 
   it "prints the prompt message for an email" do
-    input.string = "\n"
+    input.string = "email@mail.com"
     ui.ask_for_value_to_edit("email")
     expect_to_print(UI::EMAIL)
   end
@@ -113,6 +125,18 @@ describe UI do
   it "reads an email" do
     input.string = "email@mail.com"
     expect(ui.ask_for_value_to_edit("email")).to eq("email@mail.com")
+  end
+
+  it "prints an error message if the email is not valid" do
+    input.string = "asdf\nemail@mail.com"
+    ui.ask_for_value_to_edit("email")
+    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+  end
+
+  it "keeps asking until valid email" do
+    input.string = "asdf\n1234\nemail@mail.com"
+    expect(ui.ask_for_value_to_edit("email")).to eq("email@mail.com")
+    expect_error_message_count_to_be(2)
   end
 
   it "prints the prompt message for notes" do
@@ -127,8 +151,8 @@ describe UI do
   end
 
   it "asks for all fields" do
-    input.string = "name\naddress\n1234\nemail@mail.com\nnotes"
-    contact      = {"name" => "name", "address" => "address", "phone" => "1234", "email" => "email@mail.com", "notes" => "notes", }
+    input.string = "name\naddress\n01234567890\nemail@mail.com\nnotes"
+    contact      = {"name" => "name", "address" => "address", "phone" => "01234567890", "email" => "email@mail.com", "notes" => "notes", }
     expect(ui.ask_for_fields).to eq(contact)
   end
 
