@@ -1,4 +1,6 @@
-class Creator
+require 'actions/action'
+
+class Creator < Action
 
   def initialize(ui, db)
     @ui = ui
@@ -6,7 +8,7 @@ class Creator
   end
 
   def run
-    clear
+    super
     add_contacts
   end
 
@@ -31,10 +33,6 @@ class Creator
 
   def all
     db.all
-  end
-
-  def clear
-    ui.clear
   end
 
   def ask_for_fields

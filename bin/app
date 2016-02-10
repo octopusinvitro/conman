@@ -14,6 +14,7 @@ require 'actions/lister'
 require 'actions/creator'
 require 'actions/finder'
 require 'actions/updater'
+require 'actions/terminator'
 
 require 'menu'
 require 'conman'
@@ -29,9 +30,9 @@ actions = [
   [UI::ADD,    Creator.new(ui, db)],
   [UI::SEARCH, Finder.new(ui, db)],
   [UI::UPDATE, Updater.new(ui, db)],
-  [UI::EXIT,   nil]
+  [UI::EXIT,   Terminator.new(ui)]
 ]
 
-menu   = Menu.new(ui, actions)
-conman = Conman.new(menu)
-conman.run
+menu   = Menu.new(ui, actions.map { |action| action.first })
+conman = Conman.new(menu, actions.map { |action| action.last })
+conman.start

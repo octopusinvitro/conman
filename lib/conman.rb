@@ -1,31 +1,40 @@
 class Conman
 
-  def initialize(menu)
-    @menu = menu
+  def initialize(menu, actions)
+    @menu    = menu
+    @actions = actions
   end
 
-  def run
+  def start
+    clear
     loop do
-      option = ask_menu_option
-      break if exit?(option)
-      check(option)
+      body
     end
+  end
+
+  def body
+    option = ask_menu_option
+    choose(option)
   end
 
   private
 
-  attr_reader :menu
+  attr_reader :menu, :actions
+
+  def clear
+    menu.clear
+  end
 
   def ask_menu_option
     menu.ask_menu_option
   end
 
-  def exit?(option)
-    menu.exit?(option)
+  def choose(option)
+    actions.each { |action| action.run if selected?(option, action) }
   end
 
-  def check(option)
-    menu.check(option)
+  def selected?(option, action)
+    actions.index(action) == option - 1
   end
 
 end

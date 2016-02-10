@@ -21,6 +21,7 @@ class UI
 
   YES   = "y"
   CLEAR = "\033[H\033[2J"
+  BYE   = " ConMan wishes you\n    a nice day"
 
   ADD_ANOTHER  = "\nAdd another contact? (y/n): "
   SEARCH_AGAIN = "\nSearch again? (y/n): "
@@ -29,7 +30,7 @@ class UI
   MENU_OPTION  = "\nChoose a menu option: "
   SEPARATOR    = "--------------------"
 
-  HEADER       = "\nNAME\tADDRESS\tPHONE\tEMAIL\tNOTES"
+  HEADER       = "\nNAME\tADDRESS\tPHONE\t\tEMAIL\tNOTES"
   HEADER_NAMES = "\nINDEX\tNAME"
   HEADER_WITH_INDEX = "\nINDEX\t" << HEADER[1..-1]
 
@@ -157,6 +158,12 @@ class UI
 
   def clear
     console.writeln(CLEAR)
+  end
+
+  def bye
+    console.writeln(SEPARATOR)
+    console.writeln(BYE)
+    console.writeln(SEPARATOR)
   end
 
   private

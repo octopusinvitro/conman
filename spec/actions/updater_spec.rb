@@ -18,11 +18,6 @@ describe Updater do
     allow(db).to receive(:at).and_return(contacts.first)
   end
 
-  it "clears the screen as the first thing" do
-    updater.run
-    expect(ui).to have_received(:clear).once
-  end
-
   it "displays all the contacts with an index" do
     allow(db).to receive(:all).and_return(contacts)
     updater.run
