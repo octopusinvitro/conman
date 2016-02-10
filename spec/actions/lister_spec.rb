@@ -1,4 +1,4 @@
-require 'screens/lister'
+require 'actions/lister'
 
 describe Lister do
 

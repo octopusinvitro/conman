@@ -1,4 +1,4 @@
-require 'screens/finder'
+require 'actions/finder'
 
 describe Finder do
 
