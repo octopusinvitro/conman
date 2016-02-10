@@ -1,4 +1,6 @@
-class Lister
+require 'actions/action'
+
+class Lister < Action
 
   def initialize(ui, db)
     @ui = ui
@@ -6,7 +8,7 @@ class Lister
   end
 
   def run
-    clear
+    super
     list_all
   end
 
@@ -20,10 +22,6 @@ class Lister
 
   def all
     db.all
-  end
-
-  def clear
-    ui.clear
   end
 
   def print_error_message

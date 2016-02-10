@@ -19,11 +19,11 @@ describe Validator do
   end
 
   it "doesn't have any rules for names" do
-    expect(validator.valid_field?("name", "as@£$%123df")).to eq(true)
+    expect(validator.valid_field?("name", "as123df")).to eq(true)
   end
 
   it "doesn't have any rules for addresses" do
-    expect(validator.valid_field?("name", "as%^&dlkjdsf")).to eq(true)
+    expect(validator.valid_field?("name", "asdlkjdsf")).to eq(true)
   end
 
   it "detects a valid phone" do

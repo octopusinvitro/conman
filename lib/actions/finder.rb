@@ -1,4 +1,6 @@
-class Finder
+require 'actions/action'
+
+class Finder < Action
 
   def initialize(ui, db)
     @ui = ui
@@ -6,7 +8,7 @@ class Finder
   end
 
   def run
-    clear
+    super
     search_contacts
   end
 
@@ -24,10 +26,6 @@ class Finder
 
   def search_contact(term)
     db.search(term)
-  end
-
-  def clear
-    ui.clear
   end
 
   def ask_search_again

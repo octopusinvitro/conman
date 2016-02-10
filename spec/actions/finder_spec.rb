@@ -18,11 +18,6 @@ describe Finder do
     allow(ui).to receive(:ask_search_again).and_return(false)
   end
 
-  it "clears the screen as the first thing" do
-    finder.run
-    expect(ui).to have_received(:clear).once
-  end
-
   it "performs two searches" do
     allow(ui).to receive(:ask_search_again).and_return(true, false)
     finder.run

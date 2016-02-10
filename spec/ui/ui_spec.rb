@@ -342,6 +342,12 @@ describe UI do
     expect_to_print(UI::CLEAR)
   end
 
+  it "prints a goodbye message" do
+    ui.bye
+    expect(output.string).to include(UI::BYE)
+    expect(output.string.lines.count).to eq(4)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end
