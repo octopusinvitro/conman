@@ -6,6 +6,12 @@ describe Lister do
   let (:db)     {instance_double(DB).as_null_object}
   let (:lister) {described_class.new(ui, db)}
 
+  it "clears the screen as the first thing" do
+    allow(db).to receive(:all).and_return([])
+    lister.run
+    expect(ui).to have_received(:clear).once
+  end
+
   it "prints an error message if no available contacts" do
     allow(db).to receive(:all).and_return([])
     lister.run

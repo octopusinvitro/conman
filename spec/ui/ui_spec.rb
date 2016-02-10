@@ -337,6 +337,11 @@ describe UI do
     expect_to_print(UI::ERROR_WRONG_INPUT)
   end
 
+  it "clears the screen" do
+    ui.clear
+    expect_to_print(UI::CLEAR)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end

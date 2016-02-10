@@ -6,6 +6,7 @@ class Finder
   end
 
   def run
+    clear
     search_contacts
   end
 
@@ -23,6 +24,10 @@ class Finder
 
   def search_contact(term)
     db.search(term)
+  end
+
+  def clear
+    ui.clear
   end
 
   def ask_search_again

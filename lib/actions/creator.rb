@@ -6,6 +6,7 @@ class Creator
   end
 
   def run
+    clear
     add_contacts
   end
 
@@ -30,6 +31,10 @@ class Creator
 
   def all
     db.all
+  end
+
+  def clear
+    ui.clear
   end
 
   def ask_for_fields

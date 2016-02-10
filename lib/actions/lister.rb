@@ -6,6 +6,7 @@ class Lister
   end
 
   def run
+    clear
     list_all
   end
 
@@ -19,6 +20,10 @@ class Lister
 
   def all
     db.all
+  end
+
+  def clear
+    ui.clear
   end
 
   def print_error_message
