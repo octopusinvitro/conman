@@ -1,4 +1,4 @@
-require 'screens/updater'
+require 'actions/updater'
 
 describe Updater do
 
