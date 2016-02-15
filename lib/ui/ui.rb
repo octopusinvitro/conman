@@ -66,12 +66,12 @@ class UI
   end
 
   def ask_for_value_to_edit(field)
-    valid_field(FIELDS_TO_QUESTIONS[field], field)
+    ask_for_valid_field(FIELDS_TO_QUESTIONS[field], field)
   end
 
   def ask_for_fields
     contact = {}
-    FIELDS_TO_QUESTIONS.each { |field, question| contact[field] = valid_field(question, field) }
+    FIELDS_TO_QUESTIONS.each { |field, question| contact[field] = ask_for_valid_field(question, field) }
     contact
   end
 
@@ -80,20 +80,20 @@ class UI
   end
 
   def ask_for_contact_to_expand(size)
-    valid_index(EXPAND_CONTACT, size) - 1
+    ask_for_valid_index(EXPAND_CONTACT, size) - 1
   end
 
   def ask_for_contact_to_edit(size)
-    valid_index(EDIT_CONTACT, size) - 1
+    ask_for_valid_index(EDIT_CONTACT, size) - 1
   end
 
   def ask_for_field_to_edit
-    valid_index(EDIT_FIELD, FIELDS_TO_QUESTIONS.size)
+    ask_for_valid_index(EDIT_FIELD, FIELDS_TO_QUESTIONS.size)
   end
 
   def ask_menu_option(menu)
     display_menu(menu)
-    valid_index(MENU_OPTION, menu.size)
+    ask_for_valid_index(MENU_OPTION, menu.size)
   end
 
   def display_menu(menu)
@@ -179,17 +179,17 @@ class UI
     console.read.chomp
   end
 
-  def valid_index(question, size)
+  def ask_for_valid_index(question, size)
     input = ""
     loop do
       input = ask_for(question)
-      break if valid?(size, input)
+      break if valid_index?(size, input)
       error_wrong_input
     end
     Integer(input)
   end
 
-  def valid_field(question, field)
+  def ask_for_valid_field(question, field)
     input = ""
     loop do
       input = ask_for(question)
@@ -199,7 +199,7 @@ class UI
     input
   end
 
-  def valid?(size, input)
+  def valid_index?(size, input)
     validator.valid_index?(size, input)
   end
 

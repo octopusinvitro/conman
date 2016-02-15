@@ -353,7 +353,7 @@ describe UI do
   end
 
   def expect_error_message_count_to_be(count)
-    expect(output.string.scan(/(?=#{UI::ERROR_WRONG_INPUT})/).count).to eq(count)
+    expect(output.string.scan(UI::ERROR_WRONG_INPUT).size).to eq(count)
   end
 
 end

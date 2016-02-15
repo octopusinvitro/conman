@@ -57,10 +57,10 @@ class Finder < Action
   end
 
   def expand_or_not(matched)
-    matched.empty? ? error_no_contacts : expand_routine(matched)
+    matched.empty? ? error_no_contacts : expand(matched)
   end
 
-  def expand_routine(matched)
+  def expand(matched)
     display_search_results(matched)
     choose_contact_to_expand(matched)
   end
