@@ -18,16 +18,16 @@ class Validator
 
   def field_validation_rules(field, input)
     {
-      "phone"   => phone_is_valid?(input),
-      "email"   => email_is_valid?(input)
+      "phone"   => is_phone_valid?(input),
+      "email"   => is_email_valid?(input)
     }.fetch(field, true)
   end
 
-  def phone_is_valid?(input)
+  def is_phone_valid?(input)
     input.size == 11 && /[0-9]/ === input
   end
 
-  def email_is_valid?(input)
+  def is_email_valid?(input)
     input.include?("@")
   end
 
