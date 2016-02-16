@@ -2,8 +2,6 @@ require 'db/db_sqlite'
 
 describe DBSQLite do
 
-
-
   let (:db)      {described_class.new(":memory:")}
   let (:contact) {{"name" => "a name", "address" => "an address", "phone" => "123456", "email" => "email@mail.com", "notes" => "some notes"}}
 
@@ -23,6 +21,21 @@ describe DBSQLite do
     db.add(contact)
     expect(db.all).to eq(contacts)
     expect(db.size).to eq(3)
+  end
+
+  it "gets an empty contact if there are no contacts in the db" do
+    expect(db.at(0)).to eq({})
+  end
+
+  it "gets an empty contact if the index is not valid" do
+    db.add(contact)
+    expect(db.size).to eq(1)
+    expect(db.at(5)).to eq({})
+  end
+
+  it "gets one contact if there are contacts and the index is valid" do
+    db.add(contact)
+    expect(db.at(0)).to eq(contact_with_id(1))
   end
 
   def contact_with_id(id)

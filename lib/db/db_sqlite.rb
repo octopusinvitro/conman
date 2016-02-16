@@ -19,6 +19,7 @@ class DBSQLite < DB
   end
 
   def at(index)
+    all.fetch(index, {})
   end
 
   def add(contact)

@@ -25,11 +25,7 @@ describe DBFile do
     expect(db.all).to eq(contacts)
   end
 
-  it "gets an empty contact if there are not contacts in the file" do
-    expect(db.at(0)).to eq({})
-  end
-
-  it "gets an empty contact if there are no contacts" do
+  it "gets an empty contact if there are no contacts in the file" do
     expect(db.at(0)).to eq({})
   end
 
