@@ -4,4 +4,5 @@ group :test do
   gem 'rake'
   gem 'rspec',  '>=3.4.0'
   gem 'pry'
+  gem 'sqlite3'
 end
