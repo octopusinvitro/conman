@@ -12,14 +12,17 @@ class DBSQLite < DB
   end
 
   def all
-    sqlite.results_as_hash = true
+    columns  = ["id", "name", "address", "phone", "email", "notes"]
     contacts = sqlite.execute "SELECT * FROM contacts"
+    contacts.map { |contact| Hash[columns.zip(contact)] }
   end
 
   def at(index)
   end
 
   def add(contact)
+    sql = "INSERT INTO contacts (name, address, phone, email, notes) VALUES('" << contact["name"] << "','" << contact["address"] << "','" << contact["phone"] << "','" << contact["email"] << "','" << contact["notes"] << "')"
+    sqlite.execute sql
   end
 
   def update(contact)
