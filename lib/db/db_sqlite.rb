@@ -9,6 +9,7 @@ class DBSQLite < DB
   end
 
   def size
+    all.size
   end
 
   def all
