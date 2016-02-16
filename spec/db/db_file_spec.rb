@@ -1,6 +1,6 @@
-require 'db/db'
+require 'db/db_file'
 
-describe DB do
+describe DBfile do
 
   let(:reader)  {instance_double(Reader).as_null_object}
   let(:writer)  {instance_double(Writer).as_null_object}
