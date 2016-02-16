@@ -1,6 +1,6 @@
 require 'db/db'
 
-class DBfile < DB
+class DBFile < DB
 
   def initialize(reader, writer)
     @reader = reader
@@ -20,11 +20,11 @@ class DBfile < DB
   end
 
   def add(contact)
-    writer.write(added_a(contact))
+    writer.write(all << add_id_to(contact))
   end
 
   def update(contact)
-    writer.write(updated_with(add_id_to(contact)))
+    writer.write(update_with(add_id_to(contact)))
   end
 
   def search(term)
@@ -57,14 +57,19 @@ class DBfile < DB
     size == 0 ? 1 : at(size - 1)["id"] + 1
   end
 
-  def added_a(contact)
-    all << add_id_to(contact)
+  def update_with(contact)
+    index = index_of_id(contact["id"])
+    invalid?(index) ? add_contact(contact) : update_contact(contact, index)
   end
 
-  def updated_with(contact)
-    index    = index_of_id(contact["id"])
+  def add_contact(contact)
     contacts = all
-    invalid?(index) ? contacts << contact : contacts[index] = contact
+    contacts << contact
+  end
+
+  def update_contact(contact, index)
+    contacts = all
+    contacts[index] = contact
     contacts
   end
 

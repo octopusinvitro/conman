@@ -8,7 +8,7 @@ require 'ui/validator'
 
 require 'db/reader'
 require 'db/writer'
-require 'db/db'
+require 'db/db_file'
 
 require 'actions/lister'
 require 'actions/creator'
@@ -23,7 +23,7 @@ ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 path = "./contacts"
 file = File.new(path, "a+")
-db   = DB.new(Reader.new(file), Writer.new(file))
+db   = DBFile.new(Reader.new(file), Writer.new(file))
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],
