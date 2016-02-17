@@ -36,8 +36,8 @@ class Finder < Action
     ui.ask_to_expand
   end
 
-  def ask_for_contact_index(size)
-    ui.ask_for_contact_to_expand(size)
+  def ask_for_contact_index(matched_size)
+    ui.ask_for_contact_to_expand(matched_size)
   end
 
   def ask_for_term
