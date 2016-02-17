@@ -3,9 +3,12 @@ require 'sqlite3'
 
 class DBSQLite < DB
 
-  def initialize(path)
-    @sqlite = SQLite3::Database.new path
-    sqlite.execute "CREATE TABLE IF NOT EXISTS contacts(id INTEGER PRIMARY KEY, name TEXT, address TEXT, phone TEXT, email TEXT, notes TEXT)"
+  def initialize(path, table, columns)
+    @sqlite  = SQLite3::Database.new path
+    @table   = table
+    @columns = columns
+    sql      = "CREATE TABLE IF NOT EXISTS " << table << "(id INTEGER PRIMARY KEY, " << fields << ")"
+    sqlite.execute sql
   end
 
   def size
@@ -13,9 +16,8 @@ class DBSQLite < DB
   end
 
   def all
-    columns  = ["id", "name", "address", "phone", "email", "notes"]
-    contacts = sqlite.execute "SELECT * FROM contacts"
-    contacts.map { |contact| Hash[columns.zip(contact)] }
+    contacts = sqlite.execute "SELECT * FROM " << table
+    contacts.map { |contact| Hash[columns_with_id.zip(contact)] }
   end
 
   def at(index)
@@ -23,12 +25,12 @@ class DBSQLite < DB
   end
 
   def add(contact)
-    sql = "INSERT INTO contacts (name, address, phone, email, notes) VALUES('" << contact["name"] << "','" << contact["address"] << "','" << contact["phone"] << "','" << contact["email"] << "','" << contact["notes"] << "')"
+    sql = "INSERT INTO " << table << field_columns << " VALUES(" << field_values(contact) << ")"
     sqlite.execute sql
   end
 
   def update(contact)
-    sql = "UPDATE contacts SET name='" << contact["name"] << "', address='" << contact["address"] << "', phone='" << contact["phone"] << "', email='" << contact["email"] << "', notes='" << contact["notes"] << "' WHERE id=" << contact["id"].to_s
+    sql = "UPDATE " << table << " SET " << field_setters(contact) << " WHERE id=" << contact["id"].to_s
     sqlite.execute sql
   end
 
@@ -41,6 +43,34 @@ class DBSQLite < DB
 
   private
 
-  attr_reader :sqlite
+  attr_reader :sqlite, :table, :columns
+
+  def columns_with_id
+    (["id"] << columns).flatten!
+  end
+
+  def fields
+    fields = ""
+    columns.each { |column| fields << column << " TEXT, " }
+    fields.chomp(", ")
+  end
+
+  def field_columns
+    fields = "("
+    columns.each { |column| fields << column << "," }
+    fields.chomp(",") << ")"
+  end
+
+  def field_values(contact)
+    values = "'"
+    columns.each { |column| values << contact[column] << "','" }
+    values.chomp("','") << "'"
+  end
+
+  def field_setters(contact)
+    setters = ""
+    columns.each { |column| setters << column << "='" << contact[column] << "', " }
+    setters.chomp(", ")
+  end
 
 end

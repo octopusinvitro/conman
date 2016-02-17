@@ -348,6 +348,11 @@ describe UI do
     expect(output.string.lines.count).to eq(4)
   end
 
+  it "returns the fields of a contact" do
+    fields = ["name", "address", "phone", "email", "notes"]
+    expect(ui.contact_fields).to eq(fields)
+  end
+
   def expect_to_print(message)
     expect(output.string.chomp).to eq(message)
   end

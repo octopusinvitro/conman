@@ -22,8 +22,9 @@ require 'conman'
 ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 
-path = "contacts.db"
-db   = DBSQLite.new(path)
+path  = "contacts.db"
+table = "contacts"
+db    = DBSQLite.new(path, table, ui.contact_fields)
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],
