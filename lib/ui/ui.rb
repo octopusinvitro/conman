@@ -42,7 +42,14 @@ class UI
   ANOTHER_FIELD  = "\nEdit another field? (y/n): "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
-  ERROR_WRONG_INPUT = "ERROR: Wrong input. Please try again: "
+  TRY_AGAIN         = " Please try again: "
+  ERROR_WRONG_INPUT = "ERROR: Wrong input." << TRY_AGAIN
+  ERROR_WRONG_PHONE = "ERROR: Wrong phone. Must be 11 digits and all numbers" << TRY_AGAIN
+  ERROR_WRONG_EMAIL = "ERROR: Wrong email. Must contain an @." << TRY_AGAIN
+  FIELDS_TO_ERRORS = {
+    "phone"   => ERROR_WRONG_PHONE,
+    "email"   => ERROR_WRONG_EMAIL
+  }
 
   def initialize(console, validator)
     @console   = console
@@ -156,6 +163,14 @@ class UI
     console.write(ERROR_WRONG_INPUT)
   end
 
+  def error_message_for(field)
+    FIELDS_TO_ERRORS.fetch(field, ERROR_WRONG_INPUT)
+  end
+
+  def error_wrong_field(field)
+    console.write(error_message_for(field))
+  end
+
   def clear
     console.writeln(CLEAR)
   end
@@ -198,7 +213,7 @@ class UI
     loop do
       input = ask_for(question)
       break if valid_field?(field, input)
-      error_wrong_input
+      error_wrong_field(field)
     end
     input
   end
