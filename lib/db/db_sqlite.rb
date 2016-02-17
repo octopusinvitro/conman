@@ -33,6 +33,7 @@ class DBSQLite < DB
   end
 
   def search(term)
+    all.select { |contact| contact.any? {|key, val| val.to_s.include?(term)} }
   end
 
   def index_of_id(id)
