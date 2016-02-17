@@ -107,13 +107,13 @@ describe UI do
   it "prints an error message if the phone is not valid" do
     input.string = "asdf\n01234567890"
     ui.ask_for_value_to_edit("phone")
-    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+    expect(output.string).to include(UI::ERROR_WRONG_PHONE)
   end
 
   it "keeps asking until valid phone number" do
     input.string = "asdf\n1234\n01234567890"
     expect(ui.ask_for_value_to_edit("phone")).to eq("01234567890")
-    expect_error_message_count_to_be(2)
+    expect_field_error_count_to_be(2, "phone")
   end
 
   it "prints the prompt message for an email" do
@@ -130,13 +130,13 @@ describe UI do
   it "prints an error message if the email is not valid" do
     input.string = "asdf\nemail@mail.com"
     ui.ask_for_value_to_edit("email")
-    expect(output.string).to include(UI::ERROR_WRONG_INPUT)
+    expect(output.string).to include(UI::ERROR_WRONG_EMAIL)
   end
 
   it "keeps asking until valid email" do
     input.string = "asdf\n1234\nemail@mail.com"
     expect(ui.ask_for_value_to_edit("email")).to eq("email@mail.com")
-    expect_error_message_count_to_be(2)
+    expect_field_error_count_to_be(2, "email")
   end
 
   it "prints the prompt message for notes" do
@@ -359,6 +359,10 @@ describe UI do
 
   def expect_error_message_count_to_be(count)
     expect(output.string.scan(UI::ERROR_WRONG_INPUT).size).to eq(count)
+  end
+
+  def expect_field_error_count_to_be(count, field)
+    expect(output.string.scan(ui.error_message_for(field)).size).to eq(count)
   end
 
 end
