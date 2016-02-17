@@ -7,8 +7,7 @@ class DBSQLite < DB
     @sqlite  = SQLite3::Database.new path
     @table   = table
     @columns = columns
-    sql      = "CREATE TABLE IF NOT EXISTS " << table << "(id INTEGER PRIMARY KEY, " << fields << ")"
-    sqlite.execute sql
+    create_table
   end
 
   def size
@@ -45,6 +44,11 @@ class DBSQLite < DB
   private
 
   attr_reader :sqlite, :table, :columns
+
+  def create_table
+    sql = "CREATE TABLE IF NOT EXISTS " << table << "(id INTEGER PRIMARY KEY, " << fields << ")"
+    sqlite.execute sql
+  end
 
   def columns_with_id
     (["id"] << columns).flatten!
