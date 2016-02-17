@@ -2,13 +2,12 @@ require 'db/db_file'
 
 describe DBFile do
 
-  let(:reader)  {instance_double(Reader).as_null_object}
-  let(:writer)  {instance_double(Writer).as_null_object}
-  let(:db)      {described_class.new(reader, writer)}
+  let(:handler) {instance_double(FileHandler).as_null_object}
+  let(:db)      {described_class.new(handler)}
   let(:contact) {{"name" => "name", "address" => "address"}}
 
   before :each do
-    allow(reader).to receive(:read).and_return([])
+    allow(handler).to receive(:read).and_return([])
   end
 
   it "returns an empty list of contacts if there are no contents in the file" do
@@ -21,7 +20,7 @@ describe DBFile do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:read).and_return(contacts)
+    allow(handler).to receive(:read).and_return(contacts)
     expect(db.all).to eq(contacts)
   end
 
@@ -46,7 +45,7 @@ describe DBFile do
     db.add(contact)
     expect(db.size).to eq(1)
     expect(db.at(0)).to eq(contact_with_id)
-    expect(writer).to have_received(:write).once.with([contact_with_id])
+    expect(handler).to have_received(:write).once.with([contact_with_id])
   end
 
   it "first contact has an id of 1" do
@@ -93,7 +92,7 @@ describe DBFile do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:read).and_return(contacts)
+    allow(handler).to receive(:read).and_return(contacts)
     expect(db.search("address1")).to eq([contacts.first])
   end
 
@@ -103,7 +102,7 @@ describe DBFile do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(reader).to receive(:read).and_return(contacts)
+    allow(handler).to receive(:read).and_return(contacts)
     expect(db.search("address")).to eq(contacts)
   end
 
