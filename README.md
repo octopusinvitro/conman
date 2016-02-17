@@ -1,3 +1,5 @@
+![travis badge](https://travis-ci.org/me-stevens/conman.svg?branch=master "Logo Title Text 1")
+
 # Contact Management app (ConMan)
 
 This is a simple console app that keeps a list of contacts. You can:
