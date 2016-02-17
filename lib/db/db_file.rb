@@ -2,9 +2,8 @@ require 'db/db'
 
 class DBFile < DB
 
-  def initialize(reader, writer)
-    @reader = reader
-    @writer = writer
+  def initialize(filehandler)
+    @filehandler = filehandler
   end
 
   def size
@@ -12,7 +11,7 @@ class DBFile < DB
   end
 
   def all
-    reader.read
+    filehandler.read
   end
 
   def at(index)
@@ -20,11 +19,11 @@ class DBFile < DB
   end
 
   def add(contact)
-    writer.write(all << add_id_to(contact))
+    filehandler.write(all << add_id_to(contact))
   end
 
   def update(contact)
-    writer.write(update_with(add_id_to(contact)))
+    filehandler.write(update_with(add_id_to(contact)))
   end
 
   def search(term)
@@ -37,7 +36,7 @@ class DBFile < DB
 
   private
 
-  attr_reader :reader, :writer
+  attr_reader :filehandler
 
   def invalid?(index)
     index.nil? ? true : all[index].nil?
