@@ -166,6 +166,10 @@ class UI
     console.writeln(SEPARATOR)
   end
 
+  def contact_fields
+    FIELDS_TO_QUESTIONS.keys
+  end
+
   private
 
   attr_reader :console, :validator
