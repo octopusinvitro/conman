@@ -51,4 +51,11 @@ describe FileHandler do
     expect(file).to have_received(:flush)
   end
 
+  it "closes the file" do
+    file    = StringIO.new("")
+    handler = described_class.new(file)
+    handler.close
+    expect(file.closed?).to eq(true)
+  end
+
 end

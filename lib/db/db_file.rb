@@ -34,6 +34,10 @@ class DBFile < DB
     all.index { |contact| contact["id"] == id }
   end
 
+  def close
+    filehandler.close
+  end
+
   private
 
   attr_reader :filehandler

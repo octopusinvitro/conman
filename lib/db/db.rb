@@ -21,4 +21,7 @@ class DB
   def index_of_id(id)
   end
 
+  def close
+  end
+
 end

@@ -17,6 +17,10 @@ class FileHandler
     file.flush
   end
 
+  def close
+    file.close if file
+  end
+
   private
 
   attr_reader :file

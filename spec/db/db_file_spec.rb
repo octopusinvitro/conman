@@ -106,4 +106,9 @@ describe DBFile do
     expect(db.search("address")).to eq(contacts)
   end
 
+  it "closes the database" do
+    db.close
+    expect(handler).to have_received(:close).once
+  end
+
 end

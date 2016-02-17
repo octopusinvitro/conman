@@ -3,8 +3,8 @@ require 'sqlite3'
 
 class DBSQLite < DB
 
-  def initialize(path, table, columns)
-    @sqlite  = SQLite3::Database.new path
+  def initialize(sqlite, table, columns)
+    @sqlite  = sqlite
     @table   = table
     @columns = columns
     create_table
@@ -39,6 +39,10 @@ class DBSQLite < DB
 
   def index_of_id(id)
     all.index { |contact| contact["id"] == id }
+  end
+
+  def close
+    sqlite.close if sqlite
   end
 
   private
