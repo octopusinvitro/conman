@@ -46,6 +46,34 @@ describe DBSQLite do
     expect(db.at(0)["name"]).to eq("new name")
   end
 
+  it "finds one contact given an exact term" do
+    db.add(contact)
+
+    contact2 = contact
+    contact2["address"] = "address2"
+    db.add(contact2)
+
+    contact3 = contact
+    contact3["address"] = "address3"
+    db.add(contact3)
+
+    expect(db.search("address3")).to eq([db.all.last])
+  end
+
+  it "finds several contacts given an inexact term" do
+    db.add(contact)
+
+    contact2 = contact
+    contact2["address"] = "address2"
+    db.add(contact2)
+
+    contact3 = contact
+    contact3["address"] = "address3"
+    db.add(contact3)
+
+    expect(db.search("address")).to eq(db.all)
+  end
+
   def contact_with_id(id)
     new_contact       = {}
     new_contact["id"] = id
