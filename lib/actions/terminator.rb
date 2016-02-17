@@ -2,8 +2,9 @@ require 'actions/action'
 
 class Terminator < Action
 
-  def initialize(ui, kernel = Kernel)
+  def initialize(ui, db, kernel = Kernel)
     @ui     = ui
+    @db     = db
     @kernel = kernel
   end
 
@@ -14,10 +15,14 @@ class Terminator < Action
 
   private
 
-  attr_reader :ui, :kernel
+  attr_reader :ui, :db, :kernel
 
   def bye
     ui.bye
+  end
+
+  def close
+    db.close
   end
 
   def exit
@@ -26,6 +31,7 @@ class Terminator < Action
 
   def terminate
     bye
+    close
     exit
   end
 

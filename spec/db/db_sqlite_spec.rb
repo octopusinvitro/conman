@@ -2,7 +2,8 @@ require 'db/db_sqlite'
 
 describe DBSQLite do
 
-  let (:db)      {described_class.new(":memory:", "tablename", ["name", "address"])}
+  let (:sqlite)  {SQLite3::Database.new ":memory:"}
+  let (:db)      {described_class.new(sqlite, "tablename", ["name", "address"])}
   let (:contact) {{"name" => "a name", "address" => "an address"}}
 
   it "returns an empty array if database is empty" do
@@ -78,6 +79,11 @@ describe DBSQLite do
     db.add(contact)
     id = db.at(0)["id"]
     expect(db.index_of_id(id)).to eq(0)
+  end
+
+  it "closes the database" do
+    db.close
+    expect(sqlite.closed?).to eq(true)
   end
 
   def contact_with_id(id)

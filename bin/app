@@ -22,16 +22,16 @@ require 'conman'
 ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 
-path  = "contacts.db"
-table = "contacts"
-db    = DBSQLite.new(path, table, ui.contact_fields)
+sqlite = SQLite3::Database.new "contacts.db"
+table  = "contacts"
+db     = DBSQLite.new(sqlite, table, ui.contact_fields)
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],
   [UI::ADD,    Creator.new(ui, db)],
   [UI::SEARCH, Finder.new(ui, db)],
   [UI::UPDATE, Updater.new(ui, db)],
-  [UI::EXIT,   Terminator.new(ui)]
+  [UI::EXIT,   Terminator.new(ui, db)]
 ]
 
 menu   = Menu.new(ui, actions.map { |action| action.first })

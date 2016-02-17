@@ -4,12 +4,18 @@ require 'actions/kernel_fake'
 describe Terminator do
 
   let (:ui)         {instance_double(UI).as_null_object}
+  let (:db)         {instance_double(DB).as_null_object}
   let (:kernel)     {KernelFake.new}
-  let (:terminator) {described_class.new(ui, kernel)}
+  let (:terminator) {described_class.new(ui, db, kernel)}
 
   it "prints a goodbye message" do
     terminator.run
     expect(ui).to have_received(:bye).once
+  end
+
+  it "closes database on exit" do
+    terminator.run
+    expect(db).to have_received(:close).once
   end
 
   it "exits the program when called" do
