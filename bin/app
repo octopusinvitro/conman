@@ -8,7 +8,7 @@ require 'ui/validator'
 
 require 'db/reader'
 require 'db/writer'
-require 'db/db_file'
+require 'db/db_sqlite'
 
 require 'actions/lister'
 require 'actions/creator'
@@ -21,9 +21,9 @@ require 'conman'
 
 ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
-path = "./contacts"
-file = File.new(path, "a+")
-db   = DBFile.new(Reader.new(file), Writer.new(file))
+
+path = "contacts.db"
+db   = DBSQLite.new(path)
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],

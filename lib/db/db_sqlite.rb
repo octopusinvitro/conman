@@ -28,6 +28,8 @@ class DBSQLite < DB
   end
 
   def update(contact)
+    sql = "UPDATE contacts SET name='" << contact["name"] << "', address='" << contact["address"] << "', phone='" << contact["phone"] << "', email='" << contact["email"] << "', notes='" << contact["notes"] << "' WHERE id=" << contact["id"].to_s
+    sqlite.execute sql
   end
 
   def search(term)

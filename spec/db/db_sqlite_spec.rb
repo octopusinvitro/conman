@@ -15,10 +15,10 @@ describe DBSQLite do
   end
 
   it "retrieves all contacts" do
+    db.add(contact)
+    db.add(contact)
+    db.add(contact)
     contacts = [contact_with_id(1), contact_with_id(2), contact_with_id(3)]
-    db.add(contact)
-    db.add(contact)
-    db.add(contact)
     expect(db.all).to eq(contacts)
     expect(db.size).to eq(3)
   end
@@ -36,6 +36,14 @@ describe DBSQLite do
   it "gets one contact if there are contacts and the index is valid" do
     db.add(contact)
     expect(db.at(0)).to eq(contact_with_id(1))
+  end
+
+  it "updates a contact if a contact with the same id is passed" do
+    db.add(contact)
+    contact["name"] = "new name"
+    db.update(contact_with_id(1))
+    expect(db.size).to eq(1)
+    expect(db.at(0)["name"]).to eq("new name")
   end
 
   def contact_with_id(id)
