@@ -74,6 +74,12 @@ describe DBSQLite do
     expect(db.search("address")).to eq(db.all)
   end
 
+  it "finds the index of a contact with the same id as another" do
+    db.add(contact)
+    id = db.at(0)["id"]
+    expect(db.index_of_id(id)).to eq(0)
+  end
+
   def contact_with_id(id)
     new_contact       = {}
     new_contact["id"] = id

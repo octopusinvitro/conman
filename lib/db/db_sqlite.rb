@@ -39,6 +39,7 @@ class DBSQLite < DB
   end
 
   def index_of_id(id)
+    all.index { |contact| contact["id"] == id }
   end
 
   private
