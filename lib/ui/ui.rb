@@ -79,12 +79,12 @@ class UI
     ask_for(SEARCH_TERM)
   end
 
-  def ask_for_contact_to_expand(size)
-    ask_for_valid_index(EXPAND_CONTACT, size) - 1
+  def ask_for_contact_to_expand(contacts_count)
+    ask_for_valid_index(EXPAND_CONTACT, contacts_count) - 1
   end
 
-  def ask_for_contact_to_edit(size)
-    ask_for_valid_index(EDIT_CONTACT, size) - 1
+  def ask_for_contact_to_edit(contacts_count)
+    ask_for_valid_index(EDIT_CONTACT, contacts_count) - 1
   end
 
   def ask_for_field_to_edit
@@ -183,11 +183,11 @@ class UI
     console.read.chomp
   end
 
-  def ask_for_valid_index(question, size)
+  def ask_for_valid_index(question, contacts_count)
     input = ""
     loop do
       input = ask_for(question)
-      break if valid_index?(size, input)
+      break if valid_index?(contacts_count, input)
       error_wrong_input
     end
     Integer(input)
@@ -203,8 +203,8 @@ class UI
     input
   end
 
-  def valid_index?(size, input)
-    validator.valid_index?(size, input)
+  def valid_index?(contacts_count, input)
+    validator.valid_index?(contacts_count, input)
   end
 
   def valid_field?(field, input)

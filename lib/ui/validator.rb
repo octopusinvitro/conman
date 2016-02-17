@@ -1,7 +1,7 @@
 class Validator
 
-  def valid_index?(size, input)
-    valid_indexes(size).include? input
+  def valid_index?(count, input)
+    valid_indexes(count).include? input
   end
 
   def valid_field?(field, input)
@@ -10,9 +10,9 @@ class Validator
 
   private
 
-  def valid_indexes(size)
+  def valid_indexes(count)
     inputs = []
-    (1..size).each { |i| inputs << i.to_s }
+    (1..count).each { |i| inputs << i.to_s }
     inputs
   end
 
