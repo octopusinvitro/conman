@@ -44,7 +44,7 @@ class UI
   ERROR_NO_CONTACTS = "\nNo contacts were found."
   TRY_AGAIN         = " Please try again: "
   ERROR_WRONG_INPUT = "ERROR: Wrong input." << TRY_AGAIN
-  ERROR_WRONG_PHONE = "ERROR: Wrong phone. Must be 11 digits and all numbers" << TRY_AGAIN
+  ERROR_WRONG_PHONE = "ERROR: Wrong phone. Must be 11 digits and all numbers." << TRY_AGAIN
   ERROR_WRONG_EMAIL = "ERROR: Wrong email. Must contain an @." << TRY_AGAIN
   FIELDS_TO_ERRORS = {
     "phone"   => ERROR_WRONG_PHONE,

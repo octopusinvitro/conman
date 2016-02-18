@@ -15,7 +15,7 @@ class DBSQLite < DB
   end
 
   def all
-    contacts = sqlite.execute "SELECT * FROM " << table
+    contacts = sqlite.execute "SELECT * FROM #{table}"
     contacts.map { |contact| Hash[columns_with_id.zip(contact)] }
   end
 
@@ -24,12 +24,12 @@ class DBSQLite < DB
   end
 
   def add(contact)
-    sql = "INSERT INTO " << table << field_columns << " VALUES(" << field_values(contact) << ")"
+    sql = "INSERT INTO #{table} #{field_columns} VALUES(#{field_values(contact)})"
     sqlite.execute sql
   end
 
   def update(contact)
-    sql = "UPDATE " << table << " SET " << field_setters(contact) << " WHERE id=" << contact["id"].to_s
+    sql = "UPDATE #{table} SET #{field_setters(contact)} WHERE id=#{contact["id"]}"
     sqlite.execute sql
   end
 
@@ -50,7 +50,7 @@ class DBSQLite < DB
   attr_reader :sqlite, :table, :columns
 
   def create_table
-    sql = "CREATE TABLE IF NOT EXISTS " << table << "(id INTEGER PRIMARY KEY, " << fields << ")"
+    sql = "CREATE TABLE IF NOT EXISTS #{table} (id INTEGER PRIMARY KEY, #{fields})"
     sqlite.execute sql
   end
 
@@ -59,26 +59,26 @@ class DBSQLite < DB
   end
 
   def fields
-    fields = ""
-    columns.each { |column| fields << column << " TEXT, " }
-    fields.chomp(", ")
+    cols = ""
+    columns.each { |column| cols << "#{column} TEXT, " }
+    cols.chomp(", ")
   end
 
   def field_columns
-    fields = "("
-    columns.each { |column| fields << column << "," }
-    fields.chomp(",") << ")"
+    cols = "("
+    columns.each { |column| cols << "#{column}, " }
+    cols.chomp(", ") << ")"
   end
 
   def field_values(contact)
-    values = "'"
-    columns.each { |column| values << contact[column] << "','" }
-    values.chomp("','") << "'"
+    values = ""
+    columns.each { |column| values << "'#{contact[column]}', " }
+    values.chomp(", ")
   end
 
   def field_setters(contact)
     setters = ""
-    columns.each { |column| setters << column << "='" << contact[column] << "', " }
+    columns.each { |column| setters << "#{column}='#{contact[column]}', " }
     setters.chomp(", ")
   end
 
