@@ -2,9 +2,9 @@ require 'db/db_sqlite'
 
 describe DBSQLite do
 
-  let (:sqlite)  {SQLite3::Database.new ":memory:"}
-  let (:db)      {described_class.new(sqlite, "tablename", ["name", "address"])}
-  let (:contact) {{"name" => "a name", "address" => "an address"}}
+  let(:sqlite)  {SQLite3::Database.new ":memory:"}
+  let(:db)      {described_class.new(sqlite, "tablename", ["name", "address"])}
+  let(:contact) {{"name" => "a name", "address" => "an address"}}
 
   it "returns an empty array if database is empty" do
     expect(db.all).to eq([])
@@ -49,29 +49,13 @@ describe DBSQLite do
 
   it "finds one contact given an exact term" do
     db.add(contact)
-
-    contact2 = contact
-    contact2["address"] = "address2"
-    db.add(contact2)
-
-    contact3 = contact
-    contact3["address"] = "address3"
-    db.add(contact3)
-
-    expect(db.search("address3")).to eq([db.all.last])
+    db.add(contact_with_address("address2"))
+    expect(db.search("address2")).to eq([db.all.last])
   end
 
   it "finds several contacts given an inexact term" do
     db.add(contact)
-
-    contact2 = contact
-    contact2["address"] = "address2"
-    db.add(contact2)
-
-    contact3 = contact
-    contact3["address"] = "address3"
-    db.add(contact3)
-
+    db.add(contact_with_address("address2"))
     expect(db.search("address")).to eq(db.all)
   end
 
@@ -90,6 +74,12 @@ describe DBSQLite do
     new_contact       = {}
     new_contact["id"] = id
     new_contact.merge!(contact)
+  end
+
+  def contact_with_address(address)
+    contact2 = contact
+    contact2["address"] = address
+    contact2
   end
 
 end

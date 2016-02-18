@@ -90,7 +90,6 @@ describe DBFile do
     contacts = [
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
-      {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
     allow(jsonfile).to receive(:read_json).and_return(contacts)
     expect(db.search("address1")).to eq([contacts.first])
@@ -100,7 +99,6 @@ describe DBFile do
     contacts = [
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
-      {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
     allow(jsonfile).to receive(:read_json).and_return(contacts)
     expect(db.search("address")).to eq(contacts)
