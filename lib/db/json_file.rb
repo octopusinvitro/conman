@@ -1,24 +1,24 @@
 require 'json'
 
-class FileHandler
+class JSONFile
 
   def initialize(file)
     @file = file
   end
 
-  def read
+  def read_json
     file.rewind
     parse(file.read)
   end
 
-  def write(contacts)
+  def write_json(contacts)
     file.truncate(0)
     file.write(contacts.to_json)
     file.flush
   end
 
   def close
-    file.close if file
+    file.close
   end
 
   private
