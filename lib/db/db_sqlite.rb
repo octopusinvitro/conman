@@ -42,7 +42,7 @@ class DBSQLite < DB
   end
 
   def close
-    sqlite.close if sqlite
+    sqlite.close
   end
 
   private
@@ -55,7 +55,7 @@ class DBSQLite < DB
   end
 
   def columns_with_id
-    (["id"] << columns).flatten!
+    (["id"] << columns).flatten
   end
 
   def fields
