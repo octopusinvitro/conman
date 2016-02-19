@@ -3,9 +3,9 @@ require 'ui/ui'
 
 describe UI do
 
-  let(:input)     {StringIO.new}
-  let(:output)    {StringIO.new}
-  let(:ui)        {described_class.new(Console.new(input, output), Validator.new)}
+  let(:input)  {StringIO.new}
+  let(:output) {StringIO.new}
+  let(:ui)     {described_class.new(Console.new(input, output), Validator.new)}
 
   it "prints the prompt message for adding another contact" do
     input.string = "\n"
