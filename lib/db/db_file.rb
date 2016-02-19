@@ -2,8 +2,8 @@ require 'db/db'
 
 class DBFile < DB
 
-  def initialize(jsonfile)
-    @jsonfile = jsonfile
+def initialize(file)
+    @file = file
   end
 
   def size
@@ -11,7 +11,7 @@ class DBFile < DB
   end
 
   def all
-    jsonfile.read_json
+    file.read_json
   end
 
   def at(index)
@@ -19,11 +19,11 @@ class DBFile < DB
   end
 
   def add(contact)
-    jsonfile.write_json(all << add_id_to(contact))
+    file.write_json(all << add_id_to(contact))
   end
 
   def update(contact)
-    jsonfile.write_json(update_with(add_id_to(contact)))
+    file.write_json(update_with(add_id_to(contact)))
   end
 
   def search(term)
@@ -35,12 +35,12 @@ class DBFile < DB
   end
 
   def close
-    jsonfile.close
+    file.close
   end
 
   private
 
-  attr_reader :jsonfile
+  attr_reader :file
 
   def invalid?(index)
     index.nil? ? true : all[index].nil?

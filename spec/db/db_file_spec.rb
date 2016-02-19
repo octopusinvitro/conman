@@ -2,12 +2,12 @@ require 'db/db_file'
 
 describe DBFile do
 
-  let(:jsonfile) {instance_double(JSONFile).as_null_object}
-  let(:db)       {described_class.new(jsonfile)}
-  let(:contact)  {{"name" => "name", "address" => "address"}}
+  let(:file)    {instance_double(JSONFile).as_null_object}
+  let(:db)      {described_class.new(file)}
+  let(:contact) {{"name" => "name", "address" => "address"}}
 
   before :each do
-    allow(jsonfile).to receive(:read_json).and_return([])
+    allow(file).to receive(:read_json).and_return([])
   end
 
   it "returns an empty list of contacts if there are no contents in the file" do
@@ -20,7 +20,7 @@ describe DBFile do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(jsonfile).to receive(:read_json).and_return(contacts)
+    allow(file).to receive(:read_json).and_return(contacts)
     expect(db.all).to eq(contacts)
   end
 
@@ -45,7 +45,7 @@ describe DBFile do
     db.add(contact)
     expect(db.size).to eq(1)
     expect(db.at(0)).to eq(contact_with_id)
-    expect(jsonfile).to have_received(:write_json).once.with([contact_with_id])
+    expect(file).to have_received(:write_json).once.with([contact_with_id])
   end
 
   it "first contact has an id of 1" do
@@ -91,7 +91,7 @@ describe DBFile do
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
     ]
-    allow(jsonfile).to receive(:read_json).and_return(contacts)
+    allow(file).to receive(:read_json).and_return(contacts)
     expect(db.search("address1")).to eq([contacts.first])
   end
 
@@ -100,13 +100,13 @@ describe DBFile do
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
     ]
-    allow(jsonfile).to receive(:read_json).and_return(contacts)
+    allow(file).to receive(:read_json).and_return(contacts)
     expect(db.search("address")).to eq(contacts)
   end
 
   it "closes the database" do
     db.close
-    expect(jsonfile).to have_received(:close).once
+    expect(file).to have_received(:close).once
   end
 
 end
