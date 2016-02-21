@@ -57,7 +57,11 @@ def initialize(file)
   end
 
   def id_of_new
-    size == 0 ? 1 : at(size - 1)["id"] + 1
+    size == 0 ? 1 : id_of_last + 1
+  end
+
+  def id_of_last
+    at(size - 1)["id"]
   end
 
   def update_with(contact)
