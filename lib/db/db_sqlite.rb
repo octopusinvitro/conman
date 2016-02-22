@@ -1,7 +1,6 @@
-require 'db/db'
 require 'sqlite3'
 
-class DBSQLite < DB
+class DBSQLite
 
   def initialize(sqlite)
     @sqlite  = sqlite

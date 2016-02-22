@@ -8,7 +8,7 @@ describe Finder do
     {"id" => 3, "name" => "name3", "address" => "address3"}
   ]}
   let (:ui)     {instance_double(UI).as_null_object}
-  let (:db)     {instance_double(DB).as_null_object}
+  let (:db)     {instance_double(DBFile).as_null_object}
   let (:finder) {described_class.new(ui, db)}
 
   before :each do

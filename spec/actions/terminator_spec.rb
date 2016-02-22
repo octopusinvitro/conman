@@ -4,7 +4,7 @@ require 'actions/kernel_fake'
 describe Terminator do
 
   let (:ui)         {instance_double(UI).as_null_object}
-  let (:db)         {instance_double(DB).as_null_object}
+  let (:db)         {instance_double(DBFile).as_null_object}
   let (:kernel)     {KernelFake.new}
   let (:terminator) {described_class.new(ui, db, kernel)}
 

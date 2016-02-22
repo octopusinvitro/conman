@@ -3,7 +3,7 @@ require 'actions/updater'
 describe Updater do
 
   let (:ui)       {instance_double(UI).as_null_object}
-  let (:db)       {instance_double(DB).as_null_object}
+  let (:db)       {instance_double(DBFile).as_null_object}
   let (:updater)  {described_class.new(ui, db)}
   let (:contacts) {[
     {"id" => 1, "name" => "name1", "address" => "address1"},

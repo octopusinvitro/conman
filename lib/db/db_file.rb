@@ -1,6 +1,4 @@
-require 'db/db'
-
-class DBFile < DB
+class DBFile
 
 def initialize(file)
     @file = file
