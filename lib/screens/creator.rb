@@ -1,4 +1,4 @@
-require 'actions/action'
+require 'screens/action'
 
 class Creator < Action
 
