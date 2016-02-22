@@ -3,10 +3,10 @@ require 'sqlite3'
 
 class DBSQLite < DB
 
-  def initialize(sqlite, table, columns)
+  def initialize(sqlite)
     @sqlite  = sqlite
-    @table   = table
-    @columns = columns
+    @table   = "contacts"
+    @columns = ["name", "address", "phone", "email", "notes"]
     create_table
   end
 
