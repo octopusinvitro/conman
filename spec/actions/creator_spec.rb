@@ -3,7 +3,7 @@ require 'actions/creator'
 describe Creator do
 
   let (:ui)       {instance_double(UI).as_null_object}
-  let (:db)       {instance_double(DB).as_null_object}
+  let (:db)       {instance_double(DBFile).as_null_object}
   let (:creator)  {described_class.new(ui, db)}
   let (:contact)  {{"id" => 1, "name" => "a name", "address" => "an address", "phone" => "123456", "email" => "email@mail.com", "notes" => "some notes"}}
 
