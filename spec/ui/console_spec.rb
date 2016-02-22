@@ -12,7 +12,7 @@ describe Console  do
 
   it "prints a line to the console" do
     output  = StringIO.new
-    console = Console.new(nil, output)
+    console = described_class.new(nil, output)
     console.writeln("boo")
 
     expect(output.string).to eq("boo\n")
@@ -20,7 +20,7 @@ describe Console  do
 
   it "reads from console" do
     input   = StringIO.new("hello\n")
-    console = Console.new(input, nil)
+    console = described_class.new(input, nil)
 		
     expect(console.read()).to eq("hello\n")
   end

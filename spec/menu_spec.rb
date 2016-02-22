@@ -1,3 +1,4 @@
+require 'ui/ui'
 require 'menu'
 
 describe Menu do

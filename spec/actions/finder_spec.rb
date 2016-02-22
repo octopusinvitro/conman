@@ -1,3 +1,5 @@
+require 'ui/ui'
+require 'db/db_file'
 require 'actions/finder'
 
 describe Finder do

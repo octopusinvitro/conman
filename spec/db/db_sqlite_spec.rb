@@ -1,3 +1,4 @@
+require 'sqlite3'
 require 'db/db_sqlite'
 
 describe DBSQLite do

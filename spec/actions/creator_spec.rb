@@ -1,6 +1,6 @@
-require 'actions/creator'
 require 'ui/ui'
 require 'db/db_file'
+require 'actions/creator'
 
 describe Creator do
 

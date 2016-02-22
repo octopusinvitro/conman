@@ -1,4 +1,5 @@
 require 'actions/action'
+require 'ui/ui'
 
 describe Action do
 
