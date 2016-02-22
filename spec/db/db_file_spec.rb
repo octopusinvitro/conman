@@ -1,4 +1,5 @@
 require 'db/db_file'
+require 'db/json_file'
 
 describe DBFile do
 

@@ -1,4 +1,5 @@
 require 'ui/console'
+require 'ui/validator'
 require 'ui/ui'
 
 describe UI do

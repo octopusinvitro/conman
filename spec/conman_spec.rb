@@ -1,3 +1,6 @@
+require 'menu'
+require 'actions/lister'
+require 'actions/terminator'
 require 'conman'
 
 describe Conman do
