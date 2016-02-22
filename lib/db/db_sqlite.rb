@@ -24,12 +24,12 @@ class DBSQLite < DB
   end
 
   def add(contact)
-    sql = "INSERT INTO #{table} #{field_columns} VALUES(#{field_values(contact)})"
+    sql = "INSERT INTO #{table} (name, address, phone, email, notes) VALUES('#{contact["name"]}', '#{contact["address"]}', '#{contact["phone"]}', '#{contact["email"]}', '#{contact["notes"]}')"
     sqlite.execute sql
   end
 
   def update(contact)
-    sql = "UPDATE #{table} SET #{field_setters(contact)} WHERE id=#{contact["id"]}"
+    sql = "UPDATE #{table} SET name='#{contact["name"]}', address='#{contact["address"]}', phone='#{contact["phone"]}', email='#{contact["email"]}', notes='#{contact["notes"]}' WHERE id=#{contact["id"]}"
     sqlite.execute sql
   end
 
@@ -50,36 +50,12 @@ class DBSQLite < DB
   attr_reader :sqlite, :table, :columns
 
   def create_table
-    sql = "CREATE TABLE IF NOT EXISTS #{table} (id INTEGER PRIMARY KEY, #{fields})"
+    sql = "CREATE TABLE IF NOT EXISTS #{table} (id INTEGER PRIMARY KEY, name TEXT, address TEXT, phone TEXT, email TEXT, notes TEXT)"
     sqlite.execute sql
   end
 
   def columns_with_id
     (["id"] << columns).flatten
-  end
-
-  def fields
-    cols = ""
-    columns.each { |column| cols << "#{column} TEXT, " }
-    cols.chomp(", ")
-  end
-
-  def field_columns
-    cols = "("
-    columns.each { |column| cols << "#{column}, " }
-    cols.chomp(", ") << ")"
-  end
-
-  def field_values(contact)
-    values = ""
-    columns.each { |column| values << "'#{contact[column]}', " }
-    values.chomp(", ")
-  end
-
-  def field_setters(contact)
-    setters = ""
-    columns.each { |column| setters << "#{column}='#{contact[column]}', " }
-    setters.chomp(", ")
   end
 
 end
