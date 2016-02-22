@@ -23,8 +23,7 @@ ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
 
 sqlite = SQLite3::Database.new "contacts.db"
-table  = "contacts"
-db     = DBSQLite.new(sqlite, table, ui.contact_fields)
+db     = DBSQLite.new(sqlite)
 
 actions = [
   [UI::LIST,   Lister.new(ui, db)],

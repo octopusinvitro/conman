@@ -3,8 +3,8 @@ require 'db/db_sqlite'
 describe DBSQLite do
 
   let(:sqlite)  {SQLite3::Database.new ":memory:"}
-  let(:db)      {described_class.new(sqlite, "tablename", ["name", "address"])}
-  let(:contact) {{"name" => "a name", "address" => "an address"}}
+  let(:db)      {described_class.new(sqlite)}
+  let(:contact) {{"name" => "a name", "address" => "an address", "phone" => "1234", "email" => "contact@email.com", "notes" => "some notes"}}
 
   it "returns an empty array if database is empty" do
     expect(db.all).to eq([])
