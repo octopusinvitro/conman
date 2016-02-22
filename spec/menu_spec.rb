@@ -2,9 +2,9 @@ require 'menu'
 
 describe Menu do
 
-  let (:ui)      {instance_double(UI).as_null_object}
-  let (:actions) {["one", "two"]}
-  let (:menu)    {described_class.new(ui, actions)}
+  let(:ui)      {instance_double(UI).as_null_object}
+  let(:actions) {["one", "two"]}
+  let(:menu)    {described_class.new(ui, actions)}
 
   it "clears the screen" do
     menu.clear

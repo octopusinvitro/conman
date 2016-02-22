@@ -1,11 +1,13 @@
 require 'actions/creator'
+require 'ui/ui'
+require 'db/db_file'
 
 describe Creator do
 
-  let (:ui)       {instance_double(UI).as_null_object}
-  let (:db)       {instance_double(DBFile).as_null_object}
-  let (:creator)  {described_class.new(ui, db)}
-  let (:contact)  {{"id" => 1, "name" => "a name", "address" => "an address", "phone" => "123456", "email" => "email@mail.com", "notes" => "some notes"}}
+  let(:ui)       {instance_double(UI).as_null_object}
+  let(:db)       {instance_double(DBFile).as_null_object}
+  let(:creator)  {described_class.new(ui, db)}
+  let(:contact)  {{"id" => 1, "name" => "a name", "address" => "an address", "phone" => "123456", "email" => "email@mail.com", "notes" => "some notes"}}
 
   before :each do
     allow(ui).to receive(:ask_for_another).and_return(false)
