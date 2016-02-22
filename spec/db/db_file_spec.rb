@@ -21,7 +21,9 @@ describe DBFile do
       {"id" => 2, "name" => "name2", "address" => "address2"},
       {"id" => 3, "name" => "name3", "address" => "address3"}
     ]
-    allow(file).to receive(:read_json).and_return(contacts)
+    db.add(contacts[0])
+    db.add(contacts[1])
+    db.add(contacts[2])
     expect(db.all).to eq(contacts)
   end
 
@@ -46,7 +48,6 @@ describe DBFile do
     db.add(contact)
     expect(db.size).to eq(1)
     expect(db.at(0)).to eq(contact_with_id)
-    expect(file).to have_received(:write_json).once.with([contact_with_id])
   end
 
   it "first contact has an id of 1" do
@@ -92,7 +93,8 @@ describe DBFile do
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
     ]
-    allow(file).to receive(:read_json).and_return(contacts)
+    db.add(contacts[0])
+    db.add(contacts[1])
     expect(db.search("address1")).to eq([contacts.first])
   end
 
@@ -101,13 +103,23 @@ describe DBFile do
       {"id" => 1, "name" => "name1", "address" => "address1"},
       {"id" => 2, "name" => "name2", "address" => "address2"},
     ]
-    allow(file).to receive(:read_json).and_return(contacts)
+    db.add(contacts[0])
+    db.add(contacts[1])
     expect(db.search("address")).to eq(contacts)
   end
 
-  it "closes the database" do
+  it "closes the database - as a mock expectation" do
+    file = instance_double(JSONFile)
+    db = described_class.new(file)
+    expect(file).to receive(:close)
     db.close
-    expect(file).to have_received(:close).once
+  end
+
+  it "closes the database - with a spy assertion" do
+    injected_resource = instance_double(JSONFile).as_null_object
+    db = described_class.new(injected_resource)
+    db.close
+    expect(injected_resource).to have_received(:close)
   end
 
 end
