@@ -2,7 +2,7 @@ require 'db/db_file'
 
 describe DBFile do
 
-  let(:file)    {instance_double(JSONFile).as_null_object}
+  let(:file)    {JSONFile.new(StringIO.new)}
   let(:db)      {described_class.new(file)}
   let(:contact) {{"name" => "name", "address" => "address"}}
 

@@ -8,7 +8,7 @@ describe Reader do
     {"name":"name3","address":"address3"}
   ]'}
 
-  let (:contacts) {[
+  let(:contacts) {[
     {"name"=>"name1", "address"=>"address1"},
     {"name"=>"name2", "address"=>"address2"},
     {"name"=>"name3", "address"=>"address3"}

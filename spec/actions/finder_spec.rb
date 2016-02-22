@@ -2,14 +2,14 @@ require 'actions/finder'
 
 describe Finder do
 
-  let (:contacts) {[
+  let(:contacts) {[
     {"id" => 1, "name" => "name1", "address" => "address1"},
     {"id" => 2, "name" => "name2", "address" => "address2"},
     {"id" => 3, "name" => "name3", "address" => "address3"}
   ]}
-  let (:ui)     {instance_double(UI).as_null_object}
-  let (:db)     {instance_double(DBFile).as_null_object}
-  let (:finder) {described_class.new(ui, db)}
+  let(:ui)     {instance_double(UI).as_null_object}
+  let(:db)     {instance_double(DBFile).as_null_object}
+  let(:finder) {described_class.new(ui, db)}
 
   before :each do
     allow(db).to receive(:search).and_return(contacts)
