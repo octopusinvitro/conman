@@ -1,7 +1,7 @@
 require 'ui/ui'
 require 'db/db_file'
-require 'actions/kernel_fake'
-require 'actions/terminator'
+require 'screens/kernel_fake'
+require 'screens/terminator'
 
 describe Terminator do
 

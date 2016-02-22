@@ -1,6 +1,6 @@
 require 'menu'
-require 'actions/lister'
-require 'actions/terminator'
+require 'screens/lister'
+require 'screens/terminator'
 require 'conman'
 
 describe Conman do

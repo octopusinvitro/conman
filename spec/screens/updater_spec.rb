@@ -1,6 +1,6 @@
 require 'ui/ui'
 require 'db/db_file'
-require 'actions/updater'
+require 'screens/updater'
 
 describe Updater do
 
