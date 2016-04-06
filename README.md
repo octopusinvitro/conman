@@ -1,6 +1,6 @@
 ![travis badge](https://travis-ci.org/me-stevens/conman.svg?branch=master "Logo Title Text 1")
 
-# Contact Management app (ConMan)
+# Contact Management app (ConMan&trade;)
 
 This is a simple console app that keeps a list of contacts. You can:
 
@@ -42,3 +42,8 @@ in your `.bash_profile`.
 * `bin `: Executables
 * `lib `: Sources
 * `spec`: Tests
+
+## License
+
+[![License](https://img.shields.io/badge/gnu-license-green.svg?style=flat)](https://opensource.org/licenses/GPL-2.0)
+GNU License
