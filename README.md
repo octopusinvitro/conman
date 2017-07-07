@@ -1,4 +1,5 @@
-![travis badge](https://travis-ci.org/me-stevens/conman.svg?branch=master "Logo Title Text 1")
+![travis badge](https://travis-ci.org/octopusinvitro/conman.svg?branch=master "Conman at Travis")
+[![BCH compliance](https://bettercodehub.com/edge/badge/octopusinvitro/conman?branch=master)](https://bettercodehub.com/)
 
 # Contact Management app (ConMan&trade;)
 
