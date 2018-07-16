@@ -1,0 +1,14 @@
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.5.1
+
+Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Lint/ScriptPermission:
+  Exclude:
+    - 'bin/*'

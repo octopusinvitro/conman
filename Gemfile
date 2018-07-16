@@ -1,8 +1,12 @@
 source 'https://rubygems.org'
+ruby '2.5.1'
+
+gem 'sqlite3'
 
 group :test do
-  gem 'rake'
-  gem 'rspec',  '>=3.4.0'
+  gem 'coveralls', require: false
   gem 'pry'
-  gem 'sqlite3'
+  gem 'rake'
+  gem 'rspec'
+  gem 'rubocop', require: false
 end

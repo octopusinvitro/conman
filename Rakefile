@@ -1,7 +1,10 @@
-begin
-  require 'rspec/core/rake_task'
-  RSpec::Core::RakeTask.new(:spec)
-rescue LoadError
-end
+# frozen_string_literal: true
 
-task :default => :spec
+require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new
+RSpec::Core::RakeTask.new(:spec)
+
+task(:default).clear
+task default: %i[spec rubocop]
