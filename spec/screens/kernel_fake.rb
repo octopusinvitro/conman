@@ -1,5 +1,6 @@
-class KernelFake
+# frozen_string_literal: true
 
+class KernelFake
   def initialize
     @exit_was_called = false
   end
@@ -15,5 +16,4 @@ class KernelFake
   private
 
   attr_reader :exit_was_called
-
 end

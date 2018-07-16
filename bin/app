@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
@@ -21,8 +22,7 @@ require 'conman'
 
 ui = UI.new(Console.new($stdin, $stdout), Validator.new)
 
-
-sqlite = SQLite3::Database.new "contacts.db"
+sqlite = SQLite3::Database.new 'contacts.db'
 db     = DBSQLite.new(sqlite)
 
 actions = [
@@ -33,6 +33,6 @@ actions = [
   [UI::EXIT,   Terminator.new(ui, db)]
 ]
 
-menu   = Menu.new(ui, actions.map { |action| action.first })
-conman = Conman.new(menu, actions.map { |action| action.last })
+menu   = Menu.new(ui, actions.map(&:first))
+conman = Conman.new(menu, actions.map(&:last))
 conman.start

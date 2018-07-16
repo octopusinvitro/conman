@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class JSONFile
-
   def initialize(file)
     @file = file
   end
@@ -26,7 +27,6 @@ class JSONFile
   attr_reader :file
 
   def parse(contacts)
-    contacts == '' ? [] : JSON.parse(contacts)
+    contacts.empty? ? [] : JSON.parse(contacts)
   end
-
 end

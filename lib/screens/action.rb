@@ -1,6 +1,7 @@
-class Action
+# frozen_string_literal: true
 
-  def initialize(ui)
+class Action
+  def initialize(ui) # rubocop:disable Naming/UncommunicativeMethodParamName
     @ui = ui
   end
 
@@ -15,5 +16,4 @@ class Action
   def clear
     ui.clear
   end
-
 end

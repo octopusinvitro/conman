@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 require 'sqlite3'
 
 class DBSQLite
-
   def initialize(sqlite)
     @sqlite  = sqlite
-    @table   = "contacts"
-    @columns = ["name", "address", "phone", "email", "notes"]
+    @table   = 'contacts'
+    @columns = %w[name address phone email notes]
     create_table
   end
 
@@ -23,21 +24,28 @@ class DBSQLite
   end
 
   def add(contact)
-    sql = "INSERT INTO #{table} (name, address, phone, email, notes) VALUES('#{contact["name"]}', '#{contact["address"]}', '#{contact["phone"]}', '#{contact["email"]}', '#{contact["notes"]}')"
+    sql = "INSERT INTO #{table} (name, address, phone, email, notes) " \
+          "VALUES('#{contact['name']}', '#{contact['address']}', " \
+          "'#{contact['phone']}', '#{contact['email']}', '#{contact['notes']}')"
     sqlite.execute sql
   end
 
   def update(contact)
-    sql = "UPDATE #{table} SET name='#{contact["name"]}', address='#{contact["address"]}', phone='#{contact["phone"]}', email='#{contact["email"]}', notes='#{contact["notes"]}' WHERE id=#{contact["id"]}"
+    sql = "UPDATE #{table} SET name='#{contact['name']}', " \
+    "address='#{contact['address']}', phone='#{contact['phone']}', " \
+    "email='#{contact['email']}', notes='#{contact['notes']}' " \
+    "WHERE id=#{contact['id']}"
     sqlite.execute sql
   end
 
   def search(term)
-    all.select { |contact| contact.any? {|key, val| val.to_s.include?(term)} }
+    all.select do |contact|
+      contact.any? { |_key, val| val.to_s.include?(term) }
+    end
   end
 
   def index_of_id(id)
-    all.index { |contact| contact["id"] == id }
+    all.index { |contact| contact['id'] == id }
   end
 
   def close
@@ -49,12 +57,13 @@ class DBSQLite
   attr_reader :sqlite, :table, :columns
 
   def create_table
-    sql = "CREATE TABLE IF NOT EXISTS #{table} (id INTEGER PRIMARY KEY, name TEXT, address TEXT, phone TEXT, email TEXT, notes TEXT)"
+    sql = "CREATE TABLE IF NOT EXISTS #{table} " \
+          '(id INTEGER PRIMARY KEY, name TEXT, address TEXT, phone TEXT, ' \
+          'email TEXT, notes TEXT)'
     sqlite.execute sql
   end
 
   def columns_with_id
-    (["id"] << columns).flatten
+    (['id'] << columns).flatten
   end
-
 end

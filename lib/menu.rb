@@ -1,6 +1,7 @@
-class Menu
+# frozen_string_literal: true
 
-  def initialize(ui, actions)
+class Menu
+  def initialize(ui, actions) # rubocop:disable Naming/UncommunicativeMethodParamName, Metrics/LineLength
     @ui      = ui
     @actions = actions
   end
@@ -10,21 +11,20 @@ class Menu
   end
 
   def ask_menu_option
-  	ui.ask_menu_option(create_menu)
+    ui.ask_menu_option(create_menu)
   end
 
   def create_menu
-  	menu = []
-    (0...actions.size).each { |i| menu << item(i) }
-  	menu
+    menu = []
+    (0...actions.size).each { |index| menu << item(index) }
+    menu
   end
 
   private
 
   attr_reader :ui, :actions
 
-  def item(i)
-    [i + 1, actions[i]]
+  def item(index)
+    [index + 1, actions[index]]
   end
-
 end

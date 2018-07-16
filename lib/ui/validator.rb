@@ -1,5 +1,6 @@
-class Validator
+# frozen_string_literal: true
 
+class Validator
   def valid_index?(count, input)
     valid_indexes(count).include? input
   end
@@ -18,17 +19,16 @@ class Validator
 
   def field_validation_rules(field, input)
     {
-      "phone"   => is_phone_valid?(input),
-      "email"   => is_email_valid?(input)
+      'phone'   => phone_valid?(input),
+      'email'   => email_valid?(input)
     }.fetch(field, true)
   end
 
-  def is_phone_valid?(input)
-    input.size == 11 && /[0-9]/ === input
+  def phone_valid?(input)
+    input.size == 11 && (input =~ /[0-9]/).zero?
   end
 
-  def is_email_valid?(input)
-    input.include?("@")
+  def email_valid?(input)
+    input.include?('@')
   end
-
 end
