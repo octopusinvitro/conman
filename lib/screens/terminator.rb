@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'screens/action'
 
 class Terminator < Action
-
-  def initialize(ui, db, kernel = Kernel)
+  def initialize(ui, db, kernel = Kernel) # rubocop:disable Naming/UncommunicativeMethodParamName, Metrics/LineLength
     @ui     = ui
     @db     = db
     @kernel = kernel
@@ -34,5 +35,4 @@ class Terminator < Action
     close
     exit
   end
-
 end

@@ -1,6 +1,7 @@
-class DBFile
+# frozen_string_literal: true
 
-def initialize(file)
+class DBFile
+  def initialize(file)
     @file = file
   end
 
@@ -25,11 +26,13 @@ def initialize(file)
   end
 
   def search(term)
-    all.select { |contact| contact.any? {|key, val| val.to_s.include?(term)} }
+    all.select do |contact|
+      contact.any? { |_key, val| val.to_s.include?(term) }
+    end
   end
 
   def index_of_id(id)
-    all.index { |contact| contact["id"] == id }
+    all.index { |contact| contact['id'] == id }
   end
 
   def close
@@ -45,25 +48,25 @@ def initialize(file)
   end
 
   def add_id_to(contact)
-    contact.has_key?("id") ? contact : append_id(contact, id_of_new)
+    contact.key?('id') ? contact : append_id(contact, id_of_new)
   end
 
   def append_id(contact, id)
     contact_with_id       = {}
-    contact_with_id["id"] = id
+    contact_with_id['id'] = id
     contact_with_id.merge!(contact)
   end
 
   def id_of_new
-    size == 0 ? 1 : id_of_last + 1
+    size.zero? ? 1 : id_of_last + 1
   end
 
   def id_of_last
-    at(size - 1)["id"]
+    at(size - 1)['id']
   end
 
   def update_with(contact)
-    index = index_of_id(contact["id"])
+    index = index_of_id(contact['id'])
     invalid?(index) ? add_contact(contact) : update_contact(contact, index)
   end
 
@@ -77,5 +80,4 @@ def initialize(file)
     contacts[index] = contact
     contacts
   end
-
 end

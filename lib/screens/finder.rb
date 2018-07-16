@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'screens/action'
 
 class Finder < Action
-
-  def initialize(ui, db)
+  def initialize(ui, db) # rubocop:disable Naming/UncommunicativeMethodParamName
     @ui = ui
     @db = db
   end
@@ -73,5 +74,4 @@ class Finder < Action
     index = ask_for_contact_index(matched.size)
     display([matched[index]])
   end
-
 end

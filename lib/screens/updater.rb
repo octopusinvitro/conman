@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'screens/action'
 
 class Updater < Action
-
-  def initialize(ui, db)
+  def initialize(ui, db) # rubocop:disable Naming/UncommunicativeMethodParamName
     @ui = ui
     @db = db
   end
@@ -84,5 +85,4 @@ class Updater < Action
     contact[field] = ask_for_value_to_edit(field)
     update(contact)
   end
-
 end

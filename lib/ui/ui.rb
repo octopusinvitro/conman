@@ -1,25 +1,26 @@
-class UI
+# frozen_string_literal: true
 
-  LIST   = "List contacts"
-  ADD    = "Add contacts"
-  SEARCH = "Search contacts"
-  UPDATE = "Update contacts"
-  EXIT   = "Exit"
+class UI # rubocop:disable Metrics/ClassLength
+  LIST   = 'List contacts'
+  ADD    = 'Add contacts'
+  SEARCH = 'Search contacts'
+  UPDATE = 'Update contacts'
+  EXIT   = 'Exit'
 
   NAME    = "\nContact name: "
-  ADDRESS = "Contact address: "
-  PHONE   = "Contact phone: "
-  EMAIL   = "Contact email: "
-  NOTES   = "Contact notes: "
+  ADDRESS = 'Contact address: '
+  PHONE   = 'Contact phone: '
+  EMAIL   = 'Contact email: '
+  NOTES   = 'Contact notes: '
   FIELDS_TO_QUESTIONS = {
-    "name"    => NAME,
-    "address" => ADDRESS,
-    "phone"   => PHONE,
-    "email"   => EMAIL,
-    "notes"   => NOTES
-  }
+    'name'    => NAME,
+    'address' => ADDRESS,
+    'phone'   => PHONE,
+    'email'   => EMAIL,
+    'notes'   => NOTES
+  }.freeze
 
-  YES   = "y"
+  YES   = 'y'
   CLEAR = "\033[H\033[2J"
   BYE   = " ConMan wishes you\n    a nice day"
 
@@ -28,11 +29,11 @@ class UI
   SEARCH_TERM  = "\nType search term: "
 
   MENU_OPTION  = "\nChoose a menu option: "
-  SEPARATOR    = "--------------------"
+  SEPARATOR    = '--------------------'
 
   HEADER       = "\nNAME\tADDRESS\tPHONE\t\tEMAIL\tNOTES"
   HEADER_NAMES = "\nINDEX\tNAME"
-  HEADER_WITH_INDEX = "\nINDEX\t" << HEADER[1..-1]
+  HEADER_WITH_INDEX = "\nINDEX\t#{HEADER[1..-1]}"
 
   EXPAND         = "\nDisplay one of these contacts' details? (y/n): "
   EXPAND_CONTACT = "\nChoose a contact to expand: "
@@ -42,14 +43,15 @@ class UI
   ANOTHER_FIELD  = "\nEdit another field? (y/n): "
 
   ERROR_NO_CONTACTS = "\nNo contacts were found."
-  TRY_AGAIN         = " Please try again: "
-  ERROR_WRONG_INPUT = "ERROR: Wrong input." << TRY_AGAIN
-  ERROR_WRONG_PHONE = "ERROR: Wrong phone. Must be 11 digits and all numbers." << TRY_AGAIN
-  ERROR_WRONG_EMAIL = "ERROR: Wrong email. Must contain an @." << TRY_AGAIN
+  TRY_AGAIN         = ' Please try again: '
+  ERROR_WRONG_INPUT = "ERROR: Wrong input. #{TRY_AGAIN}"
+  ERROR_WRONG_PHONE =
+    "ERROR: Wrong phone. Must be 11 digits and all numbers. #{TRY_AGAIN}"
+  ERROR_WRONG_EMAIL = "ERROR: Wrong email. Must contain an @. #{TRY_AGAIN}"
   FIELDS_TO_ERRORS = {
-    "phone"   => ERROR_WRONG_PHONE,
-    "email"   => ERROR_WRONG_EMAIL
-  }
+    'phone'   => ERROR_WRONG_PHONE,
+    'email'   => ERROR_WRONG_EMAIL
+  }.freeze
 
   def initialize(console, validator)
     @console   = console
@@ -78,7 +80,9 @@ class UI
 
   def ask_for_fields
     contact = {}
-    FIELDS_TO_QUESTIONS.each { |field, question| contact[field] = ask_for_valid_field(question, field) }
+    FIELDS_TO_QUESTIONS.each do |field, question|
+      contact[field] = ask_for_valid_field(question, field)
+    end
     contact
   end
 
@@ -111,7 +115,7 @@ class UI
   end
 
   def display_item(item)
-    line = " " << item[0].to_s << ") " << item[1]
+    line = " #{item[0]}) #{item[1]}"
     console.writeln(line)
   end
 
@@ -121,38 +125,43 @@ class UI
   end
 
   def display(contact)
-    values = ""
-    contact.each { |key, value| values << value << "\t" if key != "id" }
-    console.writeln(values)
+    values = contact.map { |key, value| "#{value}\t" if key != 'id' }
+    console.writeln(values.compact.join)
   end
 
   def display_names(contacts)
     console.writeln(HEADER_NAMES)
-    contacts.each_with_index { |contact, index| display_name(index + 1, contact) }
+    contacts.each_with_index do |contact, index|
+      display_name(index + 1, contact)
+    end
   end
 
   def display_name(index, contact)
-    line = "" << index.to_s << "\t" << contact["name"]
+    line = "#{index}\t#{contact['name']}"
     console.writeln(line)
   end
 
   def display_all_with_index(contacts)
     console.writeln(HEADER_WITH_INDEX)
-    contacts.each_with_index { |contact, index| display_with_index(index + 1, contact) }
+    contacts.each_with_index do |contact, index|
+      display_with_index(index + 1, contact)
+    end
   end
 
   def display_with_index(index, contact)
-    values = " " << index.to_s << "\t"
-    contact.each { |key, value| values << value << "\t" if key != "id" }
-    console.writeln(values)
+    start = " #{index}\t"
+    values = contact.map { |key, value| "#{value}\t" if key != 'id' }
+    console.writeln("#{start}#{values.compact.join}")
   end
 
   def display_fields_with_index(contact)
-    contact.each_with_index { |(key, value), index| console.writeln(format_field(index, key, value)) if key != "id" }
+    contact.each_with_index do |(key, value), index|
+      console.writeln(format_field(index, key, value)) if key != 'id'
+    end
   end
 
   def format_field(index, key, value)
-    field = "" << index.to_s << "\t" << key << ": " << value
+    "#{index}\t#{key}: #{value}"
   end
 
   def error_no_contacts
@@ -199,7 +208,7 @@ class UI
   end
 
   def ask_for_valid_index(question, contacts_count)
-    input = ""
+    input = ''
     loop do
       input = ask_for(question)
       break if valid_index?(contacts_count, input)
@@ -209,7 +218,7 @@ class UI
   end
 
   def ask_for_valid_field(question, field)
-    input = ""
+    input = ''
     loop do
       input = ask_for(question)
       break if valid_field?(field, input)
@@ -225,5 +234,4 @@ class UI
   def valid_field?(field, input)
     validator.valid_field?(field, input)
   end
-
 end

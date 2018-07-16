@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'screens/action'
 
 class Creator < Action
-
-  def initialize(ui, db)
+  def initialize(ui, db) # rubocop:disable Naming/UncommunicativeMethodParamName
     @ui = ui
     @db = db
   end
@@ -50,5 +51,4 @@ class Creator < Action
   def display_all
     ui.display_all(all)
   end
-
 end

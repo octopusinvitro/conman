@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class Writer
-
   def initialize(file)
     @file = file
   end
@@ -15,5 +16,4 @@ class Writer
   private
 
   attr_reader :file
-
 end

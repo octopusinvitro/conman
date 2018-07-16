@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'json'
 
 class Reader
-
   def initialize(file)
     @file = file
   end
@@ -18,5 +19,4 @@ class Reader
   def parse(contacts)
     contacts == '' ? [] : JSON.parse(contacts)
   end
-
 end

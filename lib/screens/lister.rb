@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'screens/action'
 
 class Lister < Action
-
-  def initialize(ui, db)
+  def initialize(ui, db) # rubocop:disable Naming/UncommunicativeMethodParamName
     @ui = ui
     @db = db
   end
@@ -25,11 +26,10 @@ class Lister < Action
   end
 
   def print_error_message
-  	ui.error_no_contacts
+    ui.error_no_contacts
   end
 
   def display_all
-  	ui.display_all(all)
+    ui.display_all(all)
   end
-
 end

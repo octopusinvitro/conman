@@ -1,5 +1,6 @@
-class Conman
+# frozen_string_literal: true
 
+class Conman
   def initialize(menu, actions)
     @menu    = menu
     @actions = actions
@@ -36,5 +37,4 @@ class Conman
   def selected?(option, action)
     actions.index(action) == option - 1
   end
-
 end
