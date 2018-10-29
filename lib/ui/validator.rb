@@ -19,8 +19,8 @@ class Validator
 
   def field_validation_rules(field, input)
     {
-      'phone'   => phone_valid?(input),
-      'email'   => email_valid?(input)
+      'phone' => phone_valid?(input),
+      'email' => email_valid?(input)
     }.fetch(field, true)
   end
 

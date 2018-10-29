@@ -13,11 +13,11 @@ class UI # rubocop:disable Metrics/ClassLength
   EMAIL   = 'Contact email: '
   NOTES   = 'Contact notes: '
   FIELDS_TO_QUESTIONS = {
-    'name'    => NAME,
+    'name' => NAME,
     'address' => ADDRESS,
-    'phone'   => PHONE,
-    'email'   => EMAIL,
-    'notes'   => NOTES
+    'phone' => PHONE,
+    'email' => EMAIL,
+    'notes' => NOTES
   }.freeze
 
   YES   = 'y'
@@ -49,8 +49,8 @@ class UI # rubocop:disable Metrics/ClassLength
     "ERROR: Wrong phone. Must be 11 digits and all numbers. #{TRY_AGAIN}"
   ERROR_WRONG_EMAIL = "ERROR: Wrong email. Must contain an @. #{TRY_AGAIN}"
   FIELDS_TO_ERRORS = {
-    'phone'   => ERROR_WRONG_PHONE,
-    'email'   => ERROR_WRONG_EMAIL
+    'phone' => ERROR_WRONG_PHONE,
+    'email' => ERROR_WRONG_EMAIL
   }.freeze
 
   def initialize(console, validator)
@@ -212,6 +212,7 @@ class UI # rubocop:disable Metrics/ClassLength
     loop do
       input = ask_for(question)
       break if valid_index?(contacts_count, input)
+
       error_wrong_input
     end
     Integer(input)
@@ -222,6 +223,7 @@ class UI # rubocop:disable Metrics/ClassLength
     loop do
       input = ask_for(question)
       break if valid_field?(field, input)
+
       error_wrong_field(field)
     end
     input
